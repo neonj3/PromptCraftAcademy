@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PromptCraft Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient-orb ambient-orb-left" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-orb-right" aria-hidden="true"></div>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand-card">
+        <p class="eyebrow">GitHub-ready GenAI learning game</p>
+        <h1>PromptCraft Academy</h1>
+        <p class="muted">
+          Learn practical generative AI through missions, coaching, and a guided workflow that beginners can actually apply in real life.
+        </p>
+        <div class="brand-marquee">
+          <span>Prompting</span>
+          <span>Evaluation</span>
+          <span>Verification</span>
+          <span>Grounding</span>
+        </div>
+      </div>
+
+      <section class="panel compact">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Account</p>
+            <h2 id="auth-title">Guest Mode</h2>
+          </div>
+          <span id="auth-badge" class="chip chip-soft">Browser Auth</span>
+        </div>
+        <p class="muted" id="auth-subtitle">
+          Explore freely, then register to save progress, login on this device, and export your learning data to Excel.
+        </p>
+        <div class="auth-actions">
+          <button id="open-register" class="primary-button" type="button">Register</button>
+          <button id="open-login" class="secondary-button" type="button">Login</button>
+          <button id="logout-button" class="ghost-button hidden" type="button">Logout</button>
+        </div>
+        <div class="mini-note">
+          Best for GitHub Pages: this uses browser-side authentication and IndexedDB, so no paid backend is required.
+        </div>
+      </section>
+
+      <section class="panel compact">
+        <div class="panel-head">
+          <h2>Your Progress</h2>
+          <button id="reset-progress" class="ghost-button" type="button">Reset</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-label">XP</span>
+            <strong id="xp-value">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Level</span>
+            <strong id="level-value">Starter</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Completed</span>
+            <strong id="completed-value">0/0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Streak</span>
+            <strong id="streak-value">0</strong>
+          </article>
+        </div>
+        <div class="progress-rail" aria-hidden="true">
+          <span id="xp-bar"></span>
+        </div>
+        <p class="microcopy" id="progress-summary">Finish your first mission to unlock deeper lessons.</p>
+      </section>
+
+      <section class="panel compact">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Data tools</p>
+            <h2>Database and export</h2>
+          </div>
+          <span class="chip">IndexedDB</span>
+        </div>
+        <div class="export-stack">
+          <button id="export-excel" class="secondary-button" type="button">Export Excel</button>
+          <button id="export-json" class="ghost-button" type="button">Export JSON</button>
+        </div>
+        <p class="microcopy" id="export-status">
+          The app stores users, progress, and activity locally in the browser database and can export them into an Excel workbook.
+        </p>
+      </section>
+
+      <section class="panel compact">
+        <h2>Real-world outcomes</h2>
+        <ul class="plain-list" id="outcomes-list"></ul>
+      </section>
+
+      <section class="panel compact">
+        <h2>Free learning sources</h2>
+        <ul class="source-list">
+          <li><a href="https://stage.learnprompting.org/courses/introduction-to-prompt-engineering" target="_blank" rel="noreferrer">Learn Prompting</a></li>
+          <li><a href="https://github.com/microsoft/generative-ai-for-beginners" target="_blank" rel="noreferrer">Microsoft Generative AI for Beginners</a></li>
+          <li><a href="https://huggingface.co/learn/llm-course/chapter1/1" target="_blank" rel="noreferrer">Hugging Face LLM Course</a></li>
+          <li><a href="https://www.skills.google/paths/118?locale=en" target="_blank" rel="noreferrer">Google Beginner GenAI Path</a></li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="main-stage">
+      <section class="hero panel">
+        <div>
+          <p class="eyebrow">Curriculum-driven gameplay</p>
+          <h2>Build GenAI instincts you can use at work, in school, or inside your own product ideas.</h2>
+          <p class="lead">
+            Every mission teaches one concept, explains why it matters, and coaches you to write a stronger prompt the same way you would in a chatbot, coding assistant, document workflow, or support tool.
+          </p>
+        </div>
+        <div class="hero-badges">
+          <span>Prompting</span>
+          <span>Evaluation</span>
+          <span>RAG basics</span>
+          <span>Safety</span>
+          <span>Iteration</span>
+        </div>
+      </section>
+
+      <section class="top-dashboard">
+        <article class="panel dashboard-card pulse-card">
+          <p class="eyebrow">Live coach</p>
+          <h2 id="coach-title">Prompt power meter</h2>
+          <div class="meter-shell">
+            <span id="draft-meter" class="draft-meter"></span>
+          </div>
+          <p class="muted" id="coach-summary">
+            Start writing to see how clear, constrained, and reusable your prompt looks.
+          </p>
+          <ul id="coach-points" class="plain-list compact-list"></ul>
+        </article>
+
+        <article class="panel dashboard-card">
+          <p class="eyebrow">Learner analytics</p>
+          <h2>This device</h2>
+          <div class="stats-grid stats-grid-wide">
+            <article class="stat-card">
+              <span class="stat-label">Users</span>
+              <strong id="analytics-users">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Attempts</span>
+              <strong id="analytics-attempts">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Passes</span>
+              <strong id="analytics-passes">0</strong>
+            </article>
+            <article class="stat-card">
+              <span class="stat-label">Exports</span>
+              <strong id="analytics-exports">0</strong>
+            </article>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div class="lesson-column">
+          <section class="panel reveal-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Current module</p>
+                <h2 id="module-title">Loading...</h2>
+              </div>
+              <span class="chip" id="module-difficulty">Beginner</span>
+            </div>
+            <p class="muted" id="module-summary"></p>
+            <div class="lesson-cards">
+              <article class="lesson-card">
+                <h3>Core concept</h3>
+                <p id="concept-text"></p>
+              </article>
+              <article class="lesson-card">
+                <h3>Why it matters</h3>
+                <p id="why-text"></p>
+              </article>
+              <article class="lesson-card highlight">
+                <h3>Practical pattern</h3>
+                <p id="pattern-text"></p>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel reveal-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Prompt clinic</p>
+                <h2 id="mission-title">Mission</h2>
+              </div>
+              <span class="chip chip-soft" id="mission-xp">+0 XP</span>
+            </div>
+            <div class="mission-layout">
+              <div class="mission-brief">
+                <div class="brief-block">
+                  <span class="brief-label">Scenario</span>
+                  <p id="scenario-text"></p>
+                </div>
+                <div class="brief-block">
+                  <span class="brief-label">Goal</span>
+                  <p id="goal-text"></p>
+                </div>
+                <div class="brief-block">
+                  <span class="brief-label">What a great answer includes</span>
+                  <ul id="criteria-list" class="check-list"></ul>
+                </div>
+                <div class="brief-block">
+                  <span class="brief-label">Starter prompt</span>
+                  <div class="prompt-box" id="starter-prompt"></div>
+                </div>
+              </div>
+
+              <div class="prompt-workbench">
+                <label class="field-label" for="prompt-editor">Rewrite the prompt</label>
+                <textarea id="prompt-editor" spellcheck="false" placeholder="Write a stronger prompt here..."></textarea>
+                <div class="action-row">
+                  <button id="use-starter" class="secondary-button" type="button">Use starter prompt</button>
+                  <button id="surprise-prompt" class="ghost-button" type="button">Add scaffold</button>
+                  <button id="evaluate-prompt" class="primary-button" type="button">Evaluate mission</button>
+                </div>
+                <div class="feedback-card" id="feedback-card" aria-live="polite">
+                  <p class="feedback-title">Feedback will appear here.</p>
+                  <div id="feedback-score" class="feedback-score"></div>
+                  <ul id="feedback-points" class="plain-list"></ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel reveal-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Cheat sheet</p>
+                <h2>Reusable prompt formula</h2>
+              </div>
+            </div>
+            <div class="formula">
+              <div class="formula-step">
+                <strong>1. Role</strong>
+                <span>Who should the AI act like?</span>
+              </div>
+              <div class="formula-step">
+                <strong>2. Task</strong>
+                <span>What exactly should it do?</span>
+              </div>
+              <div class="formula-step">
+                <strong>3. Context</strong>
+                <span>What background should it know?</span>
+              </div>
+              <div class="formula-step">
+                <strong>4. Constraints</strong>
+                <span>What must it avoid or limit?</span>
+              </div>
+              <div class="formula-step">
+                <strong>5. Output format</strong>
+                <span>How should the answer be structured?</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="mission-column">
+          <section class="panel reveal-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Mission map</p>
+                <h2>Choose a module</h2>
+              </div>
+            </div>
+            <div id="mission-map" class="mission-map"></div>
+          </section>
+
+          <section class="panel reveal-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Reflection</p>
+                <h2>What you learned</h2>
+              </div>
+            </div>
+            <div id="reflection-box" class="reflection-box">
+              Complete a mission to unlock a short real-life takeaway you can apply immediately.
+            </div>
+          </section>
+
+          <section class="panel reveal-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Activity feed</p>
+                <h2>Your latest actions</h2>
+              </div>
+            </div>
+            <div id="activity-feed" class="activity-feed">
+              Register or login to start building an activity history.
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="auth-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal="true"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+      <button id="close-modal" class="modal-close" type="button" aria-label="Close authentication popup">×</button>
+      <p class="eyebrow">Join the academy</p>
+      <h2 id="modal-heading">Register to save your learning trail</h2>
+      <p class="muted" id="modal-message">
+        Create an account to save progress on this device, unlock login, and export users plus activity into Excel.
+      </p>
+      <div class="mode-switch">
+        <button id="switch-register" class="mode-button active" type="button">Register</button>
+        <button id="switch-login" class="mode-button" type="button">Login</button>
+      </div>
+      <form id="auth-form" class="auth-form">
+        <label class="field-label" for="auth-name">Name</label>
+        <input id="auth-name" name="name" class="text-input" type="text" placeholder="Your name">
+
+        <label class="field-label" for="auth-email">Email</label>
+        <input id="auth-email" name="email" class="text-input" type="email" placeholder="you@example.com" required>
+
+        <label class="field-label" for="auth-password">Password</label>
+        <input id="auth-password" name="password" class="text-input" type="password" placeholder="Choose a password" required>
+
+        <div id="password-hint" class="mini-note">
+          Use at least 8 characters. This is browser-side demo auth suitable for static GitHub deployment.
+        </div>
+
+        <button id="submit-auth" class="primary-button full-width" type="submit">Create account</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
