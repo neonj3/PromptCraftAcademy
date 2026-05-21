@@ -193,6 +193,77 @@ const modules = [
   }
 ];
 
+const fallbackTeacherLibrary = [
+  {
+    teacherId: "gaurav-sen",
+    teacherName: "Gaurav Sen",
+    channel: "The Engineering Glossary",
+    domain: "Core technical concepts for builders",
+    summary: "Explains the mechanics behind tokens, vectors, attention, and context systems in language engineers can use.",
+    teachingStyle: "Builder-first, terminology heavy, practical systems thinking",
+    signatureTopics: "LLMs, tokenization, attention, RAG, vector databases",
+    teacherVoice: "If you are building applications, learn the language of AI so deeper subjects become easier to understand.",
+    realWorldImpact: "Ideal for developers who want sharper technical intuition."
+  },
+  {
+    teacherId: "edureka-expert",
+    teacherName: "Edureka Expert",
+    channel: "Edureka",
+    domain: "AI and ML fundamentals",
+    summary: "Builds the ladder from AI to ML to deep learning before leading into GenAI.",
+    teachingStyle: "Structured, beginner-friendly, concept ladder from basics to advanced",
+    signatureTopics: "AI hierarchy, learning paradigms, NLP preprocessing, LSTMs",
+    teacherVoice: "AI is about making computers smarter and more helpful in everyday life.",
+    realWorldImpact: "Useful for learners who need the bigger picture before GenAI specialization."
+  },
+  {
+    teacherId: "andrew-brown",
+    teacherName: "Andrew Brown",
+    channel: "ExamPro / Andrew Brown",
+    domain: "GenAI development roadmap",
+    summary: "Connects concepts to real tool choices, maturity stages, deployment, and benchmarks.",
+    teachingStyle: "Roadmap-driven, implementation focused, cloud-aware and pragmatic",
+    signatureTopics: "GenAI maturity model, modalities, encoders vs decoders, evaluation",
+    teacherVoice: "Broad and practical GenAI knowledge gives you the flexibility to move in any technical direction.",
+    realWorldImpact: "Great for learners turning knowledge into projects and stack decisions."
+  },
+  {
+    teacherId: "simplilearn-specialist",
+    teacherName: "Simplilearn Specialist",
+    channel: "Simplilearn",
+    domain: "Prompting, tools, business use, and agents",
+    summary: "Frames GenAI as a modern workforce skill, then shows how prompts, workflows, and agents create business value.",
+    teachingStyle: "Product-minded, workforce-oriented, use-case heavy",
+    signatureTopics: "Prompt anatomy, AI agents, multimodal AI, productivity use cases",
+    teacherVoice: "Generative AI is no longer optional; it is becoming a must-know capability of the modern workforce.",
+    realWorldImpact: "Strong fit for professionals building useful day-to-day workflows."
+  },
+  {
+    teacherId: "stanford-cs229",
+    teacherName: "Stanford CS229",
+    channel: "Stanford CS229",
+    domain: "Training science and alignment",
+    summary: "Explains what really matters during model building: data, scaling, alignment, and systems constraints.",
+    teachingStyle: "Rigorous, research-oriented, systems-and-training depth",
+    signatureTopics: "Pretraining pipelines, scaling laws, SFT, RLHF, DPO, systems optimization",
+    teacherVoice: "Most people talk about architecture, but in practice data, evaluation, and systems matter just as much.",
+    realWorldImpact: "Best for learners who want to understand why modern models behave the way they do."
+  }
+];
+
+const fallbackTeacherPlaylists = [
+  { teacherId: "gaurav-sen", sequence: 1, moduleTitle: "Tokenization and next-token prediction", difficulty: "Beginner", summary: "How LLMs break text down and predict sequences." },
+  { teacherId: "gaurav-sen", sequence: 2, moduleTitle: "Vectors, attention, and ambiguity", difficulty: "Beginner", summary: "Why context changes meaning." },
+  { teacherId: "edureka-expert", sequence: 1, moduleTitle: "AI, ML, deep learning, and GenAI", difficulty: "Beginner", summary: "A clean hierarchy for new learners." },
+  { teacherId: "edureka-expert", sequence: 2, moduleTitle: "Supervised, unsupervised, and reinforcement learning", difficulty: "Beginner", summary: "The learning paradigms behind modern AI." },
+  { teacherId: "andrew-brown", sequence: 1, moduleTitle: "GenAI maturity model", difficulty: "Intermediate", summary: "From assistants to local model hosting." },
+  { teacherId: "andrew-brown", sequence: 2, moduleTitle: "Benchmarks and model cards", difficulty: "Intermediate", summary: "How to judge models beyond hype." },
+  { teacherId: "simplilearn-specialist", sequence: 1, moduleTitle: "Anatomy of a good prompt", difficulty: "Beginner", summary: "Instruction, context, input, and output format." },
+  { teacherId: "simplilearn-specialist", sequence: 2, moduleTitle: "AI agents and workflow automation", difficulty: "Intermediate", summary: "When a model becomes a system." },
+  { teacherId: "stanford-cs229", sequence: 1, moduleTitle: "Pretraining data pipelines", difficulty: "Intermediate", summary: "Why data quality and filtering matter." },
+  { teacherId: "stanford-cs229", sequence: 2, moduleTitle: "Scaling laws and alignment", difficulty: "Advanced", summary: "Parameters, data, and post-training." }
+];
+
 const DB_NAME = "promptcraft_academy_db";
 const DB_VERSION = 1;
 const SESSION_KEY = "promptcraft-current-user-id";
@@ -202,11 +273,14 @@ const state = {
   db: null,
   currentUser: null,
   activeModuleId: modules[0].id,
+  activeTeacherId: "gaurav-sen",
   xp: 0,
   completed: {},
   streak: 0,
   lastCompletedAt: null,
   draftByModule: {},
+  teacherLibrary: [],
+  teacherLessons: [],
   authMode: "register",
   popupShown: false
 };
@@ -250,6 +324,18 @@ const elements = {
   analyticsAttempts: document.getElementById("analytics-attempts"),
   analyticsPasses: document.getElementById("analytics-passes"),
   analyticsExports: document.getElementById("analytics-exports"),
+  curriculumStatus: document.getElementById("curriculum-status"),
+  teacherGrid: document.getElementById("teacher-grid"),
+  teacherName: document.getElementById("teacher-name"),
+  teacherChannel: document.getElementById("teacher-channel"),
+  teacherDomain: document.getElementById("teacher-domain"),
+  teacherSummary: document.getElementById("teacher-summary"),
+  teacherVoice: document.getElementById("teacher-voice"),
+  teacherStyle: document.getElementById("teacher-style"),
+  teacherImpact: document.getElementById("teacher-impact"),
+  teacherSkills: document.getElementById("teacher-skills"),
+  teacherLessonList: document.getElementById("teacher-lesson-list"),
+  teacherModuleCount: document.getElementById("teacher-module-count"),
   coachTitle: document.getElementById("coach-title"),
   coachSummary: document.getElementById("coach-summary"),
   coachPoints: document.getElementById("coach-points"),
@@ -312,6 +398,19 @@ function getLevelLabel(xp) {
 
 function getCompletionCount() {
   return Object.values(state.completed).filter(Boolean).length;
+}
+
+function getTeacherLibrary() {
+  return state.teacherLibrary.length ? state.teacherLibrary : fallbackTeacherLibrary;
+}
+
+function getTeacherLessons() {
+  return state.teacherLessons.length ? state.teacherLessons : fallbackTeacherPlaylists;
+}
+
+function getActiveTeacher() {
+  const library = getTeacherLibrary();
+  return library.find((teacher) => teacher.teacherId === state.activeTeacherId) || library[0];
 }
 
 function showToast(title, message) {
@@ -602,6 +701,111 @@ function renderMissionMap() {
   });
 }
 
+function renderTeacherHub() {
+  const library = getTeacherLibrary();
+  const lessons = getTeacherLessons();
+  const activeTeacher = getActiveTeacher();
+
+  elements.teacherGrid.innerHTML = "";
+  library.forEach((teacher) => {
+    const lessonCount = lessons.filter((lesson) => lesson.teacherId === teacher.teacherId).length;
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "teacher-card";
+    if (teacher.teacherId === activeTeacher.teacherId) {
+      card.classList.add("active");
+    }
+    card.innerHTML = `
+      <p class="eyebrow">${teacher.channel}</p>
+      <h3>${teacher.teacherName}</h3>
+      <p class="teacher-domain">${teacher.domain}</p>
+      <p>${teacher.summary}</p>
+      <p class="teacher-meta">${lessonCount} lesson${lessonCount === 1 ? "" : "s"} in the workbook curriculum</p>
+    `;
+    card.addEventListener("click", () => {
+      state.activeTeacherId = teacher.teacherId;
+      renderTeacherHub();
+    });
+    elements.teacherGrid.appendChild(card);
+  });
+
+  const teacherLessons = lessons
+    .filter((lesson) => lesson.teacherId === activeTeacher.teacherId)
+    .sort((left, right) => Number(left.sequence) - Number(right.sequence));
+
+  elements.teacherName.textContent = activeTeacher.teacherName;
+  elements.teacherChannel.textContent = activeTeacher.channel;
+  elements.teacherDomain.textContent = activeTeacher.domain;
+  elements.teacherSummary.textContent = activeTeacher.summary;
+  elements.teacherVoice.textContent = activeTeacher.teacherVoice;
+  elements.teacherStyle.textContent = activeTeacher.teachingStyle;
+  elements.teacherImpact.textContent = activeTeacher.realWorldImpact;
+  elements.teacherModuleCount.textContent = `${teacherLessons.length} lesson${teacherLessons.length === 1 ? "" : "s"}`;
+
+  elements.teacherSkills.innerHTML = "";
+  activeTeacher.signatureTopics
+    .split(",")
+    .map((topic) => topic.trim())
+    .filter(Boolean)
+    .forEach((topic) => {
+      const pill = document.createElement("span");
+      pill.textContent = topic;
+      elements.teacherSkills.appendChild(pill);
+    });
+
+  elements.teacherLessonList.innerHTML = "";
+  teacherLessons.forEach((lesson) => {
+    const item = document.createElement("li");
+    item.textContent = `${lesson.moduleTitle} (${lesson.difficulty}) — ${lesson.summary}`;
+    elements.teacherLessonList.appendChild(item);
+  });
+}
+
+async function loadTeacherWorkbook() {
+  try {
+    const response = await fetch("./data/promptcraft-academy-database.xlsx", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Workbook fetch failed with status ${response.status}`);
+    }
+
+    const buffer = await response.arrayBuffer();
+    const workbook = XLSX.read(buffer, { type: "array" });
+    const teacherRows = XLSX.utils.sheet_to_json(workbook.Sheets.Teachers, { defval: "" });
+    const moduleRows = XLSX.utils.sheet_to_json(workbook.Sheets.Modules, { defval: "" });
+
+    state.teacherLibrary = teacherRows.map((row) => ({
+      teacherId: row.teacherId,
+      teacherName: row.teacherName,
+      channel: row.channel,
+      domain: row.domain,
+      summary: row.summary,
+      teachingStyle: row.teachingStyle,
+      signatureTopics: row.signatureTopics,
+      teacherVoice: row.teacherVoice,
+      realWorldImpact: row.realWorldImpact
+    }));
+
+    state.teacherLessons = moduleRows.map((row) => ({
+      teacherId: row.teacherId,
+      teacherName: row.teacherName,
+      sequence: Number(row.sequence) || 0,
+      moduleTitle: row.moduleTitle,
+      difficulty: row.difficulty,
+      summary: row.summary,
+      sourceTag: row.sourceTag
+    }));
+
+    if (state.teacherLibrary.length) {
+      state.activeTeacherId = state.teacherLibrary[0].teacherId;
+    }
+
+    elements.curriculumStatus.textContent = "Workbook loaded";
+  } catch (error) {
+    console.warn("Teacher workbook could not be loaded; falling back to embedded teacher data.", error);
+    elements.curriculumStatus.textContent = "Workbook fallback";
+  }
+}
+
 function renderOutcomes(module) {
   elements.outcomesList.innerHTML = "";
   module.outcomes.forEach((outcome) => {
@@ -828,6 +1032,7 @@ function renderFeedback(score) {
 
 function render() {
   const module = getActiveModule();
+  renderTeacherHub();
   renderMissionMap();
   renderModuleDetails(module);
   updateProgressUI();
@@ -1093,6 +1298,7 @@ function maybeOpenTimedPopup() {
 
 async function initializeApp() {
   elements.footerYear.textContent = String(new Date().getFullYear());
+  await loadTeacherWorkbook();
   state.db = await openDatabase();
   await restoreSession();
   maybeOpenTimedPopup();
