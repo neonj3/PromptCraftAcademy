@@ -29,12 +29,19 @@ body {
 body {
   position: relative;
   overflow-x: hidden;
+  min-height: 100vh;
   font-family: "Manrope", sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(15, 123, 98, 0.16), transparent 28%),
     radial-gradient(circle at bottom right, rgba(244, 196, 106, 0.16), transparent 22%),
     linear-gradient(180deg, #f8fbf9 0%, var(--bg) 100%);
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 button,
@@ -75,6 +82,7 @@ input {
   width: min(1460px, calc(100vw - 32px));
   margin: 0 auto;
   padding: 24px 0 32px;
+  flex: 1;
 }
 
 .sidebar,
@@ -710,6 +718,21 @@ textarea:focus,
 .toast strong {
   display: block;
   margin-bottom: 4px;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  width: min(1460px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 0 0 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
 }
 
 .reveal-card {

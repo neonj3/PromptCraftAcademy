@@ -268,6 +268,7 @@ const elements = {
   switchLogin: document.getElementById("switch-login"),
   closeModal: document.getElementById("close-modal"),
   toastStack: document.getElementById("toast-stack"),
+  footerYear: document.getElementById("footer-year"),
   surprisePrompt: document.getElementById("surprise-prompt"),
   evaluatePrompt: document.getElementById("evaluate-prompt"),
   useStarter: document.getElementById("use-starter")
@@ -1091,6 +1092,7 @@ function maybeOpenTimedPopup() {
 }
 
 async function initializeApp() {
+  elements.footerYear.textContent = String(new Date().getFullYear());
   state.db = await openDatabase();
   await restoreSession();
   maybeOpenTimedPopup();
