@@ -1,1434 +1,1557 @@
-const modules = [
+const SITE_CONTENT_PATH = "data/site-content.json";
+const STORAGE_KEYS = {
+  session: "promptcraft.github.session",
+  github: "promptcraft.github.config",
+  practice: "promptcraft.practice.progress"
+};
+
+const WORKBOOK_HEADERS = {
+  Users: ["userId", "name", "email", "passwordHash", "createdAt", "updatedAt", "status", "source"],
+  Sessions: ["sessionId", "userId", "email", "event", "timestamp", "branch", "page"],
+  Progress: ["entryId", "userId", "email", "moduleId", "moduleTitle", "score", "xp", "completed", "timestamp"],
+  Activity: ["activityId", "userId", "email", "type", "title", "details", "timestamp"],
+  Meta: ["key", "value"]
+};
+
+const DEFAULT_GITHUB_CONFIG = {
+  owner: "neonj3",
+  repo: "PromptCraftAcademy",
+  branch: "testing-features",
+  path: "data/promptcraft-github-database.xlsx",
+  token: ""
+};
+
+const PRACTICE_MODULES = [
   {
-    id: "module-1",
-    title: "1. Prompt Foundations",
-    difficulty: "Beginner",
+    id: "prompt-foundations",
+    title: "Prompt Foundations",
     xp: 100,
-    summary: "Learn what makes a prompt useful: clear task, audience, tone, and expected output.",
-    concept:
-      "A prompt is not just a question. It is an instruction set that helps the model understand the role, task, context, and expected structure of the answer.",
-    why:
-      "Most weak AI results happen because the request is vague. Better prompts reduce retries and help beginners get dependable outputs faster.",
-    pattern:
-      "Ask for one task, one audience, one tone, and one format. Think: 'Act as...', 'Do...', 'For...', 'Return as...'.",
-    scenario:
-      "A school student wants help revising a chapter on climate change before an exam.",
-    goal:
-      "Rewrite the weak prompt so the AI explains the chapter clearly for a Class 10 student and returns a study-friendly answer.",
-    starterPrompt: "Explain climate change.",
-    scaffold:
-      "Act as a friendly teacher. Explain climate change for a Class 10 student. Use simple language, five bullet points, and end with three quick quiz questions.",
+    difficulty: "Beginner",
+    brief: "Turn a vague learner question into a clean prompt with role, audience, and format.",
+    starter: "Explain climate change.",
+    scaffold: "Act as a friendly teacher. Explain climate change for a Class 10 student using simple language, five bullet points, and three quiz questions.",
     criteria: [
-      { id: "role", label: "Assign a helpful role or angle", keywords: ["act as", "teacher", "tutor", "study coach"] },
-      { id: "audience", label: "Specify the learner or audience", keywords: ["class 10", "beginner", "student", "school"] },
-      { id: "task", label: "Describe the task clearly", keywords: ["explain", "summarize", "teach", "break down"] },
-      { id: "format", label: "Ask for a usable format", keywords: ["bullet", "points", "table", "steps", "quiz"] }
+      { label: "Set a role", keywords: ["act as", "teacher", "coach", "tutor"] },
+      { label: "Name the audience", keywords: ["student", "beginner", "class 10", "learner"] },
+      { label: "Describe the task", keywords: ["explain", "teach", "summarize", "break down"] },
+      { label: "Ask for a format", keywords: ["bullet", "table", "steps", "quiz"] }
     ],
-    takeaway:
-      "Real-life use: before asking any assistant for help, write who the answer is for and how you want it structured. That alone often cuts rework in half.",
-    outcomes: [
-      "Turn vague asks into practical prompts.",
-      "Request answers for the right audience level."
-    ]
+    takeaway: "Strong prompts name the role, the learner, the task, and the output format before the model starts talking."
   },
   {
-    id: "module-2",
-    title: "2. Context and Constraints",
+    id: "constraints",
+    title: "Context and Constraints",
+    xp: 120,
     difficulty: "Beginner",
+    brief: "Guide the model with tone, word limits, and clear must-avoid instructions.",
+    starter: "Write captions for my bakery launch.",
+    scaffold: "Write 5 short Instagram captions for a local bakery grand opening. Keep each under 45 words, use a warm tone, mention fresh bakes, and avoid pushy sales language or hashtags.",
+    criteria: [
+      { label: "Add business context", keywords: ["bakery", "grand opening", "local", "launch"] },
+      { label: "Control length", keywords: ["under", "max", "short", "45 words"] },
+      { label: "Set a tone", keywords: ["warm", "friendly", "welcoming", "playful"] },
+      { label: "Define what to avoid", keywords: ["avoid", "do not", "without", "no hashtags"] }
+    ],
+    takeaway: "If an answer feels messy, add context plus two or three boundaries before you try a new tool."
+  },
+  {
+    id: "evaluation",
+    title: "Output Design and Evaluation",
     xp: 140,
-    summary: "Guide the model with enough context and tell it what to avoid.",
-    concept:
-      "Context is the background the model needs. Constraints are the guardrails that keep the output focused, safe, and useful.",
-    why:
-      "Without constraints, models often over-explain, invent assumptions, or return output that is too advanced, too long, or off-topic.",
-    pattern:
-      "Add limits such as word count, reading level, exclusions, and must-have sections. Constraints help the model trade breadth for usefulness.",
-    scenario:
-      "A small business owner wants Instagram captions for a bakery launch and needs them short, warm, and non-salesy.",
-    goal:
-      "Turn the starter prompt into a clear request with length, tone, and content constraints.",
-    starterPrompt: "Write captions for my bakery launch.",
-    scaffold:
-      "Write 5 short Instagram captions for a local bakery grand opening. Keep each under 45 words, use a warm tone, mention fresh bakes, and avoid pushy sales language or hashtags.",
-    criteria: [
-      { id: "context", label: "Mention the bakery or launch context", keywords: ["bakery", "launch", "grand opening", "local"] },
-      { id: "length", label: "Control answer length", keywords: ["under", "max", "short", "45 words", "50 words", "60 words"] },
-      { id: "tone", label: "Set a tone", keywords: ["warm", "friendly", "playful", "welcoming"] },
-      { id: "avoid", label: "Add a must-avoid rule", keywords: ["avoid", "do not", "without", "no hashtags", "not pushy"] }
-    ],
-    takeaway:
-      "Real-life use: if an AI answer feels messy, your first fix is usually not a new tool. It is adding context plus one or two explicit limits.",
-    outcomes: [
-      "Add constraints that improve quality.",
-      "Control tone and length for content tasks."
-    ]
-  },
-  {
-    id: "module-3",
-    title: "3. Output Design and Evaluation",
     difficulty: "Beginner",
-    xp: 170,
-    summary: "Learn to ask for structured outputs and score them with a simple rubric.",
-    concept:
-      "The prompt should define success before the model answers. Output design means choosing the shape of the response. Evaluation means checking if it actually solved the problem.",
-    why:
-      "If you never define the format, AI answers become harder to verify, compare, or paste into the next step of your workflow.",
-    pattern:
-      "Ask for sections like summary, risks, assumptions, and next steps. Then review the result against relevance, clarity, completeness, and factual caution.",
-    scenario:
-      "You are comparing two laptops for a beginner video editor and want a fast decision memo.",
-    goal:
-      "Rewrite the prompt so the AI returns a comparison table plus a recommendation with reasons and caveats.",
-    starterPrompt: "Compare these laptops for me.",
-    scaffold:
-      "Compare these two laptops for a beginner video editor. Return a table with price, RAM, storage, battery, and editing suitability. Then recommend one option, explain why, and list assumptions or missing information.",
+    brief: "Ask for structured answers that are easy to compare, review, and reuse.",
+    starter: "Compare these laptops for me.",
+    scaffold: "Compare these two laptops for a beginner video editor. Return a table with price, RAM, storage, battery, and editing suitability. Then recommend one option and list your assumptions.",
     criteria: [
-      { id: "format", label: "Request a structured format", keywords: ["table", "compare", "columns", "pros and cons"] },
-      { id: "decision", label: "Ask for a recommendation", keywords: ["recommend", "best choice", "which one"] },
-      { id: "reasons", label: "Ask for reasons or criteria", keywords: ["because", "reasons", "criteria", "based on"] },
-      { id: "caution", label: "Request assumptions or caveats", keywords: ["assumptions", "caveats", "depends", "if information is missing"] }
+      { label: "Request a structure", keywords: ["table", "compare", "columns", "pros and cons"] },
+      { label: "Ask for a recommendation", keywords: ["recommend", "best choice", "which one"] },
+      { label: "Explain the reasoning", keywords: ["because", "reason", "criteria", "based on"] },
+      { label: "Surface caveats", keywords: ["assumptions", "depends", "missing information", "caveats"] }
     ],
-    takeaway:
-      "Real-life use: when the result must feed a report, sheet, or decision, ask for structure up front instead of cleaning the answer later.",
-    outcomes: [
-      "Design outputs for reuse.",
-      "Evaluate AI responses with a practical rubric."
-    ]
+    takeaway: "When AI output will feed a document or decision, ask for structure first and cleanup second."
   },
   {
-    id: "module-4",
-    title: "4. Hallucinations and Verification",
+    id: "verification",
+    title: "Hallucinations and Verification",
+    xp: 160,
     difficulty: "Intermediate",
+    brief: "Force the assistant to separate facts, assumptions, and unknowns instead of sounding overconfident.",
+    starter: "Tell me if this science post is true.",
+    scaffold: "Review this science claim carefully. Separate supported facts, assumptions, and unknowns. If evidence is unclear, say so directly and suggest what sources should be checked.",
+    criteria: [
+      { label: "Label uncertainty", keywords: ["uncertain", "unknown", "not enough information", "confidence"] },
+      { label: "Ask for verification steps", keywords: ["verify", "check sources", "evidence", "cross-check"] },
+      { label: "Separate claims", keywords: ["facts", "assumptions", "claims", "separate"] },
+      { label: "Avoid invention", keywords: ["if unsure", "say so", "do not invent", "avoid making up"] }
+    ],
+    takeaway: "In factual work, asking the model to show uncertainty is often more valuable than asking it to sound polished."
+  },
+  {
+    id: "few-shot",
+    title: "Few-shot Prompting and Workflow Chaining",
+    xp: 180,
+    difficulty: "Intermediate",
+    brief: "Use examples and step-based instructions to make complex tasks easier to repeat.",
+    starter: "Turn my project notes into resume bullets.",
+    scaffold: "Use this example format: 'Led X, resulting in Y by doing Z.' First identify the key action, then the impact, then write 3 resume bullets in the same style from my project notes.",
+    criteria: [
+      { label: "Include an example", keywords: ["example", "sample", "follow this format", "pattern"] },
+      { label: "Break the task into steps", keywords: ["first", "then", "step", "process"] },
+      { label: "Specify quantity", keywords: ["three", "3", "three bullets"] },
+      { label: "Ask for impact language", keywords: ["impact", "result", "improved", "increased", "reduced"] }
+    ],
+    takeaway: "One good example can turn AI from a guesser into a pattern follower."
+  },
+  {
+    id: "grounding",
+    title: "Grounding and Simple RAG",
     xp: 200,
-    summary: "Spot risky answers and force the model to separate facts, assumptions, and unknowns.",
-    concept:
-      "A hallucination is when the model states something false or unsupported as if it were true. Verification prompts reduce this risk by requiring evidence-aware behavior.",
-    why:
-      "As you move into research, business writing, or technical tasks, confidence without verification becomes the biggest failure mode.",
-    pattern:
-      "Tell the model to say what is known, what is uncertain, and what should be checked in a source before acting on the answer.",
-    scenario:
-      "A student wants the AI to explain a scientific claim found on social media and distinguish fact from hype.",
-    goal:
-      "Rewrite the prompt so the AI explains the claim carefully, marks uncertainty, and avoids pretending to know unsupported facts.",
-    starterPrompt: "Tell me if this science post is true.",
-    scaffold:
-      "Review this science claim carefully. Separate supported facts, assumptions, and unknowns. If evidence is unclear, say so directly and suggest what sources should be checked before trusting the claim.",
-    criteria: [
-      { id: "uncertainty", label: "Ask it to label uncertainty", keywords: ["uncertain", "unknown", "not enough information", "confidence"] },
-      { id: "verify", label: "Request verification steps", keywords: ["verify", "check sources", "evidence", "cross-check"] },
-      { id: "separate", label: "Separate facts from assumptions", keywords: ["facts", "assumptions", "claims", "separate"] },
-      { id: "safe", label: "Avoid overclaiming", keywords: ["do not invent", "if unsure", "say so", "avoid making up"] }
-    ],
-    takeaway:
-      "Real-life use: for anything factual, ask the model to surface uncertainty explicitly. That habit makes you safer and much more credible.",
-    outcomes: [
-      "Recognize hallucination risk.",
-      "Prompt for evidence-aware responses."
-    ]
-  },
-  {
-    id: "module-5",
-    title: "5. Few-shot Prompting and Workflow Chaining",
     difficulty: "Intermediate",
-    xp: 230,
-    summary: "Show the model examples and break complex work into steps.",
-    concept:
-      "Few-shot prompting means giving examples of the pattern you want. Workflow chaining means splitting one large task into smaller prompts or ordered subtasks.",
-    why:
-      "Examples reduce ambiguity, and smaller steps make difficult tasks more reliable than asking for everything at once.",
-    pattern:
-      "For complex writing or classification, provide one or two examples and ask the model to follow the same format for the new input.",
-    scenario:
-      "A job seeker wants help turning project notes into strong resume bullets using a consistent style.",
-    goal:
-      "Rewrite the prompt to include an example bullet pattern and ask the AI to create three matching bullets from rough notes.",
-    starterPrompt: "Turn my project notes into resume bullets.",
-    scaffold:
-      "Use this example format: 'Led X, resulting in Y by doing Z.' First identify the key action, then the impact, then write 3 resume bullets in the same style from my project notes.",
+    brief: "Teach the assistant to answer only from trusted source material and say when the answer is missing.",
+    starter: "Answer employee leave questions.",
+    scaffold: "Answer employee leave questions using only the provided policy text. Cite the exact section used. If the answer is missing from the policy, say that clearly and ask for more context instead of guessing.",
     criteria: [
-      { id: "example", label: "Include an example to imitate", keywords: ["example", "sample", "follow this format", "pattern"] },
-      { id: "steps", label: "Break the task into steps or sequence", keywords: ["step", "first", "then", "process"] },
-      { id: "quantity", label: "Specify how many outputs you want", keywords: ["three", "3", "three bullets"] },
-      { id: "impact", label: "Ask for measurable impact or action language", keywords: ["impact", "result", "improved", "increased", "reduced"] }
+      { label: "Limit the source", keywords: ["only use", "provided policy", "source text", "based only on"] },
+      { label: "Ask for citation", keywords: ["cite", "section", "quote", "reference"] },
+      { label: "Define fallback behavior", keywords: ["if not found", "do not guess", "ask for more context", "say not found"] },
+      { label: "Set a safety boundary", keywords: ["policy", "responsible", "avoid legal advice", "sensitive"] }
     ],
-    takeaway:
-      "Real-life use: if you can show the AI one good example, you can often scale that pattern across many similar tasks.",
-    outcomes: [
-      "Use examples to shape outputs.",
-      "Break work into more reliable AI steps."
-    ]
-  },
-  {
-    id: "module-6",
-    title: "6. Grounding, RAG Basics, and Responsible Use",
-    difficulty: "Intermediate",
-    xp: 260,
-    summary: "Teach the model to answer from provided material and behave responsibly when it does not know enough.",
-    concept:
-      "Grounding means forcing the model to rely on trusted source material. In simple terms, this is the idea behind retrieval-augmented generation, or RAG.",
-    why:
-      "Grounded workflows are what make GenAI useful in support bots, knowledge assistants, and internal tools where correctness matters.",
-    pattern:
-      "Tell the model to answer only from the provided notes, quote or cite the relevant section, and say when the answer is not present.",
-    scenario:
-      "You are building an internal HR helper that should answer from the company leave policy and never make up rules.",
-    goal:
-      "Rewrite the prompt so the assistant uses only the supplied policy text, cites the matching section, and refuses to guess when the answer is missing.",
-    starterPrompt: "Answer employee leave questions.",
-    scaffold:
-      "Answer employee leave questions using only the provided policy text. Cite the exact section used. If the answer is missing from the policy, say that clearly and ask for more context instead of guessing.",
-    criteria: [
-      { id: "source", label: "Limit the model to provided material", keywords: ["only use", "provided policy", "source text", "based only on"] },
-      { id: "cite", label: "Ask for citations or section references", keywords: ["cite", "section", "quote", "reference"] },
-      { id: "fallback", label: "Define what happens if information is missing", keywords: ["if not found", "say not found", "do not guess", "ask for more context"] },
-      { id: "responsible", label: "Add a safety or policy boundary", keywords: ["policy", "sensitive", "responsible", "avoid legal advice"] }
-    ],
-    takeaway:
-      "Real-life use: grounded prompts are the bridge from casual AI use to production-ready assistants. They make responses more traceable and safer.",
-    outcomes: [
-      "Understand simple RAG behavior.",
-      "Design safer assistants for real workflows."
-    ]
+    takeaway: "Grounded answers are the bridge between casual AI use and dependable workflow automation."
   }
 ];
-
-const fallbackTeacherLibrary = [
-  {
-    teacherId: "gaurav-sen",
-    teacherName: "Gaurav Sen",
-    channel: "The Engineering Glossary",
-    domain: "Core technical concepts for builders",
-    summary: "Explains the mechanics behind tokens, vectors, attention, and context systems in language engineers can use.",
-    teachingStyle: "Builder-first, terminology heavy, practical systems thinking",
-    signatureTopics: "LLMs, tokenization, attention, RAG, vector databases",
-    teacherVoice: "If you are building applications, learn the language of AI so deeper subjects become easier to understand.",
-    realWorldImpact: "Ideal for developers who want sharper technical intuition."
-  },
-  {
-    teacherId: "edureka-expert",
-    teacherName: "Edureka Expert",
-    channel: "Edureka",
-    domain: "AI and ML fundamentals",
-    summary: "Builds the ladder from AI to ML to deep learning before leading into GenAI.",
-    teachingStyle: "Structured, beginner-friendly, concept ladder from basics to advanced",
-    signatureTopics: "AI hierarchy, learning paradigms, NLP preprocessing, LSTMs",
-    teacherVoice: "AI is about making computers smarter and more helpful in everyday life.",
-    realWorldImpact: "Useful for learners who need the bigger picture before GenAI specialization."
-  },
-  {
-    teacherId: "andrew-brown",
-    teacherName: "Andrew Brown",
-    channel: "ExamPro / Andrew Brown",
-    domain: "GenAI development roadmap",
-    summary: "Connects concepts to real tool choices, maturity stages, deployment, and benchmarks.",
-    teachingStyle: "Roadmap-driven, implementation focused, cloud-aware and pragmatic",
-    signatureTopics: "GenAI maturity model, modalities, encoders vs decoders, evaluation",
-    teacherVoice: "Broad and practical GenAI knowledge gives you the flexibility to move in any technical direction.",
-    realWorldImpact: "Great for learners turning knowledge into projects and stack decisions."
-  },
-  {
-    teacherId: "simplilearn-specialist",
-    teacherName: "Simplilearn Specialist",
-    channel: "Simplilearn",
-    domain: "Prompting, tools, business use, and agents",
-    summary: "Frames GenAI as a modern workforce skill, then shows how prompts, workflows, and agents create business value.",
-    teachingStyle: "Product-minded, workforce-oriented, use-case heavy",
-    signatureTopics: "Prompt anatomy, AI agents, multimodal AI, productivity use cases",
-    teacherVoice: "Generative AI is no longer optional; it is becoming a must-know capability of the modern workforce.",
-    realWorldImpact: "Strong fit for professionals building useful day-to-day workflows."
-  },
-  {
-    teacherId: "stanford-cs229",
-    teacherName: "Stanford CS229",
-    channel: "Stanford CS229",
-    domain: "Training science and alignment",
-    summary: "Explains what really matters during model building: data, scaling, alignment, and systems constraints.",
-    teachingStyle: "Rigorous, research-oriented, systems-and-training depth",
-    signatureTopics: "Pretraining pipelines, scaling laws, SFT, RLHF, DPO, systems optimization",
-    teacherVoice: "Most people talk about architecture, but in practice data, evaluation, and systems matter just as much.",
-    realWorldImpact: "Best for learners who want to understand why modern models behave the way they do."
-  }
-];
-
-const fallbackTeacherPlaylists = [
-  { teacherId: "gaurav-sen", sequence: 1, moduleTitle: "Tokenization and next-token prediction", difficulty: "Beginner", summary: "How LLMs break text down and predict sequences." },
-  { teacherId: "gaurav-sen", sequence: 2, moduleTitle: "Vectors, attention, and ambiguity", difficulty: "Beginner", summary: "Why context changes meaning." },
-  { teacherId: "edureka-expert", sequence: 1, moduleTitle: "AI, ML, deep learning, and GenAI", difficulty: "Beginner", summary: "A clean hierarchy for new learners." },
-  { teacherId: "edureka-expert", sequence: 2, moduleTitle: "Supervised, unsupervised, and reinforcement learning", difficulty: "Beginner", summary: "The learning paradigms behind modern AI." },
-  { teacherId: "andrew-brown", sequence: 1, moduleTitle: "GenAI maturity model", difficulty: "Intermediate", summary: "From assistants to local model hosting." },
-  { teacherId: "andrew-brown", sequence: 2, moduleTitle: "Benchmarks and model cards", difficulty: "Intermediate", summary: "How to judge models beyond hype." },
-  { teacherId: "simplilearn-specialist", sequence: 1, moduleTitle: "Anatomy of a good prompt", difficulty: "Beginner", summary: "Instruction, context, input, and output format." },
-  { teacherId: "simplilearn-specialist", sequence: 2, moduleTitle: "AI agents and workflow automation", difficulty: "Intermediate", summary: "When a model becomes a system." },
-  { teacherId: "stanford-cs229", sequence: 1, moduleTitle: "Pretraining data pipelines", difficulty: "Intermediate", summary: "Why data quality and filtering matter." },
-  { teacherId: "stanford-cs229", sequence: 2, moduleTitle: "Scaling laws and alignment", difficulty: "Advanced", summary: "Parameters, data, and post-training." }
-];
-
-const DB_NAME = "promptcraft_academy_db";
-const DB_VERSION = 1;
-const SESSION_KEY = "promptcraft-current-user-id";
-const EXPORT_TYPE = "export";
 
 const state = {
-  db: null,
-  currentUser: null,
-  activeModuleId: modules[0].id,
-  activeTeacherId: "gaurav-sen",
-  xp: 0,
-  completed: {},
-  streak: 0,
-  lastCompletedAt: null,
-  draftByModule: {},
-  teacherLibrary: [],
-  teacherLessons: [],
+  currentPage: "",
+  content: null,
+  session: loadJson(STORAGE_KEYS.session),
+  github: { ...DEFAULT_GITHUB_CONFIG, ...loadJson(STORAGE_KEYS.github) },
+  practice: loadJson(STORAGE_KEYS.practice) || { completed: {}, xp: 0, streak: 0, activeModuleId: PRACTICE_MODULES[0].id },
   authMode: "register",
-  popupShown: false
+  workbookSummary: null,
+  selectedTeacherId: null
 };
 
-const elements = {
-  moduleTitle: document.getElementById("module-title"),
-  moduleDifficulty: document.getElementById("module-difficulty"),
-  moduleSummary: document.getElementById("module-summary"),
-  conceptText: document.getElementById("concept-text"),
-  whyText: document.getElementById("why-text"),
-  patternText: document.getElementById("pattern-text"),
-  missionTitle: document.getElementById("mission-title"),
-  missionXp: document.getElementById("mission-xp"),
-  scenarioText: document.getElementById("scenario-text"),
-  goalText: document.getElementById("goal-text"),
-  criteriaList: document.getElementById("criteria-list"),
-  starterPrompt: document.getElementById("starter-prompt"),
-  promptEditor: document.getElementById("prompt-editor"),
-  feedbackScore: document.getElementById("feedback-score"),
-  feedbackPoints: document.getElementById("feedback-points"),
-  missionMap: document.getElementById("mission-map"),
-  reflectionBox: document.getElementById("reflection-box"),
-  outcomesList: document.getElementById("outcomes-list"),
-  xpValue: document.getElementById("xp-value"),
-  levelValue: document.getElementById("level-value"),
-  completedValue: document.getElementById("completed-value"),
-  streakValue: document.getElementById("streak-value"),
-  xpBar: document.getElementById("xp-bar"),
-  progressSummary: document.getElementById("progress-summary"),
-  resetButton: document.getElementById("reset-progress"),
-  authTitle: document.getElementById("auth-title"),
-  authSubtitle: document.getElementById("auth-subtitle"),
-  authBadge: document.getElementById("auth-badge"),
-  logoutButton: document.getElementById("logout-button"),
-  openRegister: document.getElementById("open-register"),
-  openLogin: document.getElementById("open-login"),
-  exportExcel: document.getElementById("export-excel"),
-  exportJson: document.getElementById("export-json"),
-  exportStatus: document.getElementById("export-status"),
-  analyticsUsers: document.getElementById("analytics-users"),
-  analyticsAttempts: document.getElementById("analytics-attempts"),
-  analyticsPasses: document.getElementById("analytics-passes"),
-  analyticsExports: document.getElementById("analytics-exports"),
-  curriculumStatus: document.getElementById("curriculum-status"),
-  teacherGrid: document.getElementById("teacher-grid"),
-  teacherName: document.getElementById("teacher-name"),
-  teacherChannel: document.getElementById("teacher-channel"),
-  teacherDomain: document.getElementById("teacher-domain"),
-  teacherSummary: document.getElementById("teacher-summary"),
-  teacherVoice: document.getElementById("teacher-voice"),
-  teacherStyle: document.getElementById("teacher-style"),
-  teacherImpact: document.getElementById("teacher-impact"),
-  teacherSkills: document.getElementById("teacher-skills"),
-  teacherLessonList: document.getElementById("teacher-lesson-list"),
-  teacherModuleCount: document.getElementById("teacher-module-count"),
-  coachTitle: document.getElementById("coach-title"),
-  coachSummary: document.getElementById("coach-summary"),
-  coachPoints: document.getElementById("coach-points"),
-  draftMeter: document.getElementById("draft-meter"),
-  activityFeed: document.getElementById("activity-feed"),
-  authModal: document.getElementById("auth-modal"),
-  modalMessage: document.getElementById("modal-message"),
-  modalHeading: document.getElementById("modal-heading"),
-  authForm: document.getElementById("auth-form"),
-  authName: document.getElementById("auth-name"),
-  authEmail: document.getElementById("auth-email"),
-  authPassword: document.getElementById("auth-password"),
-  passwordHint: document.getElementById("password-hint"),
-  submitAuth: document.getElementById("submit-auth"),
-  switchRegister: document.getElementById("switch-register"),
-  switchLogin: document.getElementById("switch-login"),
-  closeModal: document.getElementById("close-modal"),
-  toastStack: document.getElementById("toast-stack"),
-  footerYear: document.getElementById("footer-year"),
-  surprisePrompt: document.getElementById("surprise-prompt"),
-  evaluatePrompt: document.getElementById("evaluate-prompt"),
-  useStarter: document.getElementById("use-starter")
-};
-
-function getDefaultProgress() {
-  return {
-    activeModuleId: modules[0].id,
-    xp: 0,
-    completed: {},
-    streak: 0,
-    lastCompletedAt: null,
-    draftByModule: {}
-  };
-}
-
-function applyProgress(progress) {
-  state.activeModuleId = progress.activeModuleId || modules[0].id;
-  state.xp = Number(progress.xp) || 0;
-  state.completed = progress.completed || {};
-  state.streak = Number(progress.streak) || 0;
-  state.lastCompletedAt = progress.lastCompletedAt || null;
-  state.draftByModule = progress.draftByModule || {};
-}
-
-function resetStateProgress() {
-  applyProgress(getDefaultProgress());
-}
-
-function getActiveModule() {
-  return modules.find((module) => module.id === state.activeModuleId) || modules[0];
-}
-
-function getLevelLabel(xp) {
-  if (xp >= 700) return "Workflow Architect";
-  if (xp >= 450) return "Prompt Builder";
-  if (xp >= 220) return "Applied Learner";
-  if (xp >= 80) return "Explorer";
-  return "Starter";
-}
-
-function getCompletionCount() {
-  return Object.values(state.completed).filter(Boolean).length;
-}
-
-function getTeacherLibrary() {
-  return state.teacherLibrary.length ? state.teacherLibrary : fallbackTeacherLibrary;
-}
-
-function getTeacherLessons() {
-  return state.teacherLessons.length ? state.teacherLessons : fallbackTeacherPlaylists;
-}
-
-function getActiveTeacher() {
-  const library = getTeacherLibrary();
-  return library.find((teacher) => teacher.teacherId === state.activeTeacherId) || library[0];
-}
-
-function showToast(title, message) {
-  const toast = document.createElement("div");
-  toast.className = "toast";
-  toast.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
-  elements.toastStack.appendChild(toast);
-
-  window.setTimeout(() => {
-    toast.remove();
-  }, 3600);
-}
-
-function downloadBlob(blob, filename) {
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
-}
-
-function openDatabase() {
-  return new Promise((resolve, reject) => {
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-
-      if (!db.objectStoreNames.contains("users")) {
-        const users = db.createObjectStore("users", { keyPath: "id" });
-        users.createIndex("email", "email", { unique: true });
-      }
-
-      if (!db.objectStoreNames.contains("progress")) {
-        db.createObjectStore("progress", { keyPath: "userId" });
-      }
-
-      if (!db.objectStoreNames.contains("activity")) {
-        const activity = db.createObjectStore("activity", { keyPath: "id", autoIncrement: true });
-        activity.createIndex("userId", "userId", { unique: false });
-        activity.createIndex("type", "type", { unique: false });
-      }
-    };
-
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
+document.addEventListener("DOMContentLoaded", () => {
+  state.currentPage = document.body.dataset.page || "home";
+  init().catch((error) => {
+    console.error(error);
+    document.getElementById("site-root").innerHTML = `
+      <div class="shell">
+        <section class="panel hero-error">
+          <p class="eyebrow">Load error</p>
+          <h1>PromptCraft Academy could not load.</h1>
+          <p>${escapeHtml(error.message || "Unknown error")}</p>
+        </section>
+      </div>
+    `;
   });
+});
+
+async function init() {
+  state.content = await loadSiteContent();
+  state.selectedTeacherId = state.content.teachers[0]?.teacherId || null;
+  renderShell();
+  bindGlobalEvents();
+  updateHeaderState();
+  renderCurrentPage();
+  if (!state.session) {
+    window.setTimeout(() => {
+      if (!state.session) {
+        openAuthModal(
+          "register",
+          "Register after your quick tour and your account will be saved into the GitHub workbook database for this site."
+        );
+      }
+    }, 4200);
+  }
+  if (hasGitHubWriteAccess()) {
+    await refreshWorkbookSummary();
+  }
 }
 
-function requestToPromise(request) {
-  return new Promise((resolve, reject) => {
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
-  });
+async function loadSiteContent() {
+  const response = await fetch(SITE_CONTENT_PATH);
+  if (!response.ok) {
+    throw new Error(`Could not load ${SITE_CONTENT_PATH}`);
+  }
+  return response.json();
 }
 
-function withStore(storeNames, mode, executor) {
-  return new Promise((resolve, reject) => {
-    const transaction = state.db.transaction(storeNames, mode);
-    const stores = Array.isArray(storeNames)
-      ? storeNames.map((name) => transaction.objectStore(name))
-      : transaction.objectStore(storeNames);
+function renderShell() {
+  const root = document.getElementById("site-root");
+  const pageTitle = getPageMeta(state.currentPage).title;
+  root.innerHTML = `
+    <div class="shell">
+      <header class="site-header panel">
+        <div class="brand-lockup">
+          <a class="brand-link" href="index.html">
+            <span class="brand-mark">PC</span>
+            <div>
+              <p class="eyebrow">GitHub-ready AI learning</p>
+              <h1>PromptCraft Academy</h1>
+            </div>
+          </a>
+          <p class="header-copy">${escapeHtml(state.content.site.description)}</p>
+        </div>
+        <div class="header-actions">
+          <div class="status-chip-group">
+            <span class="chip" id="sync-chip">GitHub workbook pending</span>
+            <span class="chip chip-soft" id="session-chip">Guest mode</span>
+          </div>
+          <div class="auth-actions">
+            <button class="ghost-button" id="open-login" type="button">Login</button>
+            <button class="primary-button" id="open-register" type="button">Register</button>
+            <button class="secondary-button hidden" id="logout-button" type="button">Logout</button>
+          </div>
+        </div>
+      </header>
 
-    let result;
+      <nav class="top-nav panel">
+        ${buildNav()}
+      </nav>
 
-    transaction.oncomplete = () => resolve(result);
-    transaction.onerror = () => reject(transaction.error);
-    transaction.onabort = () => reject(transaction.error);
+      <section class="page-hero panel">
+        <div>
+          <p class="eyebrow">${escapeHtml(pageTitle)}</p>
+          <h2>${escapeHtml(getPageMeta(state.currentPage).heading)}</h2>
+          <p class="lead">${escapeHtml(getPageMeta(state.currentPage).description)}</p>
+        </div>
+        <div class="hero-badges">
+          ${state.content.highlights.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+        </div>
+      </section>
 
-    result = executor(stores, transaction);
-  });
+      <main id="page-content" class="page-content"></main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="footer-year"></span> PromptCraft Academy. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <div id="auth-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="auth-modal-heading">
+        <button class="modal-close" id="close-modal" type="button" aria-label="Close account popup">&times;</button>
+        <p class="eyebrow">GitHub workbook access</p>
+        <h3 id="auth-modal-heading">Register or login</h3>
+        <p class="muted" id="auth-modal-message">
+          To make registration and login work on GitHub Pages, save a GitHub token on the Account page. The token lets this site read and update the workbook file inside the repo branch.
+        </p>
+        <div class="mode-switch">
+          <button class="mode-button active" id="switch-register" type="button">Register</button>
+          <button class="mode-button" id="switch-login" type="button">Login</button>
+        </div>
+        <form id="auth-form" class="stack-form">
+          <label class="field-label" for="auth-name">Name</label>
+          <input class="text-input" id="auth-name" type="text" placeholder="Your full name">
+
+          <label class="field-label" for="auth-email">Email</label>
+          <input class="text-input" id="auth-email" type="email" placeholder="you@example.com" required>
+
+          <label class="field-label" for="auth-password">Password</label>
+          <input class="text-input" id="auth-password" type="password" placeholder="Create a password" required>
+
+          <p class="mini-note" id="auth-mode-note">
+            This site stores users in the GitHub workbook file and hashes passwords in the browser before syncing them.
+          </p>
+
+          <button class="primary-button full-width" id="submit-auth" type="submit">Create account</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+  `;
+
+  document.getElementById("footer-year").textContent = String(new Date().getFullYear());
 }
 
-async function getUserByEmail(email) {
-  return withStore("users", "readonly", (store) => requestToPromise(store.index("email").get(email.toLowerCase())));
-}
-
-async function getUserById(userId) {
-  return withStore("users", "readonly", (store) => requestToPromise(store.get(userId)));
-}
-
-async function saveUser(user) {
-  return withStore("users", "readwrite", (store) => requestToPromise(store.put(user)));
-}
-
-async function saveProgressRecord(progress) {
-  return withStore("progress", "readwrite", (store) => requestToPromise(store.put(progress)));
-}
-
-async function getProgressRecord(userId) {
-  return withStore("progress", "readonly", (store) => requestToPromise(store.get(userId)));
-}
-
-async function addActivity(activity) {
-  return withStore("activity", "readwrite", (store) => requestToPromise(store.add(activity)));
-}
-
-async function getAllFromStore(storeName) {
-  return withStore(storeName, "readonly", (store) => requestToPromise(store.getAll()));
-}
-
-async function getActivityByUser(userId) {
-  return withStore("activity", "readonly", (store) => requestToPromise(store.index("userId").getAll(userId)));
-}
-
-async function hashPassword(password) {
-  const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
-  return Array.from(new Uint8Array(buffer))
-    .map((value) => value.toString(16).padStart(2, "0"))
+function buildNav() {
+  const items = [
+    ["home", "Home", "index.html"],
+    ["curriculum", "Curriculum", "curriculum.html"],
+    ["chapters", "Chapters", "chapters.html"],
+    ["revision", "Revision", "revision.html"],
+    ["teachers", "Teachers", "teachers.html"],
+    ["practice", "Practice", "practice.html"],
+    ["account", "Account", "account.html"]
+  ];
+  return items
+    .map(([page, label, href]) => {
+      const cls = page === state.currentPage ? "nav-link active" : "nav-link";
+      return `<a class="${cls}" href="${href}">${label}</a>`;
+    })
     .join("");
 }
 
-function formatDate(dateValue) {
-  const value = typeof dateValue === "string" ? new Date(dateValue) : dateValue;
-  return value.toLocaleString([], {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
+function getPageMeta(page) {
+  const meta = {
+    home: {
+      title: "Home",
+      heading: "A multi-page GenAI website built from your uploaded workbooks",
+      description: "Use the curriculum map to browse the full 100-page workbook, the detailed beginner chapters, the revision guide, teacher perspectives, and a GitHub-backed account flow."
+    },
+    curriculum: {
+      title: "Curriculum",
+      heading: "The complete 100-lesson workbook explorer",
+      description: "Each track contains five bite-sized lessons so a beginner can move from AI foundations to benchmarking without getting lost."
+    },
+    chapters: {
+      title: "Detailed chapters",
+      heading: "Expanded beginner chapters with exercises and recap notes",
+      description: "These sections carry the longer teaching blocks from the detailed workbook so the site remains useful both for study and revision."
+    },
+    revision: {
+      title: "Revision guide",
+      heading: "Quick revision topics for fast review",
+      description: "Use this page when you want short, digestible concept notes before an interview, exam, or project session."
+    },
+    teachers: {
+      title: "Teacher voices",
+      heading: "Five GenAI teaching styles woven into the website",
+      description: "The site highlights five instructors so the content feels more dynamic and grounded in different learning approaches."
+    },
+    practice: {
+      title: "Practice lab",
+      heading: "Prompt drills that help you apply the workbook in real life",
+      description: "Practice turns the reading material into usable GenAI instincts with fast missions around prompting, grounding, evaluation, and safety."
+    },
+    account: {
+      title: "Account and sync",
+      heading: "GitHub workbook login, registration, and live data settings",
+      description: "This page handles the GitHub token, workbook connection, session state, and the organized read/write flow that powers this static deployment."
+    }
+  };
+  return meta[page] || meta.home;
+}
+
+function bindGlobalEvents() {
+  document.getElementById("open-register").addEventListener("click", () => openAuthModal("register"));
+  document.getElementById("open-login").addEventListener("click", () => openAuthModal("login"));
+  document.getElementById("logout-button").addEventListener("click", logout);
+  document.getElementById("switch-register").addEventListener("click", () => setAuthMode("register"));
+  document.getElementById("switch-login").addEventListener("click", () => setAuthMode("login"));
+  document.getElementById("close-modal").addEventListener("click", closeAuthModal);
+  document.querySelector("[data-close-modal='true']").addEventListener("click", closeAuthModal);
+  document.getElementById("auth-form").addEventListener("submit", handleAuthSubmit);
+}
+
+function renderCurrentPage() {
+  const outlet = document.getElementById("page-content");
+  const page = state.currentPage;
+  if (page === "home") {
+    outlet.innerHTML = buildHomePage();
+    bindHomePage();
+  } else if (page === "curriculum") {
+    outlet.innerHTML = buildCurriculumPage();
+    bindCurriculumPage();
+  } else if (page === "chapters") {
+    outlet.innerHTML = buildChaptersPage();
+  } else if (page === "revision") {
+    outlet.innerHTML = buildRevisionPage();
+  } else if (page === "teachers") {
+    outlet.innerHTML = buildTeachersPage();
+    bindTeachersPage();
+    renderTeacherSpotlight(state.selectedTeacherId);
+  } else if (page === "practice") {
+    outlet.innerHTML = buildPracticePage();
+    bindPracticePage();
+    renderPracticeModule(state.practice.activeModuleId || PRACTICE_MODULES[0].id);
+  } else if (page === "account") {
+    outlet.innerHTML = buildAccountPage();
+    bindAccountPage();
+    renderAccountState();
+  } else {
+    outlet.innerHTML = buildHomePage();
+    bindHomePage();
+  }
+}
+
+function buildHomePage() {
+  const featuredTracks = state.content.tracks.slice(0, 6);
+  return `
+    <section class="grid-two">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Workbook reach</p>
+            <h3>What is inside this website</h3>
+          </div>
+          <span class="chip">${state.content.stats.lessons} lessons</span>
+        </div>
+        <div class="stats-grid stats-grid-wide">
+          <article class="stat-card"><span class="stat-label">Tracks</span><strong>${state.content.stats.tracks}</strong></article>
+          <article class="stat-card"><span class="stat-label">Chapters</span><strong>${state.content.stats.chapters}</strong></article>
+          <article class="stat-card"><span class="stat-label">Revision topics</span><strong>${state.content.stats.revisionTopics}</strong></article>
+          <article class="stat-card"><span class="stat-label">Teachers</span><strong>${state.content.stats.teachers}</strong></article>
+        </div>
+        <p class="microcopy">The 100-page workbook is the backbone. The detailed and revision workbooks are layered in so the site supports both deep study and quick review.</p>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">GitHub data flow</p>
+            <h3>How the login system works</h3>
+          </div>
+          <span class="chip chip-soft">Static hosting compatible</span>
+        </div>
+        <ol class="number-list">
+          <li>Save the repo owner, repo name, branch, workbook path, and a GitHub token on the Account page.</li>
+          <li>Register or login through the popup. The site hashes the password in the browser.</li>
+          <li>The GitHub workbook file is read, updated, and written back through the GitHub Contents API.</li>
+        </ol>
+        <a class="text-link" href="account.html">Open Account and Sync settings</a>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Start here</p>
+          <h3>Featured topic tracks</h3>
+        </div>
+        <a class="text-link" href="curriculum.html">See all 20 tracks</a>
+      </div>
+      <div class="card-grid">
+        ${featuredTracks.map((track) => buildTrackCard(track)).join("")}
+      </div>
+    </section>
+
+    <section class="grid-two">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Beginner flow</p>
+            <h3>Recommended study order</h3>
+          </div>
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-item"><strong>1. Browse Home and Curriculum</strong><span>Understand the full map before diving into the details.</span></div>
+          <div class="timeline-item"><strong>2. Read the Detailed Chapters</strong><span>These give you the longest explanations and exercises.</span></div>
+          <div class="timeline-item"><strong>3. Use Revision for memory refresh</strong><span>Perfect before applying concepts or answering questions.</span></div>
+          <div class="timeline-item"><strong>4. Practice inside the Prompt Lab</strong><span>Use missions to turn concepts into repeatable prompt habits.</span></div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Teacher spotlight</p>
+            <h3>Who is guiding the content</h3>
+          </div>
+          <a class="text-link" href="teachers.html">Meet all teachers</a>
+        </div>
+        <div class="teacher-mini-grid">
+          ${state.content.teachers
+            .map(
+              (teacher) => `
+                <button class="teacher-mini-card" data-teacher-link="${teacher.teacherId}" type="button">
+                  <strong>${escapeHtml(teacher.teacherName)}</strong>
+                  <span>${escapeHtml(teacher.domain)}</span>
+                </button>
+              `
+            )
+            .join("")}
+        </div>
+      </article>
+    </section>
+  `;
+}
+
+function bindHomePage() {
+  document.querySelectorAll("[data-teacher-link]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.getAttribute("data-teacher-link");
+      window.location.href = `teachers.html#${id}`;
+    });
   });
 }
 
-async function recordActivity(type, payload = {}) {
-  if (!state.currentUser) {
-    return;
-  }
-
-  const activity = {
-    userId: state.currentUser.id,
-    userName: state.currentUser.name,
-    type,
-    moduleId: payload.moduleId || null,
-    moduleTitle: payload.moduleTitle || null,
-    score: payload.score ?? null,
-    status: payload.status || null,
-    promptPreview: payload.promptPreview || "",
-    createdAt: new Date().toISOString()
-  };
-
-  await addActivity(activity);
-}
-
-async function persistProgress() {
-  if (!state.currentUser) {
-    return;
-  }
-
-  const progress = {
-    userId: state.currentUser.id,
-    activeModuleId: state.activeModuleId,
-    xp: state.xp,
-    completed: state.completed,
-    streak: state.streak,
-    lastCompletedAt: state.lastCompletedAt,
-    draftByModule: state.draftByModule,
-    updatedAt: new Date().toISOString()
-  };
-
-  await saveProgressRecord(progress);
-}
-
-async function loadUserProgress(userId) {
-  const progress = await getProgressRecord(userId);
-  applyProgress(progress || getDefaultProgress());
-}
-
-async function updateCurrentUser(user) {
-  state.currentUser = user;
-  if (user) {
-    localStorage.setItem(SESSION_KEY, user.id);
-    await loadUserProgress(user.id);
-  } else {
-    localStorage.removeItem(SESSION_KEY);
-    resetStateProgress();
-  }
-  renderAuthState();
-  render();
-  await renderAnalytics();
-  await renderActivityFeed();
-}
-
-async function restoreSession() {
-  const userId = localStorage.getItem(SESSION_KEY);
-  if (!userId) {
-    renderAuthState();
-    render();
-    await renderAnalytics();
-    await renderActivityFeed();
-    return;
-  }
-
-  const user = await getUserById(userId);
-  if (!user) {
-    localStorage.removeItem(SESSION_KEY);
-    renderAuthState();
-    render();
-    await renderAnalytics();
-    await renderActivityFeed();
-    return;
-  }
-
-  state.currentUser = user;
-  await loadUserProgress(user.id);
-  renderAuthState();
-  render();
-  await renderAnalytics();
-  await renderActivityFeed();
-}
-
-function renderAuthState() {
-  if (state.currentUser) {
-    elements.authTitle.textContent = `Welcome, ${state.currentUser.name}`;
-    elements.authSubtitle.textContent = `Logged in as ${state.currentUser.email}. Your progress, attempts, and exports are now saved in the browser database on this device.`;
-    elements.authBadge.textContent = "Signed In";
-    elements.logoutButton.classList.remove("hidden");
-  } else {
-    elements.authTitle.textContent = "Guest Mode";
-    elements.authSubtitle.textContent = "Explore freely, then register to save progress, login on this device, and export your learning data to Excel.";
-    elements.authBadge.textContent = "Browser Auth";
-    elements.logoutButton.classList.add("hidden");
-  }
-}
-
-function updateProgressUI() {
-  const completionCount = getCompletionCount();
-  const total = modules.length;
-  const currentLevel = getLevelLabel(state.xp);
-  const progressPercent = Math.min((state.xp / 900) * 100, 100);
-
-  elements.xpValue.textContent = state.xp;
-  elements.levelValue.textContent = currentLevel;
-  elements.completedValue.textContent = `${completionCount}/${total}`;
-  elements.streakValue.textContent = state.streak;
-  elements.xpBar.style.width = `${progressPercent}%`;
-
-  if (!state.currentUser) {
-    elements.progressSummary.textContent = "Preview mode is active. Register to save progress and export your data.";
-  } else if (completionCount === 0) {
-    elements.progressSummary.textContent = "Finish your first mission to unlock deeper lessons.";
-  } else if (completionCount === total) {
-    elements.progressSummary.textContent = "All missions complete. Replay modules to strengthen your real-world prompting habits.";
-  } else {
-    elements.progressSummary.textContent =
-      `You have completed ${completionCount} mission${completionCount > 1 ? "s" : ""}. Keep going to unlock intermediate concepts like verification and grounding.`;
-  }
-}
-
-function renderMissionMap() {
-  elements.missionMap.innerHTML = "";
-
-  modules.forEach((module, index) => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "mission-node";
-    if (module.id === state.activeModuleId) {
-      card.classList.add("active");
-    }
-    if (state.completed[module.id]) {
-      card.classList.add("complete");
-    }
-
-    const status = state.completed[module.id] ? "Complete" : "Open";
-    card.innerHTML = `
-      <div class="node-topline">
-        <span class="node-title">${module.title}</span>
-        <span class="chip">${status}</span>
+function buildTrackCard(track) {
+  const teacher = getTeacherById(track.teacherId);
+  return `
+    <article class="track-card">
+      <p class="eyebrow">${escapeHtml(track.pageRange)} · ${track.lessonCount} lessons</p>
+      <h4>${escapeHtml(track.title)}</h4>
+      <p>${escapeHtml(track.summary)}</p>
+      <div class="card-meta">
+        <span>${escapeHtml(teacher.teacherName)}</span>
+        <span>${escapeHtml(teacher.channel)}</span>
       </div>
-      <p class="node-meta">${module.difficulty} · ${module.xp} XP</p>
-      <p>${module.summary}</p>
-    `;
+    </article>
+  `;
+}
 
-    card.addEventListener("click", async () => {
-      persistDraft();
-      state.activeModuleId = module.id;
-      await persistProgress();
-      render();
-      const isFirstVisit = index > 0 && !state.completed[modules[index - 1].id];
-      if (isFirstVisit) {
-        elements.feedbackScore.textContent = "Tip: you can jump ahead, but the modules build on each other.";
+function buildCurriculumPage() {
+  return `
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Curriculum search</p>
+          <h3>Find a lesson, track, or concept</h3>
+        </div>
+      </div>
+      <input class="text-input" id="curriculum-search" type="search" placeholder="Search by page number, track, or lesson title">
+    </section>
+
+    <section id="curriculum-results" class="stack-section">
+      ${state.content.tracks.map((track) => buildCurriculumTrack(track)).join("")}
+    </section>
+  `;
+}
+
+function buildCurriculumTrack(track) {
+  const lessons = state.content.lessons.filter((lesson) => lesson.track === track.title);
+  const teacher = getTeacherById(track.teacherId);
+  return `
+    <details class="panel curriculum-track" open data-track-card="${escapeHtml(track.id)}">
+      <summary class="curriculum-summary">
+        <div>
+          <p class="eyebrow">${escapeHtml(track.pageRange)}</p>
+          <h3>${escapeHtml(track.title)}</h3>
+        </div>
+        <span class="chip">${escapeHtml(teacher.teacherName)}</span>
+      </summary>
+      <p class="muted">${escapeHtml(track.summary)}</p>
+      <div class="lesson-list">
+        ${lessons.map((lesson) => buildLessonCard(lesson)).join("")}
+      </div>
+    </details>
+  `;
+}
+
+function buildLessonCard(lesson) {
+  return `
+    <article class="lesson-card" data-lesson-card="${escapeHtml(
+      `${lesson.page} ${lesson.title} ${lesson.track} ${lesson.content}`
+    ).toLowerCase()}">
+      <div class="lesson-topline">
+        <strong>Page ${escapeHtml(lesson.page)}</strong>
+        <span>${escapeHtml(getTeacherById(lesson.teacherId).teacherName)}</span>
+      </div>
+      <h4>${escapeHtml(lesson.title)}</h4>
+      <p>${escapeHtml(lesson.content)}</p>
+      <div class="lesson-notes">
+        <div>
+          <span class="brief-label">How to think about it</span>
+          <p>${escapeHtml(lesson.thinking)}</p>
+        </div>
+        <div>
+          <span class="brief-label">Mini recap</span>
+          <p>${escapeHtml(lesson.recap)}</p>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function bindCurriculumPage() {
+  const search = document.getElementById("curriculum-search");
+  const lessonCards = [...document.querySelectorAll("[data-lesson-card]")];
+  const trackCards = [...document.querySelectorAll("[data-track-card]")];
+  search.addEventListener("input", () => {
+    const term = search.value.trim().toLowerCase();
+    lessonCards.forEach((card) => {
+      const match = card.getAttribute("data-lesson-card").includes(term);
+      card.classList.toggle("hidden", !match);
+    });
+    trackCards.forEach((trackCard) => {
+      const hasVisible = trackCard.querySelector(".lesson-card:not(.hidden)");
+      trackCard.classList.toggle("hidden", !hasVisible);
+      if (term && hasVisible) {
+        trackCard.setAttribute("open", "open");
       }
     });
-
-    elements.missionMap.appendChild(card);
   });
 }
 
-function renderTeacherHub() {
-  const library = getTeacherLibrary();
-  const lessons = getTeacherLessons();
-  const activeTeacher = getActiveTeacher();
-
-  elements.teacherGrid.innerHTML = "";
-  library.forEach((teacher) => {
-    const lessonCount = lessons.filter((lesson) => lesson.teacherId === teacher.teacherId).length;
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "teacher-card";
-    if (teacher.teacherId === activeTeacher.teacherId) {
-      card.classList.add("active");
-    }
-    card.innerHTML = `
-      <p class="eyebrow">${teacher.channel}</p>
-      <h3>${teacher.teacherName}</h3>
-      <p class="teacher-domain">${teacher.domain}</p>
-      <p>${teacher.summary}</p>
-      <p class="teacher-meta">${lessonCount} lesson${lessonCount === 1 ? "" : "s"} in the workbook curriculum</p>
-    `;
-    card.addEventListener("click", () => {
-      state.activeTeacherId = teacher.teacherId;
-      renderTeacherHub();
-    });
-    elements.teacherGrid.appendChild(card);
-  });
-
-  const teacherLessons = lessons
-    .filter((lesson) => lesson.teacherId === activeTeacher.teacherId)
-    .sort((left, right) => Number(left.sequence) - Number(right.sequence));
-
-  elements.teacherName.textContent = activeTeacher.teacherName;
-  elements.teacherChannel.textContent = activeTeacher.channel;
-  elements.teacherDomain.textContent = activeTeacher.domain;
-  elements.teacherSummary.textContent = activeTeacher.summary;
-  elements.teacherVoice.textContent = activeTeacher.teacherVoice;
-  elements.teacherStyle.textContent = activeTeacher.teachingStyle;
-  elements.teacherImpact.textContent = activeTeacher.realWorldImpact;
-  elements.teacherModuleCount.textContent = `${teacherLessons.length} lesson${teacherLessons.length === 1 ? "" : "s"}`;
-
-  elements.teacherSkills.innerHTML = "";
-  activeTeacher.signatureTopics
-    .split(",")
-    .map((topic) => topic.trim())
-    .filter(Boolean)
-    .forEach((topic) => {
-      const pill = document.createElement("span");
-      pill.textContent = topic;
-      elements.teacherSkills.appendChild(pill);
-    });
-
-  elements.teacherLessonList.innerHTML = "";
-  teacherLessons.forEach((lesson) => {
-    const item = document.createElement("li");
-    item.textContent = `${lesson.moduleTitle} (${lesson.difficulty}) — ${lesson.summary}`;
-    elements.teacherLessonList.appendChild(item);
-  });
+function buildChaptersPage() {
+  return `
+    <section class="stack-section">
+      ${state.content.chapters
+        .map(
+          (chapter) => `
+            <article class="panel chapter-card">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Chapter ${chapter.number}</p>
+                  <h3>${escapeHtml(chapter.title)}</h3>
+                </div>
+                <span class="chip">${chapter.sections.length} sections</span>
+              </div>
+              <div class="chapter-section-grid">
+                ${chapter.sections
+                  .map(
+                    (section) => `
+                      <article class="chapter-section">
+                        <h4>${escapeHtml(section.heading)}</h4>
+                        <p>${escapeHtml(section.summary)}</p>
+                        <p class="microcopy"><strong>Beginner explanation:</strong> ${escapeHtml(section.beginnerTip)}</p>
+                      </article>
+                    `
+                  )
+                  .join("")}
+              </div>
+              <div class="chapter-footer-grid">
+                <div class="practice-box">
+                  <span class="brief-label">Exercises</span>
+                  <ul class="plain-list">
+                    ${chapter.exercises.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+                  </ul>
+                </div>
+                <div class="practice-box">
+                  <span class="brief-label">Mini recap</span>
+                  <p>${escapeHtml(chapter.recap)}</p>
+                </div>
+              </div>
+            </article>
+          `
+        )
+        .join("")}
+    </section>
+  `;
 }
 
-async function loadTeacherWorkbook() {
-  try {
-    const response = await fetch("./data/promptcraft-academy-database.xlsx", { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`Workbook fetch failed with status ${response.status}`);
-    }
-
-    const buffer = await response.arrayBuffer();
-    const workbook = XLSX.read(buffer, { type: "array" });
-    const teacherRows = XLSX.utils.sheet_to_json(workbook.Sheets.Teachers, { defval: "" });
-    const moduleRows = XLSX.utils.sheet_to_json(workbook.Sheets.Modules, { defval: "" });
-
-    state.teacherLibrary = teacherRows.map((row) => ({
-      teacherId: row.teacherId,
-      teacherName: row.teacherName,
-      channel: row.channel,
-      domain: row.domain,
-      summary: row.summary,
-      teachingStyle: row.teachingStyle,
-      signatureTopics: row.signatureTopics,
-      teacherVoice: row.teacherVoice,
-      realWorldImpact: row.realWorldImpact
-    }));
-
-    state.teacherLessons = moduleRows.map((row) => ({
-      teacherId: row.teacherId,
-      teacherName: row.teacherName,
-      sequence: Number(row.sequence) || 0,
-      moduleTitle: row.moduleTitle,
-      difficulty: row.difficulty,
-      summary: row.summary,
-      sourceTag: row.sourceTag
-    }));
-
-    if (state.teacherLibrary.length) {
-      state.activeTeacherId = state.teacherLibrary[0].teacherId;
-    }
-
-    elements.curriculumStatus.textContent = "Workbook loaded";
-  } catch (error) {
-    console.warn("Teacher workbook could not be loaded; falling back to embedded teacher data.", error);
-    elements.curriculumStatus.textContent = "Workbook fallback";
-  }
+function buildRevisionPage() {
+  return `
+    <section class="stack-section">
+      ${state.content.revisionTopics
+        .map(
+          (topic) => `
+            <details class="panel revision-card" ${topic.number <= 3 ? "open" : ""}>
+              <summary class="curriculum-summary">
+                <div>
+                  <p class="eyebrow">Revision topic ${topic.number}</p>
+                  <h3>${escapeHtml(topic.title)}</h3>
+                </div>
+              </summary>
+              <ul class="plain-list">
+                ${topic.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
+              </ul>
+              <p class="mini-note"><strong>Beginner tip:</strong> ${escapeHtml(topic.beginnerTip)}</p>
+            </details>
+          `
+        )
+        .join("")}
+    </section>
+  `;
 }
 
-function renderOutcomes(module) {
-  elements.outcomesList.innerHTML = "";
-  module.outcomes.forEach((outcome) => {
-    const item = document.createElement("li");
-    item.textContent = outcome;
-    elements.outcomesList.appendChild(item);
-  });
-}
+function buildTeachersPage() {
+  return `
+    <section class="grid-two teacher-page-layout">
+      <article class="panel teacher-selector-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Teacher selector</p>
+            <h3>Choose a teaching style</h3>
+          </div>
+          <span class="chip">${state.content.teachers.length} teachers</span>
+        </div>
+        <div class="teacher-selector-list">
+          ${state.content.teachers
+            .map(
+              (teacher) => `
+                <button class="teacher-pick" type="button" data-teacher-pick="${teacher.teacherId}">
+                  <strong>${escapeHtml(teacher.teacherName)}</strong>
+                  <span>${escapeHtml(teacher.domain)}</span>
+                </button>
+              `
+            )
+            .join("")}
+        </div>
+      </article>
 
-function getCurrentDraftForModule(module) {
-  return state.draftByModule[module.id] || module.starterPrompt;
-}
+      <article class="panel" id="teacher-spotlight"></article>
+    </section>
 
-function renderModuleDetails(module) {
-  elements.moduleTitle.textContent = module.title;
-  elements.moduleDifficulty.textContent = module.difficulty;
-  elements.moduleSummary.textContent = module.summary;
-  elements.conceptText.textContent = module.concept;
-  elements.whyText.textContent = module.why;
-  elements.patternText.textContent = module.pattern;
-  elements.missionTitle.textContent = module.title;
-  elements.missionXp.textContent = `+${module.xp} XP`;
-  elements.scenarioText.textContent = module.scenario;
-  elements.goalText.textContent = module.goal;
-  elements.starterPrompt.textContent = module.starterPrompt;
-  elements.criteriaList.innerHTML = "";
-
-  module.criteria.forEach((criterion) => {
-    const item = document.createElement("li");
-    item.textContent = criterion.label;
-    elements.criteriaList.appendChild(item);
-  });
-
-  renderOutcomes(module);
-
-  elements.promptEditor.value = getCurrentDraftForModule(module);
-  elements.promptEditor.dataset.moduleId = module.id;
-
-  elements.reflectionBox.textContent = state.completed[module.id]
-    ? module.takeaway
-    : "Complete this mission to unlock the practical takeaway for real-world use.";
-}
-
-function containsKeywordGroup(text, group) {
-  const normalizedText = text.toLowerCase();
-  return group.some((keyword) => normalizedText.includes(keyword));
-}
-
-function getDraftSignals(module, draft) {
-  const normalizedPrompt = draft.trim();
-  const totalWords = normalizedPrompt ? normalizedPrompt.split(/\s+/).length : 0;
-  const notes = [];
-  let hits = 0;
-
-  module.criteria.forEach((criterion) => {
-    const matched = containsKeywordGroup(normalizedPrompt, criterion.keywords);
-    if (matched) {
-      hits += 1;
-      notes.push(`You already covered ${criterion.label.toLowerCase()}.`);
-    } else {
-      notes.push(`Try adding ${criterion.label.toLowerCase()}.`);
-    }
-  });
-
-  if (totalWords >= 18) {
-    hits += 0.5;
-    notes.push("Good: the draft has enough detail to reduce ambiguity.");
-  } else {
-    notes.push("Add a bit more detail so the AI knows the intended outcome.");
-  }
-
-  if (containsKeywordGroup(normalizedPrompt, ["bullet", "table", "steps", "json", "format", "sections"])) {
-    hits += 0.5;
-    notes.push("Nice: you asked for a response format.");
-  } else {
-    notes.push("Consider asking for bullets, a table, or another specific output format.");
-  }
-
-  const percentage = Math.round(Math.min(hits / (module.criteria.length + 1), 1) * 100);
-  return {
-    percentage,
-    notes
-  };
-}
-
-function updateCoach() {
-  const module = getActiveModule();
-  const draft = elements.promptEditor.value;
-  const signals = getDraftSignals(module, draft);
-  elements.draftMeter.style.width = `${signals.percentage}%`;
-
-  if (signals.percentage >= 80) {
-    elements.coachTitle.textContent = "Prompt power meter";
-    elements.coachSummary.textContent = "This draft is looking strong and reusable.";
-  } else if (signals.percentage >= 50) {
-    elements.coachTitle.textContent = "Prompt power meter";
-    elements.coachSummary.textContent = "You have a solid start. Add a few guardrails and a stronger format.";
-  } else {
-    elements.coachTitle.textContent = "Prompt power meter";
-    elements.coachSummary.textContent = "This prompt is still vague. Add role, audience, constraints, and structure.";
-  }
-
-  elements.coachPoints.innerHTML = "";
-  signals.notes.slice(0, 4).forEach((note) => {
-    const item = document.createElement("li");
-    item.textContent = note;
-    elements.coachPoints.appendChild(item);
-  });
-}
-
-function evaluatePrompt(module, prompt) {
-  const normalizedPrompt = prompt.trim();
-  const notes = [];
-  let hits = 0;
-
-  if (normalizedPrompt.length < 40) {
-    notes.push("Your rewrite is still very short. Add more guidance so the model knows exactly what good output looks like.");
-  }
-
-  module.criteria.forEach((criterion) => {
-    if (containsKeywordGroup(normalizedPrompt, criterion.keywords)) {
-      hits += 1;
-      notes.push(`Strong: you covered "${criterion.label.toLowerCase()}".`);
-    } else {
-      notes.push(`Missing: add something that covers "${criterion.label.toLowerCase()}".`);
-    }
-  });
-
-  const structureSignals = ["bullet", "table", "steps", "sections", "json", "format"];
-  const hasStructure = containsKeywordGroup(normalizedPrompt, structureSignals);
-  const hasContextWords = normalizedPrompt.split(/\s+/).length >= 18;
-
-  if (hasStructure) {
-    hits += 0.5;
-    notes.push("Bonus: you specified a response structure, which makes answers easier to reuse.");
-  }
-
-  if (hasContextWords) {
-    hits += 0.5;
-    notes.push("Bonus: the prompt includes enough detail to reduce ambiguity.");
-  }
-
-  const maxScore = module.criteria.length + 1;
-  const rawScore = Math.min(hits / maxScore, 1);
-  const percentage = Math.round(rawScore * 100);
-
-  let verdict = "Needs work";
-  if (percentage >= 85) verdict = "Excellent";
-  else if (percentage >= 65) verdict = "Strong";
-  else if (percentage >= 45) verdict = "Good start";
-
-  return {
-    percentage,
-    verdict,
-    notes
-  };
-}
-
-function updateStreak() {
-  const today = new Date().toISOString().slice(0, 10);
-  if (state.lastCompletedAt === today) {
-    return;
-  }
-
-  const previous = state.lastCompletedAt ? new Date(state.lastCompletedAt) : null;
-  const current = new Date(today);
-
-  if (!previous) {
-    state.streak = 1;
-  } else {
-    const diffDays = Math.round((current - previous) / (1000 * 60 * 60 * 24));
-    if (diffDays === 1) {
-      state.streak += 1;
-    } else if (diffDays > 1) {
-      state.streak = 1;
-    }
-  }
-
-  state.lastCompletedAt = today;
-}
-
-async function applyMissionRewards(module, score, prompt) {
-  const passed = score.percentage >= 65;
-  const alreadyCompleted = Boolean(state.completed[module.id]);
-
-  if (passed && !alreadyCompleted) {
-    state.xp += module.xp;
-    state.completed[module.id] = true;
-    updateStreak();
-    elements.reflectionBox.textContent = module.takeaway;
-  } else if (passed) {
-    updateStreak();
-  }
-
-  await recordActivity("evaluation", {
-    moduleId: module.id,
-    moduleTitle: module.title,
-    score: score.percentage,
-    status: passed ? "pass" : "retry",
-    promptPreview: prompt.slice(0, 150)
-  });
-
-  await persistProgress();
-  await renderAnalytics();
-  await renderActivityFeed();
-
-  if (passed) {
-    showToast("Mission cleared", `${module.title} passed with ${score.percentage}/100.`);
-  } else {
-    showToast("Keep refining", "You are close. Use the coach tips and try again.");
-  }
-}
-
-function renderFeedback(score) {
-  elements.feedbackScore.textContent = `${score.verdict} · ${score.percentage}/100`;
-  elements.feedbackPoints.innerHTML = "";
-
-  score.notes.forEach((note) => {
-    const item = document.createElement("li");
-    item.textContent = note;
-    elements.feedbackPoints.appendChild(item);
-  });
-}
-
-function render() {
-  const module = getActiveModule();
-  renderTeacherHub();
-  renderMissionMap();
-  renderModuleDetails(module);
-  updateProgressUI();
-  updateCoach();
-}
-
-function persistDraft() {
-  const moduleId = elements.promptEditor.dataset.moduleId || state.activeModuleId;
-  state.draftByModule[moduleId] = elements.promptEditor.value;
-}
-
-function openAuthModal(mode = "register", message = "") {
-  state.authMode = mode;
-  renderAuthMode();
-  elements.modalMessage.textContent = message || "Create an account to save progress on this device, unlock login, and export users plus activity into Excel.";
-  elements.authModal.classList.remove("hidden");
-  elements.authModal.setAttribute("aria-hidden", "false");
-}
-
-function closeAuthModal() {
-  elements.authModal.classList.add("hidden");
-  elements.authModal.setAttribute("aria-hidden", "true");
-  elements.authForm.reset();
-}
-
-function renderAuthMode() {
-  const registerMode = state.authMode === "register";
-  elements.switchRegister.classList.toggle("active", registerMode);
-  elements.switchLogin.classList.toggle("active", !registerMode);
-  elements.authName.parentElement?.classList?.remove("hidden");
-  elements.authName.previousElementSibling?.classList?.remove("hidden");
-
-  if (registerMode) {
-    elements.modalHeading.textContent = "Register to save your learning trail";
-    elements.submitAuth.textContent = "Create account";
-    elements.authName.required = true;
-    elements.authName.previousElementSibling.classList.remove("hidden");
-    elements.authName.classList.remove("hidden");
-    elements.passwordHint.textContent = "Use at least 8 characters. This is browser-side demo auth suitable for static GitHub deployment.";
-  } else {
-    elements.modalHeading.textContent = "Login to continue learning";
-    elements.submitAuth.textContent = "Login";
-    elements.authName.required = false;
-    elements.authName.previousElementSibling.classList.add("hidden");
-    elements.authName.classList.add("hidden");
-    elements.passwordHint.textContent = "Your credentials are checked in the browser database on this device.";
-  }
-}
-
-async function handleRegister(name, email, password) {
-  const existing = await getUserByEmail(email);
-  if (existing) {
-    throw new Error("An account with this email already exists on this device.");
-  }
-
-  const now = new Date().toISOString();
-  const user = {
-    id: crypto.randomUUID(),
-    name: name.trim(),
-    email: email.toLowerCase(),
-    passwordHash: await hashPassword(password),
-    createdAt: now,
-    lastLoginAt: now
-  };
-
-  await saveUser(user);
-  await saveProgressRecord({
-    userId: user.id,
-    ...getDefaultProgress(),
-    updatedAt: now
-  });
-  await recordActivityForNewUser(user);
-  await updateCurrentUser(user);
-  closeAuthModal();
-  showToast("Registration complete", "Your account has been created and progress saving is now active.");
-}
-
-async function recordActivityForNewUser(user) {
-  const previousUser = state.currentUser;
-  state.currentUser = user;
-  await recordActivity("registration", {
-    status: "created",
-    promptPreview: "New learner registered."
-  });
-  state.currentUser = previousUser;
-}
-
-async function handleLogin(email, password) {
-  const user = await getUserByEmail(email);
-  if (!user) {
-    throw new Error("No account was found with that email on this device.");
-  }
-
-  const passwordHash = await hashPassword(password);
-  if (passwordHash !== user.passwordHash) {
-    throw new Error("Incorrect password. Please try again.");
-  }
-
-  user.lastLoginAt = new Date().toISOString();
-  await saveUser(user);
-  await updateCurrentUser(user);
-  await recordActivity("login", {
-    status: "success",
-    promptPreview: "Learner logged in."
-  });
-  closeAuthModal();
-  showToast("Welcome back", `Logged in as ${user.name}.`);
-}
-
-async function handleLogout() {
-  await updateCurrentUser(null);
-  showToast("Logged out", "You are now back in guest mode.");
-}
-
-async function renderAnalytics() {
-  const users = await getAllFromStore("users");
-  const activity = await getAllFromStore("activity");
-  const attempts = activity.filter((item) => item.type === "evaluation").length;
-  const passes = activity.filter((item) => item.type === "evaluation" && item.status === "pass").length;
-  const exports = activity.filter((item) => item.type === EXPORT_TYPE).length;
-
-  elements.analyticsUsers.textContent = String(users.length);
-  elements.analyticsAttempts.textContent = String(attempts);
-  elements.analyticsPasses.textContent = String(passes);
-  elements.analyticsExports.textContent = String(exports);
-}
-
-async function renderActivityFeed() {
-  if (!state.currentUser) {
-    elements.activityFeed.textContent = "Register or login to start building an activity history.";
-    return;
-  }
-
-  const rows = await getActivityByUser(state.currentUser.id);
-  const latest = rows.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 6);
-  if (!latest.length) {
-    elements.activityFeed.textContent = "Your activity will appear here once you start learning.";
-    return;
-  }
-
-  elements.activityFeed.innerHTML = "";
-  latest.forEach((entry) => {
-    const item = document.createElement("article");
-    item.className = "activity-item";
-    item.innerHTML = `
-      <div class="activity-head">
-        <span class="activity-pill">${entry.type}</span>
-        <span class="activity-time">${formatDate(entry.createdAt)}</span>
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Teacher-led curriculum</p>
+          <h3>How lessons are distributed</h3>
+        </div>
       </div>
-      <strong>${entry.moduleTitle || "Account activity"}</strong>
-      <p>${entry.promptPreview || "Activity recorded in the browser database."}</p>
-    `;
-    elements.activityFeed.appendChild(item);
-  });
+      <div class="teacher-distribution-grid">
+        ${state.content.teachers
+          .map((teacher) => {
+            const lessons = state.content.teacherLessons.filter((lesson) => lesson.teacherId === teacher.teacherId);
+            return `
+              <article class="teacher-distribution-card">
+                <h4>${escapeHtml(teacher.teacherName)}</h4>
+                <p>${escapeHtml(teacher.summary)}</p>
+                <p class="microcopy">${lessons.length} assigned workbook lessons</p>
+              </article>
+            `;
+          })
+          .join("")}
+      </div>
+    </section>
+  `;
 }
 
-async function exportDatabaseToExcel() {
-  if (!window.XLSX) {
-    throw new Error("Excel export library is not available.");
+function bindTeachersPage() {
+  const fromHash = window.location.hash.replace("#", "");
+  if (fromHash) {
+    state.selectedTeacherId = fromHash;
   }
-
-  const users = await getAllFromStore("users");
-  const progress = await getAllFromStore("progress");
-  const activity = await getAllFromStore("activity");
-
-  const workbook = XLSX.utils.book_new();
-  const usersSheet = XLSX.utils.json_to_sheet(users.map((user) => ({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    createdAt: user.createdAt,
-    lastLoginAt: user.lastLoginAt
-  })));
-  const progressSheet = XLSX.utils.json_to_sheet(progress.map((row) => ({
-    userId: row.userId,
-    activeModuleId: row.activeModuleId,
-    xp: row.xp,
-    completedCount: Object.values(row.completed || {}).filter(Boolean).length,
-    streak: row.streak,
-    lastCompletedAt: row.lastCompletedAt,
-    updatedAt: row.updatedAt
-  })));
-  const activitySheet = XLSX.utils.json_to_sheet(activity.map((row) => ({
-    id: row.id,
-    userId: row.userId,
-    userName: row.userName,
-    type: row.type,
-    moduleId: row.moduleId,
-    moduleTitle: row.moduleTitle,
-    score: row.score,
-    status: row.status,
-    promptPreview: row.promptPreview,
-    createdAt: row.createdAt
-  })));
-
-  XLSX.utils.book_append_sheet(workbook, usersSheet, "Users");
-  XLSX.utils.book_append_sheet(workbook, progressSheet, "Progress");
-  XLSX.utils.book_append_sheet(workbook, activitySheet, "Activity");
-
-  XLSX.writeFile(workbook, "promptcraft-academy-data.xlsx");
-
-  if (state.currentUser) {
-    await recordActivity(EXPORT_TYPE, {
-      status: "xlsx",
-      promptPreview: "Excel workbook exported."
+  document.querySelectorAll("[data-teacher-pick]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.selectedTeacherId = button.getAttribute("data-teacher-pick");
+      renderTeacherSpotlight(state.selectedTeacherId);
+      history.replaceState(null, "", `teachers.html#${state.selectedTeacherId}`);
     });
-  }
-
-  elements.exportStatus.textContent = "Export complete. The workbook includes Users, Progress, and Activity sheets.";
-  await renderAnalytics();
-  await renderActivityFeed();
-  showToast("Excel exported", "Your browser database has been copied into an Excel workbook.");
-}
-
-async function exportDatabaseToJson() {
-  const users = await getAllFromStore("users");
-  const progress = await getAllFromStore("progress");
-  const activity = await getAllFromStore("activity");
-  const blob = new Blob([JSON.stringify({ users, progress, activity }, null, 2)], {
-    type: "application/json"
   });
-
-  downloadBlob(blob, "promptcraft-academy-data.json");
-
-  if (state.currentUser) {
-    await recordActivity(EXPORT_TYPE, {
-      status: "json",
-      promptPreview: "JSON export downloaded."
-    });
-  }
-
-  elements.exportStatus.textContent = "JSON export complete. Use this if you want a raw database backup.";
-  await renderAnalytics();
-  await renderActivityFeed();
-  showToast("JSON exported", "A raw backup of the browser database was downloaded.");
 }
 
-async function resetProgress() {
-  resetStateProgress();
-  await persistProgress();
-  render();
-  await recordActivity("reset", {
-    status: "progress_reset",
-    promptPreview: "Progress was reset by the learner."
-  });
-  await renderAnalytics();
-  await renderActivityFeed();
-  showToast("Progress reset", "The learner profile has been reset for this account.");
-}
-
-function maybeOpenTimedPopup() {
-  if (state.currentUser || state.popupShown) {
+function renderTeacherSpotlight(teacherId) {
+  const teacher = getTeacherById(teacherId) || state.content.teachers[0];
+  state.selectedTeacherId = teacher.teacherId;
+  const lessons = state.content.teacherLessons.filter((lesson) => lesson.teacherId === teacher.teacherId).slice(0, 12);
+  const spotlight = document.getElementById("teacher-spotlight");
+  if (!spotlight) {
     return;
   }
+  spotlight.innerHTML = `
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">${escapeHtml(teacher.channel)}</p>
+        <h3>${escapeHtml(teacher.teacherName)}</h3>
+      </div>
+      <span class="chip chip-soft">${escapeHtml(teacher.domain)}</span>
+    </div>
+    <p>${escapeHtml(teacher.summary)}</p>
+    <div class="teacher-columns">
+      <div class="practice-box">
+        <span class="brief-label">Teaching style</span>
+        <p>${escapeHtml(teacher.teachingStyle)}</p>
+      </div>
+      <div class="practice-box">
+        <span class="brief-label">Teacher voice</span>
+        <p>${escapeHtml(teacher.teacherVoice)}</p>
+      </div>
+    </div>
+    <div class="practice-box">
+      <span class="brief-label">Signature topics</span>
+      <div class="pill-row">
+        ${teacher.signatureTopics.map((topic) => `<span class="pill">${escapeHtml(topic)}</span>`).join("")}
+      </div>
+    </div>
+    <div class="practice-box">
+      <span class="brief-label">Sample lesson playlist</span>
+      <ul class="plain-list compact-list">
+        ${lessons.map((lesson) => `<li>Page ${escapeHtml(lesson.page)}: ${escapeHtml(lesson.moduleTitle)}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+  document.querySelectorAll("[data-teacher-pick]").forEach((button) => {
+    button.classList.toggle("active", button.getAttribute("data-teacher-pick") === teacher.teacherId);
+  });
+}
 
-  state.popupShown = true;
-  window.setTimeout(() => {
-    if (!state.currentUser) {
-      openAuthModal("register", "Register in a few seconds and you can keep your progress, login later on this device, and export your database to Excel.");
+function buildPracticePage() {
+  return `
+    <section class="grid-two practice-layout">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Mission list</p>
+            <h3>Choose a prompt drill</h3>
+          </div>
+          <span class="chip">${PRACTICE_MODULES.length} modules</span>
+        </div>
+        <div class="practice-map" id="practice-map"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Current mission</p>
+            <h3 id="practice-title">Prompt drill</h3>
+          </div>
+          <span class="chip chip-soft" id="practice-meta">+0 XP</span>
+        </div>
+        <p id="practice-brief" class="muted"></p>
+        <div class="practice-box">
+          <span class="brief-label">Starter prompt</span>
+          <div class="prompt-box" id="practice-starter"></div>
+        </div>
+        <div class="practice-box">
+          <span class="brief-label">Rewrite it</span>
+          <textarea class="prompt-area" id="practice-editor" placeholder="Write a stronger prompt here..."></textarea>
+          <div class="auth-actions">
+            <button class="ghost-button" id="use-practice-starter" type="button">Use starter</button>
+            <button class="secondary-button" id="use-practice-scaffold" type="button">Add scaffold</button>
+            <button class="primary-button" id="grade-practice" type="button">Evaluate</button>
+          </div>
+        </div>
+        <div class="practice-box">
+          <span class="brief-label">Checklist</span>
+          <ul class="plain-list compact-list" id="practice-criteria"></ul>
+        </div>
+        <div class="feedback-card" id="practice-feedback">
+          <p class="feedback-title">Feedback will appear here after evaluation.</p>
+          <div class="feedback-score" id="practice-score"></div>
+          <ul class="plain-list compact-list" id="practice-points"></ul>
+        </div>
+        <div class="practice-box">
+          <span class="brief-label">Takeaway</span>
+          <p id="practice-takeaway">Finish a mission to capture the real-world habit it teaches.</p>
+        </div>
+      </article>
+    </section>
+  `;
+}
+
+function bindPracticePage() {
+  renderPracticeMap();
+  document.getElementById("use-practice-starter").addEventListener("click", () => {
+    const module = getActivePracticeModule();
+    document.getElementById("practice-editor").value = module.starter;
+  });
+  document.getElementById("use-practice-scaffold").addEventListener("click", () => {
+    const module = getActivePracticeModule();
+    document.getElementById("practice-editor").value = module.scaffold;
+  });
+  document.getElementById("grade-practice").addEventListener("click", async () => {
+    const module = getActivePracticeModule();
+    const prompt = document.getElementById("practice-editor").value.trim();
+    if (!prompt) {
+      showToast("Add a prompt", "Write your improved prompt first.");
+      return;
     }
-  }, 3500);
+    const result = evaluatePracticePrompt(module, prompt);
+    renderPracticeFeedback(result);
+    const alreadyCompleted = Boolean(state.practice.completed[module.id]);
+    if (result.score >= module.criteria.length) {
+      state.practice.completed[module.id] = true;
+      if (!alreadyCompleted) {
+        state.practice.xp += module.xp;
+      }
+    }
+    persistPracticeState();
+    document.getElementById("practice-takeaway").textContent = module.takeaway;
+    renderPracticeMap();
+    if (state.session && hasGitHubWriteAccess()) {
+      await saveProgressEntry(module, result);
+    }
+  });
 }
 
-async function initializeApp() {
-  elements.footerYear.textContent = String(new Date().getFullYear());
-  await loadTeacherWorkbook();
-  state.db = await openDatabase();
-  await restoreSession();
-  maybeOpenTimedPopup();
+function renderPracticeMap() {
+  const target = document.getElementById("practice-map");
+  if (!target) {
+    return;
+  }
+  target.innerHTML = PRACTICE_MODULES
+    .map((module) => {
+      const completed = Boolean(state.practice.completed[module.id]);
+      const active = module.id === state.practice.activeModuleId;
+      return `
+        <button class="practice-node ${completed ? "completed" : ""} ${active ? "active" : ""}" data-practice-module="${module.id}" type="button">
+          <span>${escapeHtml(module.title)}</span>
+          <small>${escapeHtml(module.difficulty)} · ${module.xp} XP</small>
+        </button>
+      `;
+    })
+    .join("");
+  target.querySelectorAll("[data-practice-module]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const moduleId = button.getAttribute("data-practice-module");
+      state.practice.activeModuleId = moduleId;
+      persistPracticeState();
+      renderPracticeMap();
+      renderPracticeModule(moduleId);
+    });
+  });
 }
 
-elements.useStarter.addEventListener("click", async () => {
-  const module = getActiveModule();
-  elements.promptEditor.value = module.starterPrompt;
-  persistDraft();
-  updateCoach();
-  await persistProgress();
-  elements.feedbackScore.textContent = "Starter prompt restored. Now improve it.";
-  elements.feedbackPoints.innerHTML = "";
-});
+function renderPracticeModule(moduleId) {
+  const module = PRACTICE_MODULES.find((item) => item.id === moduleId) || PRACTICE_MODULES[0];
+  state.practice.activeModuleId = module.id;
+  document.getElementById("practice-title").textContent = module.title;
+  document.getElementById("practice-meta").textContent = `${module.difficulty} · +${module.xp} XP`;
+  document.getElementById("practice-brief").textContent = module.brief;
+  document.getElementById("practice-starter").textContent = module.starter;
+  document.getElementById("practice-editor").value = module.starter;
+  document.getElementById("practice-criteria").innerHTML = module.criteria
+    .map((criterion) => `<li>${escapeHtml(criterion.label)}</li>`)
+    .join("");
+  renderPracticeFeedback(null);
+}
 
-elements.surprisePrompt.addEventListener("click", async () => {
-  const module = getActiveModule();
-  elements.promptEditor.value = module.scaffold;
-  persistDraft();
-  updateCoach();
-  await persistProgress();
-  showToast("Scaffold added", "A stronger prompt template has been inserted for this mission.");
-});
+function getActivePracticeModule() {
+  return PRACTICE_MODULES.find((item) => item.id === state.practice.activeModuleId) || PRACTICE_MODULES[0];
+}
 
-elements.promptEditor.addEventListener("input", async () => {
-  persistDraft();
-  updateCoach();
-  if (state.currentUser) {
-    await persistProgress();
+function evaluatePracticePrompt(module, prompt) {
+  const lower = prompt.toLowerCase();
+  let score = 0;
+  const points = module.criteria.map((criterion) => {
+    const matched = criterion.keywords.some((keyword) => lower.includes(keyword));
+    if (matched) {
+      score += 1;
+      return { ok: true, text: `${criterion.label}: strong` };
+    }
+    return { ok: false, text: `${criterion.label}: improve this part` };
+  });
+  const bonus = prompt.length > 80 ? 1 : 0;
+  if (bonus) {
+    score += 1;
+    points.push({ ok: true, text: "Clarity bonus: the prompt has enough detail to guide the model." });
+  } else {
+    points.push({ ok: false, text: "Clarity bonus: add more detail so the assistant can respond consistently." });
   }
-});
+  const maxScore = module.criteria.length + 1;
+  const percentage = Math.round((score / maxScore) * 100);
+  return { score, maxScore, percentage, points };
+}
 
-elements.evaluatePrompt.addEventListener("click", async () => {
-  if (!state.currentUser) {
-    openAuthModal("register", "Please register or login before evaluating missions so your results can be saved to the browser database and exported later.");
-    showToast("Account needed", "Login or register to save progress and use the activity database.");
+function renderPracticeFeedback(result) {
+  const scoreEl = document.getElementById("practice-score");
+  const pointsEl = document.getElementById("practice-points");
+  const titleEl = document.querySelector("#practice-feedback .feedback-title");
+  if (!result) {
+    titleEl.textContent = "Feedback will appear here after evaluation.";
+    scoreEl.textContent = "";
+    pointsEl.innerHTML = "";
     return;
   }
+  titleEl.textContent = result.percentage >= 70 ? "Strong draft" : "Good start, but tighten it up";
+  scoreEl.textContent = `${result.percentage}/100`;
+  pointsEl.innerHTML = result.points
+    .map((point) => `<li class="${point.ok ? "ok" : "warn"}">${escapeHtml(point.text)}</li>`)
+    .join("");
+  showToast("Practice scored", `Your prompt earned ${result.percentage}/100.`);
+}
 
-  const module = getActiveModule();
-  const prompt = elements.promptEditor.value;
-  const score = evaluatePrompt(module, prompt);
-  renderFeedback(score);
-  await applyMissionRewards(module, score, prompt);
-  renderMissionMap();
-  updateProgressUI();
-});
+function buildAccountPage() {
+  return `
+    <section class="grid-two">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">GitHub sync settings</p>
+            <h3>Connect the workbook file</h3>
+          </div>
+          <span class="chip" id="account-sync-status">Not connected</span>
+        </div>
+        <form id="github-config-form" class="stack-form">
+          <label class="field-label" for="github-owner">Repo owner</label>
+          <input class="text-input" id="github-owner" type="text" value="${escapeHtml(state.github.owner)}">
 
-elements.resetButton.addEventListener("click", async () => {
-  if (!state.currentUser) {
-    resetStateProgress();
-    render();
-    showToast("Preview reset", "Guest progress was reset.");
-    return;
+          <label class="field-label" for="github-repo">Repo name</label>
+          <input class="text-input" id="github-repo" type="text" value="${escapeHtml(state.github.repo)}">
+
+          <label class="field-label" for="github-branch">Branch</label>
+          <input class="text-input" id="github-branch" type="text" value="${escapeHtml(state.github.branch)}">
+
+          <label class="field-label" for="github-path">Workbook path</label>
+          <input class="text-input" id="github-path" type="text" value="${escapeHtml(state.github.path)}">
+
+          <label class="field-label" for="github-token">GitHub token</label>
+          <input class="text-input" id="github-token" type="password" value="${escapeHtml(state.github.token)}" placeholder="GitHub classic or fine-grained token with contents write access">
+
+          <div class="auth-actions">
+            <button class="primary-button" type="submit">Save settings</button>
+            <button class="secondary-button" id="test-connection" type="button">Test connection</button>
+            <button class="ghost-button" id="download-workbook" type="button">Download workbook</button>
+          </div>
+        </form>
+        <p class="mini-note">Because this site is fully static, GitHub write access is handled with a token stored in your browser. That is convenient for zero-cost deployment, but it is not a production-grade auth architecture.</p>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Session</p>
+            <h3>Current account state</h3>
+          </div>
+          <span class="chip chip-soft" id="account-session-badge">Guest</span>
+        </div>
+        <div id="account-session-copy" class="stack-copy"></div>
+        <div class="auth-actions">
+          <button class="secondary-button" id="account-register" type="button">Register</button>
+          <button class="ghost-button" id="account-login" type="button">Login</button>
+          <button class="ghost-button hidden" id="account-logout" type="button">Logout</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-two">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Workbook records</p>
+            <h3>Database overview</h3>
+          </div>
+        </div>
+        <div class="stats-grid stats-grid-wide">
+          <article class="stat-card"><span class="stat-label">Users</span><strong id="summary-users">0</strong></article>
+          <article class="stat-card"><span class="stat-label">Sessions</span><strong id="summary-sessions">0</strong></article>
+          <article class="stat-card"><span class="stat-label">Progress</span><strong id="summary-progress">0</strong></article>
+          <article class="stat-card"><span class="stat-label">Activity</span><strong id="summary-activity">0</strong></article>
+        </div>
+        <p class="microcopy" id="summary-updated">Save your GitHub settings and test the connection to load workbook counts.</p>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Organized write flow</p>
+            <h3>What gets written into GitHub</h3>
+          </div>
+        </div>
+        <ul class="plain-list">
+          <li><strong>Users:</strong> registration details with hashed password and timestamps.</li>
+          <li><strong>Sessions:</strong> login and logout activity with page and branch context.</li>
+          <li><strong>Progress:</strong> practice mission scores and XP events.</li>
+          <li><strong>Activity:</strong> general account and content events.</li>
+        </ul>
+      </article>
+    </section>
+  `;
+}
+
+function bindAccountPage() {
+  document.getElementById("github-config-form").addEventListener("submit", (event) => {
+    event.preventDefault();
+    saveGitHubSettingsFromForm();
+  });
+  document.getElementById("test-connection").addEventListener("click", async () => {
+    try {
+      saveGitHubSettingsFromForm();
+      await refreshWorkbookSummary();
+      showToast("Connection ready", "The workbook was loaded from GitHub successfully.");
+    } catch (error) {
+      showToast("Connection failed", error.message);
+    }
+  });
+  document.getElementById("download-workbook").addEventListener("click", async () => {
+    try {
+      saveGitHubSettingsFromForm();
+      const bundle = await fetchWorkbookBundle();
+      downloadBytes(bundle.bytes, "promptcraft-github-database.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+      showToast("Workbook downloaded", "A local copy of the current GitHub workbook was downloaded.");
+    } catch (error) {
+      showToast("Download failed", error.message);
+    }
+  });
+  document.getElementById("account-register").addEventListener("click", () => openAuthModal("register"));
+  document.getElementById("account-login").addEventListener("click", () => openAuthModal("login"));
+  document.getElementById("account-logout").addEventListener("click", logout);
+}
+
+function renderAccountState() {
+  const sessionBadge = document.getElementById("account-session-badge");
+  const sessionCopy = document.getElementById("account-session-copy");
+  const logoutButton = document.getElementById("account-logout");
+  const syncStatus = document.getElementById("account-sync-status");
+
+  syncStatus.textContent = hasGitHubWriteAccess() ? "Token saved" : "Token missing";
+  syncStatus.classList.toggle("chip-soft", !hasGitHubWriteAccess());
+
+  if (state.session) {
+    sessionBadge.textContent = state.session.email;
+    sessionCopy.innerHTML = `
+      <p><strong>Name:</strong> ${escapeHtml(state.session.name || "Learner")}</p>
+      <p><strong>Email:</strong> ${escapeHtml(state.session.email)}</p>
+      <p><strong>Source:</strong> ${escapeHtml(state.session.source || "github-workbook")}</p>
+      <p><strong>Signed in at:</strong> ${escapeHtml(formatDateTime(state.session.timestamp))}</p>
+    `;
+    logoutButton.classList.remove("hidden");
+  } else {
+    sessionBadge.textContent = "Guest";
+    sessionCopy.innerHTML = `
+      <p>Guest users can browse the site, but registration and login write into the GitHub workbook only after a token has been saved.</p>
+      <p>That design keeps the site zero-cost and static-host friendly, even though it is not a secure enterprise auth model.</p>
+    `;
+    logoutButton.classList.add("hidden");
   }
 
-  await resetProgress();
-});
+  updateWorkbookSummaryUI();
+}
 
-elements.openRegister.addEventListener("click", () => openAuthModal("register"));
-elements.openLogin.addEventListener("click", () => openAuthModal("login"));
-elements.logoutButton.addEventListener("click", async () => handleLogout());
-
-elements.switchRegister.addEventListener("click", () => {
-  state.authMode = "register";
-  renderAuthMode();
-});
-
-elements.switchLogin.addEventListener("click", () => {
-  state.authMode = "login";
-  renderAuthMode();
-});
-
-elements.closeModal.addEventListener("click", closeAuthModal);
-
-elements.authModal.addEventListener("click", (event) => {
-  const target = event.target;
-  if (target instanceof HTMLElement && target.dataset.closeModal === "true") {
-    closeAuthModal();
-  }
-});
-
-elements.authForm.addEventListener("submit", async (event) => {
+async function handleAuthSubmit(event) {
   event.preventDefault();
-  const name = elements.authName.value.trim();
-  const email = elements.authEmail.value.trim();
-  const password = elements.authPassword.value.trim();
+  if (!hasGitHubWriteAccess()) {
+    showToast("GitHub token required", "Open the Account page, save your GitHub token, and then try again.");
+    window.location.href = "account.html";
+    return;
+  }
+
+  const name = document.getElementById("auth-name").value.trim();
+  const email = document.getElementById("auth-email").value.trim().toLowerCase();
+  const password = document.getElementById("auth-password").value;
 
   if (!email || !password) {
     showToast("Missing details", "Email and password are required.");
     return;
   }
-
-  if (state.authMode === "register" && password.length < 8) {
-    showToast("Password too short", "Use at least 8 characters for registration.");
+  if (state.authMode === "register" && !name) {
+    showToast("Name required", "Please add your name before registering.");
+    return;
+  }
+  if (password.length < 8) {
+    showToast("Password too short", "Use at least 8 characters.");
     return;
   }
 
   try {
     if (state.authMode === "register") {
-      if (!name) {
-        showToast("Name required", "Please add your name before registering.");
-        return;
-      }
-      await handleRegister(name, email, password);
+      await registerUser(name, email, password);
+      showToast("Registration saved", "Your account was written into the GitHub workbook.");
     } else {
-      await handleLogin(email, password);
+      await loginUser(email, password);
+      showToast("Login successful", "Your session is now active on this browser.");
     }
+    closeAuthModal();
+    updateHeaderState();
+    if (state.currentPage === "account") {
+      renderAccountState();
+    }
+    await refreshWorkbookSummary();
   } catch (error) {
-    showToast("Authentication error", error.message);
+    showToast("Auth failed", error.message);
   }
-});
+}
 
-elements.exportExcel.addEventListener("click", async () => {
+async function registerUser(name, email, password) {
+  const passwordHash = await hashText(password);
+  const bundle = await fetchWorkbookBundle();
+  const data = workbookToData(bundle.workbook);
+  const existing = data.Users.find((row) => normalizeEmail(row.email) === email);
+  if (existing) {
+    throw new Error("This email is already registered in the workbook.");
+  }
+  const timestamp = new Date().toISOString();
+  const userId = createId("user");
+  data.Users.push({
+    userId,
+    name,
+    email,
+    passwordHash,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    status: "active",
+    source: "github-pages"
+  });
+  data.Sessions.push({
+    sessionId: createId("session"),
+    userId,
+    email,
+    event: "register",
+    timestamp,
+    branch: state.github.branch,
+    page: state.currentPage
+  });
+  data.Activity.push({
+    activityId: createId("activity"),
+    userId,
+    email,
+    type: "register",
+    title: "New registration",
+    details: `Registered from ${state.currentPage} page`,
+    timestamp
+  });
+  writeDataToWorkbook(bundle.workbook, organizeWorkbookData(data));
+  await saveWorkbookBundle(bundle.workbook, bundle.sha, `Register ${email} via PromptCraft Academy`);
+  state.session = { userId, name, email, timestamp, source: "github-workbook" };
+  saveJson(STORAGE_KEYS.session, state.session);
+}
+
+async function loginUser(email, password) {
+  const passwordHash = await hashText(password);
+  const bundle = await fetchWorkbookBundle();
+  const data = workbookToData(bundle.workbook);
+  const existing = data.Users.find(
+    (row) => normalizeEmail(row.email) === email && row.passwordHash === passwordHash && row.status !== "disabled"
+  );
+  if (!existing) {
+    throw new Error("The email or password does not match the workbook records.");
+  }
+  const timestamp = new Date().toISOString();
+  data.Sessions.push({
+    sessionId: createId("session"),
+    userId: existing.userId,
+    email,
+    event: "login",
+    timestamp,
+    branch: state.github.branch,
+    page: state.currentPage
+  });
+  data.Activity.push({
+    activityId: createId("activity"),
+    userId: existing.userId,
+    email,
+    type: "login",
+    title: "User login",
+    details: `Logged in from ${state.currentPage} page`,
+    timestamp
+  });
+  writeDataToWorkbook(bundle.workbook, organizeWorkbookData(data));
+  await saveWorkbookBundle(bundle.workbook, bundle.sha, `Login ${email} via PromptCraft Academy`);
+  state.session = { userId: existing.userId, name: existing.name, email, timestamp, source: "github-workbook" };
+  saveJson(STORAGE_KEYS.session, state.session);
+}
+
+async function logout() {
+  if (state.session && hasGitHubWriteAccess()) {
+    try {
+      const bundle = await fetchWorkbookBundle();
+      const data = workbookToData(bundle.workbook);
+      const timestamp = new Date().toISOString();
+      data.Sessions.push({
+        sessionId: createId("session"),
+        userId: state.session.userId,
+        email: state.session.email,
+        event: "logout",
+        timestamp,
+        branch: state.github.branch,
+        page: state.currentPage
+      });
+      data.Activity.push({
+        activityId: createId("activity"),
+        userId: state.session.userId,
+        email: state.session.email,
+        type: "logout",
+        title: "User logout",
+        details: `Logged out from ${state.currentPage} page`,
+        timestamp
+      });
+      writeDataToWorkbook(bundle.workbook, organizeWorkbookData(data));
+      await saveWorkbookBundle(bundle.workbook, bundle.sha, `Logout ${state.session.email} via PromptCraft Academy`);
+    } catch (error) {
+      console.warn("Logout sync failed", error);
+    }
+  }
+
+  state.session = null;
+  saveJson(STORAGE_KEYS.session, null);
+  updateHeaderState();
+  if (state.currentPage === "account") {
+    renderAccountState();
+  }
+  showToast("Logged out", "Your local session was cleared.");
+}
+
+async function saveProgressEntry(module, result) {
+  const bundle = await fetchWorkbookBundle();
+  const data = workbookToData(bundle.workbook);
+  const timestamp = new Date().toISOString();
+  data.Progress.push({
+    entryId: createId("progress"),
+    userId: state.session.userId,
+    email: state.session.email,
+    moduleId: module.id,
+    moduleTitle: module.title,
+    score: result.percentage,
+    xp: result.percentage >= 70 ? module.xp : 0,
+    completed: result.percentage >= 70 ? "yes" : "no",
+    timestamp
+  });
+  data.Activity.push({
+    activityId: createId("activity"),
+    userId: state.session.userId,
+    email: state.session.email,
+    type: "practice",
+    title: module.title,
+    details: `Scored ${result.percentage}/100 in the practice lab`,
+    timestamp
+  });
+  writeDataToWorkbook(bundle.workbook, organizeWorkbookData(data));
+  await saveWorkbookBundle(bundle.workbook, bundle.sha, `Practice progress for ${state.session.email}`);
+  await refreshWorkbookSummary();
+}
+
+function saveGitHubSettingsFromForm() {
+  state.github = {
+    owner: document.getElementById("github-owner").value.trim(),
+    repo: document.getElementById("github-repo").value.trim(),
+    branch: document.getElementById("github-branch").value.trim(),
+    path: document.getElementById("github-path").value.trim(),
+    token: document.getElementById("github-token").value.trim()
+  };
+  saveJson(STORAGE_KEYS.github, state.github);
+  updateHeaderState();
+  if (state.currentPage === "account") {
+    renderAccountState();
+  }
+  showToast("Settings saved", "GitHub workbook settings were saved to this browser.");
+}
+
+function updateHeaderState() {
+  const syncChip = document.getElementById("sync-chip");
+  const sessionChip = document.getElementById("session-chip");
+  const logoutButton = document.getElementById("logout-button");
+  syncChip.textContent = hasGitHubWriteAccess() ? `Workbook: ${state.github.branch}` : "GitHub token missing";
+  syncChip.classList.toggle("chip-soft", !hasGitHubWriteAccess());
+  if (state.session) {
+    sessionChip.textContent = state.session.email;
+    document.getElementById("open-login").classList.add("hidden");
+    document.getElementById("open-register").classList.add("hidden");
+    logoutButton.classList.remove("hidden");
+  } else {
+    sessionChip.textContent = "Guest mode";
+    document.getElementById("open-login").classList.remove("hidden");
+    document.getElementById("open-register").classList.remove("hidden");
+    logoutButton.classList.add("hidden");
+  }
+}
+
+async function refreshWorkbookSummary() {
+  const bundle = await fetchWorkbookBundle();
+  const data = workbookToData(bundle.workbook);
+  state.workbookSummary = {
+    users: data.Users.length,
+    sessions: data.Sessions.length,
+    progress: data.Progress.length,
+    activity: data.Activity.length,
+    updatedAt: new Date().toISOString()
+  };
+  updateWorkbookSummaryUI();
+}
+
+function updateWorkbookSummaryUI() {
+  if (!state.workbookSummary || state.currentPage !== "account") {
+    return;
+  }
+  document.getElementById("summary-users").textContent = String(state.workbookSummary.users);
+  document.getElementById("summary-sessions").textContent = String(state.workbookSummary.sessions);
+  document.getElementById("summary-progress").textContent = String(state.workbookSummary.progress);
+  document.getElementById("summary-activity").textContent = String(state.workbookSummary.activity);
+  document.getElementById("summary-updated").textContent = `Last refreshed ${formatDateTime(state.workbookSummary.updatedAt)} from ${state.github.owner}/${state.github.repo}@${state.github.branch}`;
+}
+
+function openAuthModal(mode = "register", message = "") {
+  setAuthMode(mode);
+  document.getElementById("auth-modal-message").textContent =
+    message ||
+    "Save a GitHub token on the Account page so this site can read and write the workbook file inside your repository branch.";
+  document.getElementById("auth-modal").classList.remove("hidden");
+  document.getElementById("auth-modal").setAttribute("aria-hidden", "false");
+}
+
+function closeAuthModal() {
+  document.getElementById("auth-modal").classList.add("hidden");
+  document.getElementById("auth-modal").setAttribute("aria-hidden", "true");
+}
+
+function setAuthMode(mode) {
+  state.authMode = mode;
+  const isRegister = mode === "register";
+  const nameInput = document.getElementById("auth-name");
+  const nameLabel = nameInput.previousElementSibling;
+  document.getElementById("switch-register").classList.toggle("active", isRegister);
+  document.getElementById("switch-login").classList.toggle("active", !isRegister);
+  document.getElementById("submit-auth").textContent = isRegister ? "Create account" : "Login";
+  document.getElementById("auth-mode-note").textContent = isRegister
+    ? "This site stores users in the GitHub workbook file and hashes passwords in the browser before syncing them."
+    : "Login checks the GitHub workbook file for your email and password hash before opening a session in this browser.";
+  nameLabel.classList.toggle("hidden", !isRegister);
+  nameInput.classList.toggle("hidden", !isRegister);
+}
+
+function hasGitHubWriteAccess() {
+  return Boolean(state.github.owner && state.github.repo && state.github.branch && state.github.path && state.github.token);
+}
+
+async function fetchWorkbookBundle() {
+  if (!hasGitHubWriteAccess()) {
+    throw new Error("GitHub owner, repo, branch, workbook path, and token are required.");
+  }
+  if (!window.XLSX) {
+    throw new Error("SheetJS could not be loaded.");
+  }
+  const path = state.github.path.split("/").map(encodeURIComponent).join("/");
+  const url = `https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(
+    state.github.repo
+  )}/contents/${path}?ref=${encodeURIComponent(state.github.branch)}`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${state.github.token}`,
+      Accept: "application/vnd.github+json"
+    }
+  });
+  if (!response.ok) {
+    throw new Error(`GitHub workbook request failed with status ${response.status}.`);
+  }
+  const payload = await response.json();
+  const bytes = base64ToBytes(payload.content.replace(/\n/g, ""));
+  const workbook = XLSX.read(bytes, { type: "array" });
+  return { workbook, sha: payload.sha, bytes };
+}
+
+async function saveWorkbookBundle(workbook, sha, message) {
+  const path = state.github.path.split("/").map(encodeURIComponent).join("/");
+  const url = `https://api.github.com/repos/${encodeURIComponent(state.github.owner)}/${encodeURIComponent(
+    state.github.repo
+  )}/contents/${path}`;
+  const bytes = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+  const content = bytesToBase64(bytes);
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${state.github.token}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message,
+      content,
+      sha,
+      branch: state.github.branch
+    })
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`GitHub workbook update failed: ${response.status} ${text}`);
+  }
+}
+
+function workbookToData(workbook) {
+  const data = {};
+  Object.entries(WORKBOOK_HEADERS).forEach(([sheetName, headers]) => {
+    const sheet = workbook.Sheets[sheetName];
+    if (!sheet) {
+      data[sheetName] = [];
+      return;
+    }
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+    data[sheetName] = rows.map((row) => {
+      const normalized = {};
+      headers.forEach((header) => {
+        normalized[header] = row[header] ?? "";
+      });
+      return normalized;
+    });
+  });
+  return data;
+}
+
+function writeDataToWorkbook(workbook, data) {
+  Object.entries(WORKBOOK_HEADERS).forEach(([sheetName, headers]) => {
+    const rows = data[sheetName] || [];
+    const matrix = [headers, ...rows.map((row) => headers.map((header) => row[header] ?? ""))];
+    const sheet = XLSX.utils.aoa_to_sheet(matrix);
+    workbook.Sheets[sheetName] = sheet;
+    if (!workbook.SheetNames.includes(sheetName)) {
+      workbook.SheetNames.push(sheetName);
+    }
+  });
+}
+
+function organizeWorkbookData(data) {
+  return {
+    ...data,
+    Users: [...data.Users].sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt))),
+    Sessions: [...data.Sessions].sort((a, b) => String(b.timestamp).localeCompare(String(a.timestamp))),
+    Progress: [...data.Progress].sort((a, b) => String(b.timestamp).localeCompare(String(a.timestamp))),
+    Activity: [...data.Activity].sort((a, b) => String(b.timestamp).localeCompare(String(a.timestamp))),
+    Meta: data.Meta
+  };
+}
+
+function createId(prefix) {
+  return `${prefix}-${Math.random().toString(36).slice(2, 10)}-${Date.now().toString(36)}`;
+}
+
+async function hashText(value) {
+  const bytes = new TextEncoder().encode(value);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(hashBuffer)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function normalizeEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function base64ToBytes(base64) {
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+  return bytes;
+}
+
+function bytesToBase64(value) {
+  const bytes = value instanceof Uint8Array ? value : new Uint8Array(value);
+  let binary = "";
+  const chunk = 0x8000;
+  for (let index = 0; index < bytes.length; index += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + chunk));
+  }
+  return btoa(binary);
+}
+
+function downloadBytes(bytes, filename, mimeType) {
+  const blob = new Blob([bytes], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+function persistPracticeState() {
+  saveJson(STORAGE_KEYS.practice, state.practice);
+}
+
+function getTeacherById(teacherId) {
+  return state.content.teachers.find((teacher) => teacher.teacherId === teacherId) || state.content.teachers[0];
+}
+
+function saveJson(key, value) {
+  if (value === null || value === undefined) {
+    localStorage.removeItem(key);
+    return;
+  }
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function loadJson(key) {
   try {
-    await exportDatabaseToExcel();
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
   } catch (error) {
-    showToast("Export failed", error.message);
+    console.warn(`Could not parse localStorage key ${key}`, error);
+    return null;
   }
-});
+}
 
-elements.exportJson.addEventListener("click", async () => {
-  try {
-    await exportDatabaseToJson();
-  } catch (error) {
-    showToast("Export failed", error.message);
+function formatDateTime(value) {
+  if (!value) {
+    return "Not available";
   }
-});
+  return new Date(value).toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
+}
 
-initializeApp().catch((error) => {
-  console.error(error);
-  showToast("Startup error", "The browser database could not be initialized.");
-});
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function showToast(title, message) {
+  const stack = document.getElementById("toast-stack");
+  if (!stack) {
+    return;
+  }
+  const item = document.createElement("div");
+  item.className = "toast";
+  item.innerHTML = `<strong>${escapeHtml(title)}</strong><span>${escapeHtml(message)}</span>`;
+  stack.appendChild(item);
+  window.setTimeout(() => {
+    item.classList.add("fade-out");
+    window.setTimeout(() => item.remove(), 320);
+  }, 3200);
+}
