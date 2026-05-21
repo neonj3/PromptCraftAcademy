@@ -1,104 +1,107 @@
 # PromptCraft Academy
 
-PromptCraft Academy is a zero-cost, static web game that teaches generative AI from basic to intermediate level through short lessons and scored prompt missions.
+PromptCraft Academy is now a multi-page static website built from three beginner AI workbooks. It is designed for free GitHub deployment and includes a GitHub-backed workbook flow for registration, login, sessions, and practice records.
 
-## What it teaches
+## What is inside
 
-- Prompt foundations: role, task, audience, and format
-- Context and constraints
-- Output design and evaluation
-- Hallucination awareness and verification
-- Few-shot prompting and workflow chaining
-- Grounding and simple RAG behavior
+- `index.html`: landing page and study flow
+- `curriculum.html`: full 100-lesson workbook explorer
+- `chapters.html`: detailed beginner chapters with exercises
+- `revision.html`: quick revision guide
+- `teachers.html`: five-teacher dynamic learning view
+- `practice.html`: interactive prompt drills
+- `account.html`: GitHub workbook settings, registration, login, and sync status
+- `app.js`: shared rendering, page logic, auth flow, GitHub workbook reads/writes, and practice scoring
+- `styles.css`: shared responsive UI
+- `data/site-content.json`: structured course content extracted from the uploaded DOCX files
+- `data/promptcraft-github-database.xlsx`: workbook database template stored in the repo
+- `scripts/build_site_assets.py`: rebuilds the JSON content and workbook template from the source DOCX files
 
-## Why this version is zero-cost
+## Source documents consolidated into the site
 
-- No backend
-- No paid API dependency
-- No paid database
-- Runs entirely in the browser
-- Uses `IndexedDB` in the browser for users, progress, and activity
-- Exports browser database records to Excel with SheetJS
+- `Detailed_Beginner_AI_Workbook.docx`
+- `AI_Generative_AI_100_Page_Beginner_Workbook.docx`
+- `Generative_AI_Workbook.docx`
 
-That means you can host it on free static hosting such as GitHub Pages, Netlify, or Cloudflare Pages.
+The current site content includes:
 
-## Project files
+- 100 workbook lessons across 20 topic tracks
+- 5 longer beginner chapters
+- 15 revision topics
+- 5 teacher perspectives
 
-- `index.html`: app structure
-- `styles.css`: clean responsive UI
-- `app.js`: lessons, auth flow, IndexedDB logic, mission scoring, analytics, and export tools
-- `PromptCraft-Academy-Blueprint.docx`: consolidated project document
+## How login and registration work on GitHub Pages
 
-## How to run locally
+This project stays fully static, so it does not use a paid backend or hosted database.
 
-1. Download or clone this folder.
-2. Open `index.html` in a browser.
+Instead:
 
-You do not need Node, Python, or any package install to play the game.
+1. Open `account.html`.
+2. Enter the repo owner, repo name, branch, workbook path, and a GitHub token with repository contents write access.
+3. Save the settings in the browser.
+4. Register or login through the site.
+5. The site reads `data/promptcraft-github-database.xlsx` from GitHub, updates the workbook, and writes it back through the GitHub Contents API.
 
-## New features added
+The workbook is organized into these sheets:
 
-- Timed registration popup after a few seconds
-- Client-side registration and login authentication
-- IndexedDB browser database for users, progress, and activity
-- Excel export with separate sheets for users, progress, and activity
-- JSON export for raw backup
-- More interactive UI with live prompt coach, activity feed, and scaffold button
-
-## How to deploy for free
-
-### Option 1: GitHub Pages
-
-1. Create a new GitHub repository.
-2. Upload `index.html`, `styles.css`, and `app.js` to the repository root.
-3. In GitHub, open `Settings` -> `Pages`.
-4. Under `Build and deployment`, choose `Deploy from a branch`.
-5. Select the `main` branch and `/root`.
-6. Save. GitHub will publish your site and give you a public URL.
+- `Users`
+- `Sessions`
+- `Progress`
+- `Activity`
+- `Meta`
 
 Important:
 
-- The current authentication is browser-side and suitable for a static GitHub Pages deployment.
-- The current database is browser-side `IndexedDB`, which means data is stored per device/browser, not in a shared cloud database.
-- If you later want production-grade login and shared cloud data, you will need a backend or a hosted auth/database service.
+- This is practical for a zero-cost static deployment.
+- The token is stored in the browser, so this is not production-grade secure authentication.
+- Use it for controlled educational deployments, demos, or internal learning projects.
 
-### Option 2: Netlify
+## Local development
 
-1. Sign in to Netlify.
-2. Drag this project folder into Netlify Drop, or connect the GitHub repository.
-3. No build command is needed.
-4. No publish directory is needed if the files are in the root.
+Because the site fetches `data/site-content.json`, use a simple static server instead of opening the files directly with `file://`.
 
-### Option 3: Cloudflare Pages
+Example with Python:
 
-1. Create a Pages project in Cloudflare.
-2. Connect the GitHub repo.
-3. Framework preset: `None`.
-4. Build command: leave blank.
-5. Output directory: `/`.
+```powershell
+python -m http.server 8000
+```
 
-## How to ask Codex to help deploy it
+Then open:
 
-If you want OpenAI Codex to help with deployment, give it this repo and ask:
+- `http://localhost:8000/index.html`
 
-`Deploy this static site to GitHub Pages. Do not add a backend or paid service.`
+## Rebuilding the content and workbook
 
-or
+If the workbook DOCX files change, rebuild the generated assets with:
 
-`Prepare this static project for Netlify deployment and verify that it remains fully static.`
+```powershell
+C:\Users\ASUS\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\build_site_assets.py
+```
 
-Because this is already a static site, Codex should not need to install a framework or rewrite the architecture.
+This refreshes:
 
-## Learning sources used to shape the curriculum
+- `data/site-content.json`
+- `data/promptcraft-github-database.xlsx`
 
-- Learn Prompting: beginner prompt engineering, hallucinations, bias, and responsible use
-- Microsoft Generative AI for Beginners: lesson-based learning plus build-oriented progression
-- Hugging Face LLM Course: LLM/NLP foundations and advanced topics like fine-tuning
-- Google Cloud Beginner: Introduction to Generative AI: high-level GenAI, LLM, and responsible AI progression
+## Free deployment to GitHub Pages
 
-## Suggested next improvements
+1. Push the repo to GitHub.
+2. In GitHub, open `Settings` -> `Pages`.
+3. Choose `Deploy from a branch`.
+4. Select your branch and the root folder.
+5. Save.
 
-- Add more missions for images, code, and spreadsheets
-- Add a teacher dashboard or printable worksheets
-- Add sample policy documents for richer grounding missions
-- Add adaptive hints based on weak prompt patterns
+After deployment:
+
+- Use `account.html` to save the GitHub token and workbook path.
+- Keep the workbook file in the same repo branch you configured.
+
+## Verification completed
+
+- `app.js` passes `node --check`
+- `site-content.json` was validated after generation
+- `promptcraft-github-database.xlsx` was created and sheet structure was verified
+
+## Remaining limitation
+
+The site is static and zero-cost, so there is no secure server-side auth layer. The GitHub token approach is the tradeoff that makes read/write workbook sync possible on GitHub Pages without adding a paid backend.

@@ -1,0 +1,2452 @@
+{
+  "site": {
+    "name": "PromptCraft Academy",
+    "tagline": "A GitHub-ready, zero-cost multi-page GenAI learning experience",
+    "description": "This site consolidates three beginner workbooks into an approachable, interactive website that teaches AI, machine learning, and generative AI through guided tracks, chapter notes, revision pages, teacher-led perspectives, and hands-on practice."
+  },
+  "stats": {
+    "lessons": 100,
+    "tracks": 20,
+    "chapters": 5,
+    "revisionTopics": 15,
+    "teachers": 5
+  },
+  "highlights": [
+    "100 bite-sized workbook lessons grouped into 20 topic tracks",
+    "5 detailed beginner chapters with practice exercises",
+    "15 quick-revision topic summaries for fast review",
+    "5 teacher perspectives to make the content feel more dynamic",
+    "Static hosting friendly architecture for GitHub Pages"
+  ],
+  "tracks": [
+    {
+      "id": "ai-foundations",
+      "order": 1,
+      "title": "AI Foundations",
+      "teacherId": "edureka-expert",
+      "pageRange": "001\u2013005",
+      "summary": "AI is the umbrella term for computer systems that perform tasks normally associated with human intelligence, such as recognizing patterns, understanding language, making decisions, and adapting from experience.",
+      "lessonCount": 5
+    },
+    {
+      "id": "machine-learning-basics",
+      "order": 2,
+      "title": "Machine Learning Basics",
+      "teacherId": "edureka-expert",
+      "pageRange": "006\u2013010",
+      "summary": "Machine learning enables software to improve its performance on a task by learning patterns from data rather than relying only on fixed rules written by humans.",
+      "lessonCount": 5
+    },
+    {
+      "id": "core-ml-algorithms",
+      "order": 3,
+      "title": "Core ML Algorithms",
+      "teacherId": "edureka-expert",
+      "pageRange": "011\u2013015",
+      "summary": "Linear regression predicts a continuous number by fitting a line or plane that minimizes prediction error. It is a beginner-friendly way to understand loss, training, and prediction.",
+      "lessonCount": 5
+    },
+    {
+      "id": "deep-learning-and-neural-networks",
+      "order": 4,
+      "title": "Deep Learning and Neural Networks",
+      "teacherId": "stanford-cs229",
+      "pageRange": "016\u2013020",
+      "summary": "A neural network is a layered mathematical system that transforms inputs into outputs. During training, it adjusts internal weights to reduce errors.",
+      "lessonCount": 5
+    },
+    {
+      "id": "generative-ai-fundamentals",
+      "order": 5,
+      "title": "Generative AI Fundamentals",
+      "teacherId": "simplilearn-specialist",
+      "pageRange": "021\u2013025",
+      "summary": "Generative AI creates new content based on patterns learned from training data. It can produce text, code, images, audio, video, synthetic data, and design variations.",
+      "lessonCount": 5
+    },
+    {
+      "id": "large-language-models",
+      "order": 6,
+      "title": "Large Language Models",
+      "teacherId": "gaurav-sen",
+      "pageRange": "026\u2013030",
+      "summary": "A large language model processes tokens and predicts likely next tokens. By repeating this process, it can generate sentences, explanations, code, summaries, and conversations.",
+      "lessonCount": 5
+    },
+    {
+      "id": "training-and-alignment",
+      "order": 7,
+      "title": "Training and Alignment",
+      "teacherId": "stanford-cs229",
+      "pageRange": "031\u2013035",
+      "summary": "Pre-training teaches a model broad patterns from huge datasets. For language models, this often involves predicting hidden or next tokens from large text collections.",
+      "lessonCount": 5
+    },
+    {
+      "id": "prompt-engineering",
+      "order": 8,
+      "title": "Prompt Engineering",
+      "teacherId": "simplilearn-specialist",
+      "pageRange": "036\u2013040",
+      "summary": "Prompt engineering is the practice of writing clear instructions, context, examples, and constraints so an AI model produces a useful output.",
+      "lessonCount": 5
+    },
+    {
+      "id": "rag-and-context-engineering",
+      "order": 9,
+      "title": "RAG and Context Engineering",
+      "teacherId": "gaurav-sen",
+      "pageRange": "041\u2013045",
+      "summary": "Retrieval-augmented generation connects an LLM to external knowledge. The system retrieves relevant information and adds it to the prompt before the model answers.",
+      "lessonCount": 5
+    },
+    {
+      "id": "ai-agents-and-agentic-ai",
+      "order": 10,
+      "title": "AI Agents and Agentic AI",
+      "teacherId": "simplilearn-specialist",
+      "pageRange": "046\u2013050",
+      "summary": "AI agents are software systems that use AI to pursue goals and complete tasks on behalf of users. They may reason, plan, use tools, remember state, and adapt.",
+      "lessonCount": 5
+    },
+    {
+      "id": "multimodal-ai",
+      "order": 11,
+      "title": "Multimodal AI",
+      "teacherId": "andrew-brown",
+      "pageRange": "051\u2013055",
+      "summary": "Multimodal AI can understand or generate more than one data type, such as text, images, audio, video, tables, charts, and documents.",
+      "lessonCount": 5
+    },
+    {
+      "id": "responsible-ai-and-safety",
+      "order": 12,
+      "title": "Responsible AI and Safety",
+      "teacherId": "stanford-cs229",
+      "pageRange": "056\u2013060",
+      "summary": "Responsible AI is the practice of designing, building, and using AI systems in ways that are fair, reliable, safe, private, secure, transparent, and accountable.",
+      "lessonCount": 5
+    },
+    {
+      "id": "building-ai-applications",
+      "order": 13,
+      "title": "Building AI Applications",
+      "teacherId": "andrew-brown",
+      "pageRange": "061\u2013065",
+      "summary": "Before building AI, define the user problem, success metric, available data, risks, constraints, and whether AI is actually needed.",
+      "lessonCount": 5
+    },
+    {
+      "id": "mlops-and-llmops",
+      "order": 14,
+      "title": "MLOps and LLMOps",
+      "teacherId": "andrew-brown",
+      "pageRange": "066\u2013070",
+      "summary": "MLOps applies software engineering, DevOps, and data practices to machine learning so models can be built, deployed, monitored, and improved reliably.",
+      "lessonCount": 5
+    },
+    {
+      "id": "ai-tools-and-ecosystem",
+      "order": 15,
+      "title": "AI Tools and Ecosystem",
+      "teacherId": "andrew-brown",
+      "pageRange": "071\u2013075",
+      "summary": "AI assistants help users draft, summarize, explain, brainstorm, code, translate, and analyze information through natural language interaction.",
+      "lessonCount": 5
+    },
+    {
+      "id": "business-applications",
+      "order": 16,
+      "title": "Business Applications",
+      "teacherId": "simplilearn-specialist",
+      "pageRange": "076\u2013080",
+      "summary": "AI can route tickets, suggest responses, summarize conversations, detect sentiment, and power chatbots that answer common questions.",
+      "lessonCount": 5
+    },
+    {
+      "id": "career-and-skills",
+      "order": 17,
+      "title": "Career and Skills",
+      "teacherId": "andrew-brown",
+      "pageRange": "081\u2013085",
+      "summary": "Python is widely used in AI because of its readable syntax and strong libraries for data, machine learning, deep learning, automation, and application development.",
+      "lessonCount": 5
+    },
+    {
+      "id": "hands-on-practice",
+      "order": 18,
+      "title": "Hands-on Practice",
+      "teacherId": "andrew-brown",
+      "pageRange": "086\u2013090",
+      "summary": "A beginner classifier project teaches data collection, labeling, preprocessing, model training, evaluation, and deployment thinking.",
+      "lessonCount": 5
+    },
+    {
+      "id": "advanced-genai-concepts",
+      "order": 19,
+      "title": "Advanced GenAI Concepts",
+      "teacherId": "gaurav-sen",
+      "pageRange": "091\u2013095",
+      "summary": "Temperature, top-p, and related sampling settings influence how predictable or creative model outputs are. Lower settings tend to be more focused, while higher settings may add variety but also more risk of errors.",
+      "lessonCount": 5
+    },
+    {
+      "id": "data-and-evaluation",
+      "order": 20,
+      "title": "Data and Evaluation",
+      "teacherId": "stanford-cs229",
+      "pageRange": "096\u2013100",
+      "summary": "AI systems are limited by the quality of their data. Clean, representative, well-labeled, and legally usable data improves model reliability.",
+      "lessonCount": 5
+    }
+  ],
+  "lessons": [
+    {
+      "page": "001",
+      "title": "What Artificial Intelligence Means",
+      "track": "AI Foundations",
+      "slug": "what-artificial-intelligence-means",
+      "teacherId": "edureka-expert",
+      "content": "AI is the umbrella term for computer systems that perform tasks normally associated with human intelligence, such as recognizing patterns, understanding language, making decisions, and adapting from experience.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "002",
+      "title": "Weak AI, Strong AI, and Superintelligence",
+      "track": "AI Foundations",
+      "slug": "weak-ai-strong-ai-and-superintelligence",
+      "teacherId": "edureka-expert",
+      "content": "Weak or narrow AI solves specific problems, while strong AI or AGI refers to a hypothetical system that could reason broadly like a human. Artificial superintelligence refers to a still-hypothetical system that would exceed human capability in most areas.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "003",
+      "title": "Why AI Became Popular Recently",
+      "track": "AI Foundations",
+      "slug": "why-ai-became-popular-recently",
+      "teacherId": "edureka-expert",
+      "content": "AI concepts are old, but modern adoption increased because of more data, better algorithms, faster hardware, cloud infrastructure, open-source tools, and business demand for automation.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "004",
+      "title": "AI, ML, Deep Learning, and Generative AI",
+      "track": "AI Foundations",
+      "slug": "ai-ml-deep-learning-and-generative-ai",
+      "teacherId": "edureka-expert",
+      "content": "AI is the broad field. Machine learning is a subset where systems learn from data. Deep learning is a subset of ML based on neural networks. Generative AI is a family of models that create new text, images, audio, video, or code.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "005",
+      "title": "AI Use Cases in Daily Life",
+      "track": "AI Foundations",
+      "slug": "ai-use-cases-in-daily-life",
+      "teacherId": "edureka-expert",
+      "content": "AI appears in search engines, recommendations, maps, fraud detection, translation, spam filters, image search, customer support bots, and productivity tools.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "006",
+      "title": "What Machine Learning Is",
+      "track": "Machine Learning Basics",
+      "slug": "what-machine-learning-is",
+      "teacherId": "edureka-expert",
+      "content": "Machine learning enables software to improve its performance on a task by learning patterns from data rather than relying only on fixed rules written by humans.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "007",
+      "title": "Supervised Learning",
+      "track": "Machine Learning Basics",
+      "slug": "supervised-learning",
+      "teacherId": "edureka-expert",
+      "content": "Supervised learning trains models using examples where the correct answer is known. The model studies input-output pairs and learns to predict the output for new inputs.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "008",
+      "title": "Unsupervised Learning",
+      "track": "Machine Learning Basics",
+      "slug": "unsupervised-learning",
+      "teacherId": "edureka-expert",
+      "content": "Unsupervised learning finds structure in data without labeled answers. It is useful for grouping, discovering patterns, reducing dimensions, and understanding data distributions.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "009",
+      "title": "Reinforcement Learning",
+      "track": "Machine Learning Basics",
+      "slug": "reinforcement-learning",
+      "teacherId": "edureka-expert",
+      "content": "Reinforcement learning trains an agent to act in an environment by receiving rewards or penalties. It is useful when learning happens through trial, feedback, and long-term outcomes.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "010",
+      "title": "Training, Validation, and Testing",
+      "track": "Machine Learning Basics",
+      "slug": "training-validation-and-testing",
+      "teacherId": "edureka-expert",
+      "content": "A dataset is often split into training, validation, and test sets. Training fits the model, validation helps tune choices, and testing estimates real-world performance.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "011",
+      "title": "Linear Regression",
+      "track": "Core ML Algorithms",
+      "slug": "linear-regression",
+      "teacherId": "edureka-expert",
+      "content": "Linear regression predicts a continuous number by fitting a line or plane that minimizes prediction error. It is a beginner-friendly way to understand loss, training, and prediction.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "012",
+      "title": "Logistic Regression",
+      "track": "Core ML Algorithms",
+      "slug": "logistic-regression",
+      "teacherId": "edureka-expert",
+      "content": "Logistic regression is used for classification, especially binary classification. It estimates the probability that an example belongs to a class.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "013",
+      "title": "Decision Trees",
+      "track": "Core ML Algorithms",
+      "slug": "decision-trees",
+      "teacherId": "edureka-expert",
+      "content": "A decision tree makes predictions by asking a sequence of questions. Each branch narrows down the answer until the model reaches a prediction.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "014",
+      "title": "Random Forests and Ensembles",
+      "track": "Core ML Algorithms",
+      "slug": "random-forests-and-ensembles",
+      "teacherId": "edureka-expert",
+      "content": "An ensemble combines many models to get a stronger result. A random forest combines many decision trees and averages or votes across them.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "015",
+      "title": "Model Evaluation Metrics",
+      "track": "Core ML Algorithms",
+      "slug": "model-evaluation-metrics",
+      "teacherId": "edureka-expert",
+      "content": "Evaluation metrics depend on the task. Accuracy is not enough when classes are imbalanced. Precision, recall, F1, ROC-AUC, MAE, and RMSE help measure different aspects of performance.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "016",
+      "title": "Neural Networks in Simple Terms",
+      "track": "Deep Learning and Neural Networks",
+      "slug": "neural-networks-in-simple-terms",
+      "teacherId": "stanford-cs229",
+      "content": "A neural network is a layered mathematical system that transforms inputs into outputs. During training, it adjusts internal weights to reduce errors.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "017",
+      "title": "Why Deep Learning Needs Data and Compute",
+      "track": "Deep Learning and Neural Networks",
+      "slug": "why-deep-learning-needs-data-and-compute",
+      "teacherId": "stanford-cs229",
+      "content": "Deep learning models can learn complex patterns, but they usually need large datasets and powerful hardware because they perform many matrix operations during training.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "018",
+      "title": "Activation Functions",
+      "track": "Deep Learning and Neural Networks",
+      "slug": "activation-functions",
+      "teacherId": "stanford-cs229",
+      "content": "Activation functions allow neural networks to learn non-linear relationships. Without them, even a deep network would behave like a simple linear model.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "019",
+      "title": "Backpropagation and Gradient Descent",
+      "track": "Deep Learning and Neural Networks",
+      "slug": "backpropagation-and-gradient-descent",
+      "teacherId": "stanford-cs229",
+      "content": "Training uses loss to measure error. Backpropagation calculates how each weight contributed to the error, and gradient descent updates weights to reduce future error.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "020",
+      "title": "CNNs, RNNs, and Transformers",
+      "track": "Deep Learning and Neural Networks",
+      "slug": "cnns-rnns-and-transformers",
+      "teacherId": "stanford-cs229",
+      "content": "Different neural architectures are suited to different data. CNNs are strong for images, RNNs were common for sequences, and transformers became dominant for language and many multimodal tasks.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "021",
+      "title": "What Generative AI Is",
+      "track": "Generative AI Fundamentals",
+      "slug": "what-generative-ai-is",
+      "teacherId": "simplilearn-specialist",
+      "content": "Generative AI creates new content based on patterns learned from training data. It can produce text, code, images, audio, video, synthetic data, and design variations.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "022",
+      "title": "Generative vs Traditional AI",
+      "track": "Generative AI Fundamentals",
+      "slug": "generative-vs-traditional-ai",
+      "teacherId": "simplilearn-specialist",
+      "content": "Traditional AI often predicts, classifies, recommends, or detects. Generative AI creates outputs that feel new, such as paragraphs, images, music, and code.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "023",
+      "title": "Foundation Models",
+      "track": "Generative AI Fundamentals",
+      "slug": "foundation-models",
+      "teacherId": "simplilearn-specialist",
+      "content": "A foundation model is a general-purpose model trained on large amounts of data and adaptable to many downstream tasks through prompting, fine-tuning, or retrieval.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "024",
+      "title": "Modalities of Generative AI",
+      "track": "Generative AI Fundamentals",
+      "slug": "modalities-of-generative-ai",
+      "teacherId": "simplilearn-specialist",
+      "content": "A modality is a type of data, such as text, image, audio, video, 3D, or structured data. Modern systems increasingly combine multiple modalities.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "025",
+      "title": "Common Limitations of Generative AI",
+      "track": "Generative AI Fundamentals",
+      "slug": "common-limitations-of-generative-ai",
+      "teacherId": "simplilearn-specialist",
+      "content": "Generative AI may hallucinate, repeat bias, misunderstand context, leak sensitive information if poorly designed, or produce unsafe content without guardrails.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "026",
+      "title": "What an LLM Does",
+      "track": "Large Language Models",
+      "slug": "what-an-llm-does",
+      "teacherId": "gaurav-sen",
+      "content": "A large language model processes tokens and predicts likely next tokens. By repeating this process, it can generate sentences, explanations, code, summaries, and conversations.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "027",
+      "title": "Tokens and Context Windows",
+      "track": "Large Language Models",
+      "slug": "tokens-and-context-windows",
+      "teacherId": "gaurav-sen",
+      "content": "Text is split into tokens before entering a model. The context window is the amount of tokens the model can consider at once.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "028",
+      "title": "Embeddings and Vector Meaning",
+      "track": "Large Language Models",
+      "slug": "embeddings-and-vector-meaning",
+      "teacherId": "gaurav-sen",
+      "content": "Embeddings turn tokens, sentences, or documents into vectors. Similar meanings appear closer in vector space, enabling semantic search and retrieval.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "029",
+      "title": "Attention Mechanism",
+      "track": "Large Language Models",
+      "slug": "attention-mechanism",
+      "teacherId": "gaurav-sen",
+      "content": "Attention helps a model decide which tokens matter for understanding another token. It allows the model to use context, such as knowing whether Apple means fruit or company.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "030",
+      "title": "Autoregressive Generation",
+      "track": "Large Language Models",
+      "slug": "autoregressive-generation",
+      "teacherId": "gaurav-sen",
+      "content": "Autoregressive models generate one token at a time. Each new token becomes part of the context for predicting the next token.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "031",
+      "title": "Pre-training",
+      "track": "Training and Alignment",
+      "slug": "pre-training",
+      "teacherId": "stanford-cs229",
+      "content": "Pre-training teaches a model broad patterns from huge datasets. For language models, this often involves predicting hidden or next tokens from large text collections.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "032",
+      "title": "Self-Supervised Learning",
+      "track": "Training and Alignment",
+      "slug": "self-supervised-learning",
+      "teacherId": "stanford-cs229",
+      "content": "Self-supervised learning creates training signals from the data itself. For example, a model can learn by predicting missing words or next words without humans labeling every example.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "033",
+      "title": "Fine-tuning",
+      "track": "Training and Alignment",
+      "slug": "fine-tuning",
+      "teacherId": "stanford-cs229",
+      "content": "Fine-tuning adapts a pre-trained model to a specific style, domain, or task by continuing training on curated examples.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "034",
+      "title": "Instruction Tuning and SFT",
+      "track": "Training and Alignment",
+      "slug": "instruction-tuning-and-sft",
+      "teacherId": "stanford-cs229",
+      "content": "Supervised fine-tuning uses example instructions and desired answers to teach a model how to behave like an assistant instead of merely continuing text.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "035",
+      "title": "RLHF and Preference Learning",
+      "track": "Training and Alignment",
+      "slug": "rlhf-and-preference-learning",
+      "teacherId": "stanford-cs229",
+      "content": "Reinforcement learning from human feedback and preference optimization teach models to produce outputs that humans prefer, such as helpful, harmless, and concise answers.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "036",
+      "title": "What Prompt Engineering Is",
+      "track": "Prompt Engineering",
+      "slug": "what-prompt-engineering-is",
+      "teacherId": "simplilearn-specialist",
+      "content": "Prompt engineering is the practice of writing clear instructions, context, examples, and constraints so an AI model produces a useful output.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "037",
+      "title": "Prompt Anatomy",
+      "track": "Prompt Engineering",
+      "slug": "prompt-anatomy",
+      "teacherId": "simplilearn-specialist",
+      "content": "A strong prompt can include role, task, context, input data, output format, constraints, tone, examples, and evaluation criteria.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "038",
+      "title": "Zero-shot and Few-shot Prompting",
+      "track": "Prompt Engineering",
+      "slug": "zero-shot-and-few-shot-prompting",
+      "teacherId": "simplilearn-specialist",
+      "content": "Zero-shot prompting asks the model to solve a task without examples. Few-shot prompting gives sample inputs and outputs so the model can imitate the pattern.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "039",
+      "title": "Structured Output Prompts",
+      "track": "Prompt Engineering",
+      "slug": "structured-output-prompts",
+      "teacherId": "simplilearn-specialist",
+      "content": "Structured prompts request output in a specific format, such as JSON, a table, bullet points, lesson plan, or checklist.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "040",
+      "title": "Prompt Testing and Iteration",
+      "track": "Prompt Engineering",
+      "slug": "prompt-testing-and-iteration",
+      "teacherId": "simplilearn-specialist",
+      "content": "Prompt engineering is experimental. You test prompts against real examples, compare outputs, revise wording, and document what works.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "041",
+      "title": "What RAG Is",
+      "track": "RAG and Context Engineering",
+      "slug": "what-rag-is",
+      "teacherId": "gaurav-sen",
+      "content": "Retrieval-augmented generation connects an LLM to external knowledge. The system retrieves relevant information and adds it to the prompt before the model answers.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "042",
+      "title": "Vector Databases",
+      "track": "RAG and Context Engineering",
+      "slug": "vector-databases",
+      "teacherId": "gaurav-sen",
+      "content": "Vector databases store embeddings and allow similarity search. They help find documents that are semantically related to a user query.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "043",
+      "title": "Chunking and Indexing",
+      "track": "RAG and Context Engineering",
+      "slug": "chunking-and-indexing",
+      "teacherId": "gaurav-sen",
+      "content": "Chunking divides documents into meaningful pieces. Good chunks are large enough to preserve meaning but small enough to retrieve precisely.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "044",
+      "title": "Context Engineering vs Prompt Engineering",
+      "track": "RAG and Context Engineering",
+      "slug": "context-engineering-vs-prompt-engineering",
+      "teacherId": "gaurav-sen",
+      "content": "Prompt engineering focuses on one instruction. Context engineering designs how memory, retrieved documents, user preferences, tools, and summaries are assembled for each request.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "045",
+      "title": "Evaluating RAG Systems",
+      "track": "RAG and Context Engineering",
+      "slug": "evaluating-rag-systems",
+      "teacherId": "gaurav-sen",
+      "content": "RAG evaluation checks whether retrieval found the right evidence and whether the generated answer used it faithfully.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "046",
+      "title": "What AI Agents Are",
+      "track": "AI Agents and Agentic AI",
+      "slug": "what-ai-agents-are",
+      "teacherId": "simplilearn-specialist",
+      "content": "AI agents are software systems that use AI to pursue goals and complete tasks on behalf of users. They may reason, plan, use tools, remember state, and adapt.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "047",
+      "title": "Tools and APIs",
+      "track": "AI Agents and Agentic AI",
+      "slug": "tools-and-apis",
+      "teacherId": "simplilearn-specialist",
+      "content": "Agents become useful when connected to tools such as search, calculators, databases, email, calendars, code execution, or business systems.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "048",
+      "title": "Planning and Task Decomposition",
+      "track": "AI Agents and Agentic AI",
+      "slug": "planning-and-task-decomposition",
+      "teacherId": "simplilearn-specialist",
+      "content": "Agentic systems break a goal into smaller steps, execute them, observe results, and adjust the plan when needed.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "049",
+      "title": "Memory in Agents",
+      "track": "AI Agents and Agentic AI",
+      "slug": "memory-in-agents",
+      "teacherId": "simplilearn-specialist",
+      "content": "Agent memory can include short-term conversation state, long-term preferences, task state, and external records.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "050",
+      "title": "Agentic AI Risks",
+      "track": "AI Agents and Agentic AI",
+      "slug": "agentic-ai-risks",
+      "teacherId": "simplilearn-specialist",
+      "content": "More autonomy creates more risk. Agents can take wrong actions, use tools incorrectly, leak data, or overstep user intent.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "051",
+      "title": "What Multimodal AI Means",
+      "track": "Multimodal AI",
+      "slug": "what-multimodal-ai-means",
+      "teacherId": "andrew-brown",
+      "content": "Multimodal AI can understand or generate more than one data type, such as text, images, audio, video, tables, charts, and documents.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "052",
+      "title": "Image Generation",
+      "track": "Multimodal AI",
+      "slug": "image-generation",
+      "teacherId": "andrew-brown",
+      "content": "Image generation models create visuals from text prompts or edit existing images. They are used in design, marketing, storyboarding, and creative exploration.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "053",
+      "title": "Audio and Speech AI",
+      "track": "Multimodal AI",
+      "slug": "audio-and-speech-ai",
+      "teacherId": "andrew-brown",
+      "content": "Audio AI can transcribe speech, synthesize voices, remove noise, classify sounds, or generate music.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "054",
+      "title": "Video and 3D Generation",
+      "track": "Multimodal AI",
+      "slug": "video-and-3d-generation",
+      "teacherId": "andrew-brown",
+      "content": "Video and 3D generation are emerging areas where models produce motion, scenes, characters, or 3D assets from prompts or references.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "055",
+      "title": "Multimodal RAG",
+      "track": "Multimodal AI",
+      "slug": "multimodal-rag",
+      "teacherId": "andrew-brown",
+      "content": "Multimodal RAG retrieves text, tables, charts, diagrams, or images so an AI system can answer questions grounded in mixed-format information.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "056",
+      "title": "Why Responsible AI Matters",
+      "track": "Responsible AI and Safety",
+      "slug": "why-responsible-ai-matters",
+      "teacherId": "stanford-cs229",
+      "content": "Responsible AI is the practice of designing, building, and using AI systems in ways that are fair, reliable, safe, private, secure, transparent, and accountable.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "057",
+      "title": "Bias and Fairness",
+      "track": "Responsible AI and Safety",
+      "slug": "bias-and-fairness",
+      "teacherId": "stanford-cs229",
+      "content": "Bias appears when data, design, or deployment causes unfair outcomes for groups or individuals. Fairness requires careful data review, testing, and monitoring.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "058",
+      "title": "Privacy and Security",
+      "track": "Responsible AI and Safety",
+      "slug": "privacy-and-security",
+      "teacherId": "stanford-cs229",
+      "content": "AI systems must protect sensitive data. Risks include data leakage, prompt injection, model inversion, unauthorized tool use, and unsafe retention.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "059",
+      "title": "Hallucination and Grounding",
+      "track": "Responsible AI and Safety",
+      "slug": "hallucination-and-grounding",
+      "teacherId": "stanford-cs229",
+      "content": "Hallucination occurs when a model produces incorrect information confidently. Grounding uses evidence, retrieval, tools, and validation to reduce this risk.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "060",
+      "title": "Governance and AI Risk Management",
+      "track": "Responsible AI and Safety",
+      "slug": "governance-and-ai-risk-management",
+      "teacherId": "stanford-cs229",
+      "content": "AI governance defines policies, roles, reviews, testing, documentation, monitoring, and escalation paths for AI systems.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "061",
+      "title": "Problem Framing",
+      "track": "Building AI Applications",
+      "slug": "problem-framing",
+      "teacherId": "andrew-brown",
+      "content": "Before building AI, define the user problem, success metric, available data, risks, constraints, and whether AI is actually needed.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "062",
+      "title": "Data Collection and Preparation",
+      "track": "Building AI Applications",
+      "slug": "data-collection-and-preparation",
+      "teacherId": "andrew-brown",
+      "content": "Data preparation includes collecting, cleaning, labeling, formatting, splitting, and documenting data. It often takes more time than model selection.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "063",
+      "title": "Choosing Build vs Buy",
+      "track": "Building AI Applications",
+      "slug": "choosing-build-vs-buy",
+      "teacherId": "andrew-brown",
+      "content": "Teams can build custom models, fine-tune existing models, use APIs, or combine off-the-shelf tools with custom data.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "064",
+      "title": "Evaluation Before Launch",
+      "track": "Building AI Applications",
+      "slug": "evaluation-before-launch",
+      "teacherId": "andrew-brown",
+      "content": "AI applications should be tested for accuracy, latency, cost, safety, usability, and failure modes before reaching users.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "065",
+      "title": "Deployment and Monitoring",
+      "track": "Building AI Applications",
+      "slug": "deployment-and-monitoring",
+      "teacherId": "andrew-brown",
+      "content": "Deployment means making the AI system available to users. Monitoring checks quality, costs, errors, drift, abuse, and user satisfaction over time.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "066",
+      "title": "What MLOps Is",
+      "track": "MLOps and LLMOps",
+      "slug": "what-mlops-is",
+      "teacherId": "andrew-brown",
+      "content": "MLOps applies software engineering, DevOps, and data practices to machine learning so models can be built, deployed, monitored, and improved reliably.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "067",
+      "title": "Experiment Tracking",
+      "track": "MLOps and LLMOps",
+      "slug": "experiment-tracking",
+      "teacherId": "andrew-brown",
+      "content": "Experiment tracking records datasets, code, parameters, metrics, and model versions so teams can reproduce results and compare approaches.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "068",
+      "title": "Model Versioning",
+      "track": "MLOps and LLMOps",
+      "slug": "model-versioning",
+      "teacherId": "andrew-brown",
+      "content": "Model versioning helps teams know which model is in development, testing, production, or rollback.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "069",
+      "title": "LLMOps Special Concerns",
+      "track": "MLOps and LLMOps",
+      "slug": "llmops-special-concerns",
+      "teacherId": "andrew-brown",
+      "content": "LLMOps extends MLOps with prompts, retrieval indexes, safety filters, evaluation sets, model providers, token costs, and response monitoring.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "070",
+      "title": "Cost and Latency Optimization",
+      "track": "MLOps and LLMOps",
+      "slug": "cost-and-latency-optimization",
+      "teacherId": "andrew-brown",
+      "content": "AI systems must balance quality, speed, and cost. Smaller models, caching, batching, retrieval pruning, and prompt compression can help.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "071",
+      "title": "Chatbots and AI Assistants",
+      "track": "AI Tools and Ecosystem",
+      "slug": "chatbots-and-ai-assistants",
+      "teacherId": "andrew-brown",
+      "content": "AI assistants help users draft, summarize, explain, brainstorm, code, translate, and analyze information through natural language interaction.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "072",
+      "title": "Coding Assistants",
+      "track": "AI Tools and Ecosystem",
+      "slug": "coding-assistants",
+      "teacherId": "andrew-brown",
+      "content": "Coding assistants generate code, explain errors, write tests, refactor functions, and help navigate unfamiliar codebases.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "073",
+      "title": "Open-Source Models and Hugging Face",
+      "track": "AI Tools and Ecosystem",
+      "slug": "open-source-models-and-hugging-face",
+      "teacherId": "andrew-brown",
+      "content": "Open-source model ecosystems allow learners and teams to explore models, datasets, demos, and tooling without depending only on closed platforms.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "074",
+      "title": "Cloud AI Platforms",
+      "track": "AI Tools and Ecosystem",
+      "slug": "cloud-ai-platforms",
+      "teacherId": "andrew-brown",
+      "content": "Cloud AI platforms provide infrastructure, managed models, deployment tools, monitoring, security, and integrations for building AI applications at scale.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "075",
+      "title": "No-Code and Low-Code AI Tools",
+      "track": "AI Tools and Ecosystem",
+      "slug": "no-code-and-low-code-ai-tools",
+      "teacherId": "andrew-brown",
+      "content": "No-code and low-code tools help non-developers create AI workflows, chatbots, dashboards, and automations with limited coding.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "076",
+      "title": "AI in Customer Support",
+      "track": "Business Applications",
+      "slug": "ai-in-customer-support",
+      "teacherId": "simplilearn-specialist",
+      "content": "AI can route tickets, suggest responses, summarize conversations, detect sentiment, and power chatbots that answer common questions.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "077",
+      "title": "AI in Marketing and Sales",
+      "track": "Business Applications",
+      "slug": "ai-in-marketing-and-sales",
+      "teacherId": "simplilearn-specialist",
+      "content": "AI helps create campaign drafts, segment audiences, personalize content, score leads, summarize calls, and analyze customer feedback.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "078",
+      "title": "AI in Healthcare",
+      "track": "Business Applications",
+      "slug": "ai-in-healthcare",
+      "teacherId": "simplilearn-specialist",
+      "content": "AI supports imaging analysis, documentation, triage assistance, drug discovery, patient communication, and research workflows, but requires strict validation.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "079",
+      "title": "AI in Finance",
+      "track": "Business Applications",
+      "slug": "ai-in-finance",
+      "teacherId": "simplilearn-specialist",
+      "content": "AI supports fraud detection, risk scoring, financial analysis, forecasting, compliance review, and report generation.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "080",
+      "title": "AI in Education",
+      "track": "Business Applications",
+      "slug": "ai-in-education",
+      "teacherId": "simplilearn-specialist",
+      "content": "AI can personalize learning, generate practice questions, explain concepts, summarize materials, and support teachers with planning.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "081",
+      "title": "Python for AI Learners",
+      "track": "Career and Skills",
+      "slug": "python-for-ai-learners",
+      "teacherId": "andrew-brown",
+      "content": "Python is widely used in AI because of its readable syntax and strong libraries for data, machine learning, deep learning, automation, and application development.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "082",
+      "title": "Math Foundations",
+      "track": "Career and Skills",
+      "slug": "math-foundations",
+      "teacherId": "andrew-brown",
+      "content": "Useful AI math includes linear algebra, probability, statistics, calculus basics, and optimization. Beginners can learn these gradually through examples.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "083",
+      "title": "Portfolio Projects",
+      "track": "Career and Skills",
+      "slug": "portfolio-projects",
+      "teacherId": "andrew-brown",
+      "content": "A portfolio shows that you can apply concepts. Good beginner projects are small, practical, documented, and easy for others to run.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "084",
+      "title": "Interview Readiness",
+      "track": "Career and Skills",
+      "slug": "interview-readiness",
+      "teacherId": "andrew-brown",
+      "content": "AI interviews often test fundamentals, project experience, trade-offs, evaluation, responsible AI, and practical problem-solving.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "085",
+      "title": "Learning Roadmap",
+      "track": "Career and Skills",
+      "slug": "learning-roadmap",
+      "teacherId": "andrew-brown",
+      "content": "A strong learning path moves from AI basics to ML, deep learning, LLMs, prompt engineering, RAG, agents, MLOps, responsible AI, and projects.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "086",
+      "title": "Build a Simple Classifier Plan",
+      "track": "Hands-on Practice",
+      "slug": "build-a-simple-classifier-plan",
+      "teacherId": "andrew-brown",
+      "content": "A beginner classifier project teaches data collection, labeling, preprocessing, model training, evaluation, and deployment thinking.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "087",
+      "title": "Design a Prompt Library",
+      "track": "Hands-on Practice",
+      "slug": "design-a-prompt-library",
+      "teacherId": "andrew-brown",
+      "content": "A prompt library stores reusable prompts for summarization, tutoring, coding, data analysis, writing, and brainstorming.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "088",
+      "title": "Create a RAG Knowledge Bot",
+      "track": "Hands-on Practice",
+      "slug": "create-a-rag-knowledge-bot",
+      "teacherId": "andrew-brown",
+      "content": "A RAG bot lets users ask questions over documents. It requires chunking, embeddings, retrieval, prompting, citations, and answer evaluation.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "089",
+      "title": "Prototype an AI Agent",
+      "track": "Hands-on Practice",
+      "slug": "prototype-an-ai-agent",
+      "teacherId": "andrew-brown",
+      "content": "A safe beginner agent can use tools such as calculator, search over local files, or task checklist generation without performing irreversible actions.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "090",
+      "title": "Capstone Project Blueprint",
+      "track": "Hands-on Practice",
+      "slug": "capstone-project-blueprint",
+      "teacherId": "andrew-brown",
+      "content": "A capstone combines problem framing, data, AI model or API, evaluation, user interface, documentation, and responsible AI checks.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "091",
+      "title": "Temperature and Sampling",
+      "track": "Advanced GenAI Concepts",
+      "slug": "temperature-and-sampling",
+      "teacherId": "gaurav-sen",
+      "content": "Temperature, top-p, and related sampling settings influence how predictable or creative model outputs are. Lower settings tend to be more focused, while higher settings may add variety but also more risk of errors.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "092",
+      "title": "Context Windows and Long Documents",
+      "track": "Advanced GenAI Concepts",
+      "slug": "context-windows-and-long-documents",
+      "teacherId": "gaurav-sen",
+      "content": "A context window limits how much information the model can consider at one time. Long documents may need chunking, summarization, retrieval, or selective context assembly.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "093",
+      "title": "System Prompts and Developer Instructions",
+      "track": "Advanced GenAI Concepts",
+      "slug": "system-prompts-and-developer-instructions",
+      "teacherId": "gaurav-sen",
+      "content": "System and developer instructions define behavior, constraints, tone, and tool usage. They are usually more authoritative than ordinary user text in an application.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "094",
+      "title": "Prompt Injection",
+      "track": "Advanced GenAI Concepts",
+      "slug": "prompt-injection",
+      "teacherId": "gaurav-sen",
+      "content": "Prompt injection happens when user-provided or retrieved text tries to override the application instructions or misuse tools.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "095",
+      "title": "Model Selection",
+      "track": "Advanced GenAI Concepts",
+      "slug": "model-selection",
+      "teacherId": "gaurav-sen",
+      "content": "Choosing a model involves trade-offs between quality, cost, latency, context length, modality support, privacy, and tool integration.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "096",
+      "title": "Data Quality",
+      "track": "Data and Evaluation",
+      "slug": "data-quality",
+      "teacherId": "stanford-cs229",
+      "content": "AI systems are limited by the quality of their data. Clean, representative, well-labeled, and legally usable data improves model reliability.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "097",
+      "title": "Overfitting and Underfitting",
+      "track": "Data and Evaluation",
+      "slug": "overfitting-and-underfitting",
+      "teacherId": "stanford-cs229",
+      "content": "Overfitting happens when a model memorizes training data too closely. Underfitting happens when the model is too simple to learn the pattern.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "098",
+      "title": "Confusion Matrix",
+      "track": "Data and Evaluation",
+      "slug": "confusion-matrix",
+      "teacherId": "stanford-cs229",
+      "content": "A confusion matrix shows true positives, false positives, true negatives, and false negatives. It helps beginners understand classification errors.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "099",
+      "title": "Human Evaluation",
+      "track": "Data and Evaluation",
+      "slug": "human-evaluation",
+      "teacherId": "stanford-cs229",
+      "content": "Human evaluation is useful for generative AI because outputs can be subjective, open-ended, or hard to judge with one automatic metric.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": []
+    },
+    {
+      "page": "100",
+      "title": "Benchmarking",
+      "track": "Data and Evaluation",
+      "slug": "benchmarking",
+      "teacherId": "stanford-cs229",
+      "content": "Benchmarks are standardized tests, but real application quality depends on your own data, users, tasks, and constraints.",
+      "thinking": "Start by asking what problem is being solved, what data or context is available, what the system is expected to output, and how a human would verify the result. This habit keeps AI learning practical instead of abstract.",
+      "recap": "The goal of this page is not memorization. The goal is to connect the concept to a simple real-world workflow and know what to verify before trusting results.",
+      "extras": [
+        "Revision exercise: Choose any five terms from this page and create a beginner analogy for each. Then write one sentence explaining how the term appears in a real AI product.",
+        "Revision exercise: Choose any five terms from this page and create a beginner analogy for each. Then write one sentence explaining how the term appears in a real AI product.",
+        "Revision exercise: Choose any five terms from this page and create a beginner analogy for each. Then write one sentence explaining how the term appears in a real AI product.",
+        "Revision exercise: Choose any five terms from this page and create a beginner analogy for each. Then write one sentence explaining how the term appears in a real AI product.",
+        "Revision exercise: Choose any five terms from this page and create a beginner analogy for each. Then write one sentence explaining how the term appears in a real AI product.",
+        "References and Further Learning",
+        "The sources below were used as learning references and expansion material. They are included in human-readable form so the workbook can be shared without tool-specific citation tokens.",
+        "Recommended study method: complete 5 pages per day, revise the glossary every weekend, and build one small project after every 20 pages."
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "id": "chapter-1",
+      "number": 1,
+      "title": "What is Artificial Intelligence?",
+      "sections": [
+        {
+          "heading": "Understanding AI",
+          "summary": "Artificial Intelligence (AI) is the ability of machines to mimic human intelligence. This means computers can learn, reason, make decisions, recognize patterns, and solve problems. AI is everywhere around us \u2014 from YouTube recommendations to voice assistants like Alexa and Siri.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Real-World Examples",
+          "summary": "Examples of AI include Netflix recommendations, Google Maps route suggestions, face recognition in smartphones, self-driving cars, chatbots, spam email filtering, and fraud detection systems in banks.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "How AI Works",
+          "summary": "AI systems work by collecting data, finding patterns in that data, and making predictions. The more data the AI sees, the better it becomes at understanding and predicting outcomes.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Types of AI",
+          "summary": "Weak AI performs specific tasks such as voice assistants. Strong AI refers to human-level intelligence, which still does not exist today.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        }
+      ],
+      "exercises": [
+        "List 10 examples of AI you use daily.",
+        "Explain the difference between AI and normal software.",
+        "Research one AI application in healthcare and summarize it."
+      ],
+      "recap": "Review the key concepts of this chapter before moving to the next one. Try revising without looking at the notes."
+    },
+    {
+      "id": "chapter-2",
+      "number": 2,
+      "title": "Introduction to Machine Learning",
+      "sections": [
+        {
+          "heading": "What is Machine Learning?",
+          "summary": "Machine Learning (ML) is a branch of AI where systems learn from data instead of being explicitly programmed. Instead of writing every rule manually, we allow computers to identify patterns on their own.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Supervised Learning",
+          "summary": "In supervised learning, models learn from labeled data. For example, if we show thousands of pictures labeled as cats or dogs, the system learns to identify them automatically.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Unsupervised Learning",
+          "summary": "In unsupervised learning, the system finds hidden patterns without labels. This is often used in customer segmentation and recommendation systems.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Reinforcement Learning",
+          "summary": "Reinforcement learning trains systems using rewards and punishments. This technique is used in robotics, gaming AI, and autonomous systems.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        }
+      ],
+      "exercises": [
+        "Write 5 examples of supervised learning.",
+        "Find a real-world application of reinforcement learning.",
+        "Explain how Netflix recommendations use machine learning."
+      ],
+      "recap": "Review the key concepts of this chapter before moving to the next one. Try revising without looking at the notes."
+    },
+    {
+      "id": "chapter-3",
+      "number": 3,
+      "title": "Deep Learning and Neural Networks",
+      "sections": [
+        {
+          "heading": "What is Deep Learning?",
+          "summary": "Deep Learning is a subset of machine learning that uses artificial neural networks. These neural networks are inspired by the human brain.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Neural Networks",
+          "summary": "A neural network contains layers of nodes called neurons. Each neuron processes information and passes it to the next layer.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Why Deep Learning Became Popular",
+          "summary": "Deep learning became powerful because of big data, GPUs, and better algorithms. It enables speech recognition, image recognition, and advanced AI systems.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Applications",
+          "summary": "Applications include self-driving cars, medical diagnosis, language translation, chatbots, and image generation.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        }
+      ],
+      "exercises": [
+        "Draw a simple neural network diagram.",
+        "Research GPUs and explain why they are important in AI.",
+        "Compare machine learning and deep learning."
+      ],
+      "recap": "Review the key concepts of this chapter before moving to the next one. Try revising without looking at the notes."
+    },
+    {
+      "id": "chapter-4",
+      "number": 4,
+      "title": "Generative AI Fundamentals",
+      "sections": [
+        {
+          "heading": "What is Generative AI?",
+          "summary": "Generative AI creates completely new content such as text, images, music, videos, and code. Unlike traditional AI which mainly analyzes data, generative AI produces original outputs.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Examples of Generative AI",
+          "summary": "Examples include ChatGPT, Gemini, Claude, Midjourney, DALL\u00b7E, GitHub Copilot, and Stable Diffusion.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "How Generative AI Learns",
+          "summary": "Generative AI learns from massive datasets by identifying patterns. It then uses those patterns to generate realistic outputs.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Limitations",
+          "summary": "Generative AI can hallucinate, meaning it may generate incorrect or misleading information.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        }
+      ],
+      "exercises": [
+        "Use ChatGPT to generate a short story.",
+        "Create 5 prompts and compare the responses.",
+        "Research hallucination in AI and explain it."
+      ],
+      "recap": "Review the key concepts of this chapter before moving to the next one. Try revising without looking at the notes."
+    },
+    {
+      "id": "chapter-5",
+      "number": 5,
+      "title": "Large Language Models (LLMs)",
+      "sections": [
+        {
+          "heading": "What are LLMs?",
+          "summary": "Large Language Models are advanced AI systems trained on billions of words. They predict the next word in a sentence based on context.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Transformers",
+          "summary": "LLMs use transformer architecture which helps them understand context better than older AI systems.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Context Window",
+          "summary": "The context window is the amount of information an LLM can remember during a conversation.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        },
+        {
+          "heading": "Popular LLMs",
+          "summary": "Popular LLMs include GPT, Gemini, Claude, Llama, and Mistral.",
+          "beginnerTip": "Think about this concept in a real-life scenario. Try explaining it to a friend using simple language. If you can explain it simply, you truly understand it."
+        }
+      ],
+      "exercises": [
+        "Compare ChatGPT and Gemini.",
+        "Explain why context matters in conversation AI.",
+        "Research open-source LLMs."
+      ],
+      "recap": "Transformer: Neural architecture used in modern AI systems."
+    }
+  ],
+  "revisionTopics": [
+    {
+      "number": 1,
+      "title": "Introduction to Artificial Intelligence",
+      "points": [
+        "Artificial Intelligence (AI) refers to systems that can perform tasks requiring human intelligence such as reasoning, learning, problem-solving, and decision-making.",
+        "AI systems can analyze large amounts of data, identify patterns, and improve their performance over time.",
+        "Examples include Siri, Alexa, recommendation systems, self-driving cars, and chatbots.",
+        "Weak AI focuses on specific tasks, while Strong AI aims to achieve human-like intelligence."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 2,
+      "title": "History and Evolution of AI",
+      "points": [
+        "1950: Alan Turing introduced the Turing Test to determine whether machines can mimic human intelligence.",
+        "1956: The term 'Artificial Intelligence' was officially coined by John McCarthy.",
+        "1997: IBM Deep Blue defeated chess champion Garry Kasparov.",
+        "Modern AI growth accelerated due to big data, cloud computing, GPUs, and advanced algorithms."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 3,
+      "title": "Machine Learning Fundamentals",
+      "points": [
+        "Machine Learning (ML) is a subset of AI where machines learn patterns from data instead of being explicitly programmed.",
+        "Supervised Learning uses labeled data.",
+        "Unsupervised Learning finds hidden patterns in unlabeled data.",
+        "Reinforcement Learning trains systems using rewards and penalties.",
+        "Applications include fraud detection, recommendation systems, and predictive analytics."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 4,
+      "title": "Deep Learning and Neural Networks",
+      "points": [
+        "Deep Learning uses neural networks with multiple layers to process complex information.",
+        "Neural networks imitate how the human brain processes information.",
+        "Deep learning powers image recognition, speech recognition, and large language models.",
+        "Popular frameworks include TensorFlow and PyTorch."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 5,
+      "title": "Generative AI Fundamentals",
+      "points": [
+        "Generative AI creates new content such as text, images, code, music, and videos.",
+        "Unlike traditional AI, it generates original outputs instead of only analyzing data.",
+        "Examples include ChatGPT, Gemini, Claude, Midjourney, and DALL\u00b7E.",
+        "Generative AI models are trained on massive datasets to learn patterns and generate realistic outputs."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 6,
+      "title": "Large Language Models (LLMs)",
+      "points": [
+        "Large Language Models are neural networks trained to predict the next word or token in a sequence.",
+        "LLMs understand language patterns and context using billions of parameters.",
+        "Examples include GPT models, Gemini, Llama, and Claude.",
+        "LLMs use transformer architecture and attention mechanisms to process language."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 7,
+      "title": "Tokenization, Vectors, and Embeddings",
+      "points": [
+        "Tokenization breaks text into smaller pieces called tokens.",
+        "Tokens may represent words, parts of words, or symbols.",
+        "Embeddings convert words into vectors (numerical representations).",
+        "Similar words are placed close together in vector space."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 8,
+      "title": "Transformers and Attention Mechanism",
+      "points": [
+        "Transformers revolutionized AI by improving contextual understanding.",
+        "Attention mechanisms help models understand the meaning of words based on surrounding context.",
+        "For example, the word 'Apple' can mean a fruit or a company depending on nearby words.",
+        "Transformers made modern chatbots and generative AI possible."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 9,
+      "title": "Prompt Engineering",
+      "points": [
+        "Prompt engineering is the process of designing instructions for AI systems.",
+        "Clear and structured prompts improve AI outputs.",
+        "Common techniques include role prompting, chain-of-thought prompting, and few-shot prompting.",
+        "Effective prompts help generate better code, summaries, stories, and analysis."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 10,
+      "title": "AI Agents and Agentic AI",
+      "points": [
+        "AI agents combine LLMs with tools and memory to perform actions.",
+        "Examples include coding assistants and autonomous workflows.",
+        "Agentic AI can coordinate multiple tasks, make decisions, and adapt dynamically.",
+        "AI agents can use APIs, databases, and external tools to complete tasks."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 11,
+      "title": "Multimodal AI",
+      "points": [
+        "Multimodal AI can process and generate multiple types of data such as text, images, audio, and video.",
+        "Examples include image generation tools and voice assistants.",
+        "Modern AI systems combine different data formats for richer understanding.",
+        "Applications include healthcare, entertainment, robotics, and content creation."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 12,
+      "title": "AI Tools and Ecosystem",
+      "points": [
+        "Popular tools include ChatGPT, Claude, Gemini, GitHub Copilot, Midjourney, and Hugging Face.",
+        "Frameworks like TensorFlow and PyTorch help build AI systems.",
+        "Vector databases are used for semantic search and retrieval.",
+        "Cloud platforms provide scalable AI infrastructure."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 13,
+      "title": "Real-World Applications of AI",
+      "points": [
+        "Healthcare: disease prediction and medical imaging.",
+        "Finance: fraud detection and algorithmic trading.",
+        "Cybersecurity: anomaly detection and threat analysis.",
+        "Education: personalized learning systems.",
+        "Business: automation, analytics, and customer support."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 14,
+      "title": "Ethics, Bias, and Responsible AI",
+      "points": [
+        "AI systems can inherit bias from training data.",
+        "Responsible AI focuses on fairness, transparency, privacy, and safety.",
+        "Hallucination occurs when AI generates incorrect or misleading information.",
+        "Organizations must ensure ethical deployment of AI systems."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    },
+    {
+      "number": 15,
+      "title": "Future of AI",
+      "points": [
+        "AI is expected to transform industries and redefine jobs.",
+        "Future trends include autonomous systems, AI agents, robotics, and personalized assistants.",
+        "Continuous learning is essential because AI evolves rapidly.",
+        "Human-AI collaboration will become increasingly important.",
+        "Quick Revision Summary",
+        "AI enables machines to mimic human intelligence.",
+        "Machine Learning allows systems to learn from data.",
+        "Deep Learning uses neural networks for complex tasks.",
+        "Generative AI creates original content.",
+        "LLMs predict the next token using transformers and attention.",
+        "Prompt engineering improves AI responses.",
+        "AI agents can perform actions using tools and APIs.",
+        "Responsible AI ensures fairness and safety."
+      ],
+      "beginnerTip": "Focus on understanding the concepts conceptually before moving into coding or advanced implementation."
+    }
+  ],
+  "teachers": [
+    {
+      "teacherId": "gaurav-sen",
+      "teacherName": "Gaurav Sen",
+      "channel": "The Engineering Glossary",
+      "domain": "Core technical concepts for builders",
+      "summary": "Explains the mechanics behind tokens, vectors, attention, and context systems in language that aspiring AI builders can reuse.",
+      "teachingStyle": "Builder-first, terminology-aware, practical systems thinking",
+      "signatureTopics": [
+        "LLMs",
+        "tokenization",
+        "attention",
+        "RAG",
+        "vector databases"
+      ],
+      "teacherVoice": "If you are building applications, learn the language of AI so deeper subjects become easier to understand.",
+      "realWorldImpact": "Ideal for developers and technical learners who want sharper engineering intuition."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "teacherName": "Edureka Expert",
+      "channel": "Edureka",
+      "domain": "AI and ML fundamentals",
+      "summary": "Builds the ladder from AI to ML to deep learning before leading into Generative AI, which makes the field less intimidating for new learners.",
+      "teachingStyle": "Structured, beginner-friendly, concept ladder from basics to advanced",
+      "signatureTopics": [
+        "AI hierarchy",
+        "learning paradigms",
+        "NLP basics",
+        "deep learning"
+      ],
+      "teacherVoice": "AI is about making computers smarter and more helpful in everyday life.",
+      "realWorldImpact": "Useful for learners who need the big picture before specializing in GenAI."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "teacherName": "Andrew Brown",
+      "channel": "ExamPro / Andrew Brown",
+      "domain": "GenAI development roadmap",
+      "summary": "Connects concepts to real tool choices, maturity stages, deployment, and the broader ecosystem around AI products.",
+      "teachingStyle": "Roadmap-driven, implementation focused, cloud-aware and pragmatic",
+      "signatureTopics": [
+        "maturity models",
+        "modalities",
+        "evaluation",
+        "deployment",
+        "tooling"
+      ],
+      "teacherVoice": "Broad and practical GenAI knowledge gives you the flexibility to move in any technical direction.",
+      "realWorldImpact": "Great for learners turning theory into projects and stack decisions."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "teacherName": "Simplilearn Specialist",
+      "channel": "Simplilearn",
+      "domain": "Prompting, tools, business use, and agents",
+      "summary": "Frames GenAI as a modern workforce skill, then shows how prompts, workflows, and agents create business value.",
+      "teachingStyle": "Product-minded, workforce-oriented, use-case heavy",
+      "signatureTopics": [
+        "prompt anatomy",
+        "AI agents",
+        "multimodal AI",
+        "productivity",
+        "business use cases"
+      ],
+      "teacherVoice": "Generative AI is no longer optional; it is becoming a must-know capability of the modern workforce.",
+      "realWorldImpact": "Strong fit for professionals building useful day-to-day workflows."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "teacherName": "Stanford CS229",
+      "channel": "Stanford CS229",
+      "domain": "Training science and alignment",
+      "summary": "Explains what really matters during model building: data, scaling, alignment, optimization, and systems constraints.",
+      "teachingStyle": "Rigorous, research-oriented, systems-and-training depth",
+      "signatureTopics": [
+        "pretraining",
+        "scaling laws",
+        "SFT",
+        "RLHF",
+        "data quality"
+      ],
+      "teacherVoice": "Most people talk about architecture, but in practice data, evaluation, and systems matter just as much.",
+      "realWorldImpact": "Best for learners who want to understand why modern models behave the way they do."
+    }
+  ],
+  "teacherLessons": [
+    {
+      "teacherId": "edureka-expert",
+      "page": "001",
+      "moduleTitle": "What Artificial Intelligence Means",
+      "difficulty": "Beginner",
+      "summary": "AI is the umbrella term for computer systems that perform tasks normally associated with human intelligence, such as recognizing patterns, understanding language, making decisions, and adapting from experience."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "002",
+      "moduleTitle": "Weak AI, Strong AI, and Superintelligence",
+      "difficulty": "Beginner",
+      "summary": "Weak or narrow AI solves specific problems, while strong AI or AGI refers to a hypothetical system that could reason broadly like a human. Artificial superintelligence refers to a still-hypothetical system that would exceed human capability in most areas."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "003",
+      "moduleTitle": "Why AI Became Popular Recently",
+      "difficulty": "Beginner",
+      "summary": "AI concepts are old, but modern adoption increased because of more data, better algorithms, faster hardware, cloud infrastructure, open-source tools, and business demand for automation."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "004",
+      "moduleTitle": "AI, ML, Deep Learning, and Generative AI",
+      "difficulty": "Beginner",
+      "summary": "AI is the broad field. Machine learning is a subset where systems learn from data. Deep learning is a subset of ML based on neural networks. Generative AI is a family of models that create new text, images, audio, video, or code."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "005",
+      "moduleTitle": "AI Use Cases in Daily Life",
+      "difficulty": "Beginner",
+      "summary": "AI appears in search engines, recommendations, maps, fraud detection, translation, spam filters, image search, customer support bots, and productivity tools."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "006",
+      "moduleTitle": "What Machine Learning Is",
+      "difficulty": "Beginner",
+      "summary": "Machine learning enables software to improve its performance on a task by learning patterns from data rather than relying only on fixed rules written by humans."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "007",
+      "moduleTitle": "Supervised Learning",
+      "difficulty": "Beginner",
+      "summary": "Supervised learning trains models using examples where the correct answer is known. The model studies input-output pairs and learns to predict the output for new inputs."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "008",
+      "moduleTitle": "Unsupervised Learning",
+      "difficulty": "Beginner",
+      "summary": "Unsupervised learning finds structure in data without labeled answers. It is useful for grouping, discovering patterns, reducing dimensions, and understanding data distributions."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "009",
+      "moduleTitle": "Reinforcement Learning",
+      "difficulty": "Beginner",
+      "summary": "Reinforcement learning trains an agent to act in an environment by receiving rewards or penalties. It is useful when learning happens through trial, feedback, and long-term outcomes."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "010",
+      "moduleTitle": "Training, Validation, and Testing",
+      "difficulty": "Beginner",
+      "summary": "A dataset is often split into training, validation, and test sets. Training fits the model, validation helps tune choices, and testing estimates real-world performance."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "011",
+      "moduleTitle": "Linear Regression",
+      "difficulty": "Beginner",
+      "summary": "Linear regression predicts a continuous number by fitting a line or plane that minimizes prediction error. It is a beginner-friendly way to understand loss, training, and prediction."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "012",
+      "moduleTitle": "Logistic Regression",
+      "difficulty": "Beginner",
+      "summary": "Logistic regression is used for classification, especially binary classification. It estimates the probability that an example belongs to a class."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "013",
+      "moduleTitle": "Decision Trees",
+      "difficulty": "Beginner",
+      "summary": "A decision tree makes predictions by asking a sequence of questions. Each branch narrows down the answer until the model reaches a prediction."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "014",
+      "moduleTitle": "Random Forests and Ensembles",
+      "difficulty": "Beginner",
+      "summary": "An ensemble combines many models to get a stronger result. A random forest combines many decision trees and averages or votes across them."
+    },
+    {
+      "teacherId": "edureka-expert",
+      "page": "015",
+      "moduleTitle": "Model Evaluation Metrics",
+      "difficulty": "Beginner",
+      "summary": "Evaluation metrics depend on the task. Accuracy is not enough when classes are imbalanced. Precision, recall, F1, ROC-AUC, MAE, and RMSE help measure different aspects of performance."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "016",
+      "moduleTitle": "Neural Networks in Simple Terms",
+      "difficulty": "Beginner",
+      "summary": "A neural network is a layered mathematical system that transforms inputs into outputs. During training, it adjusts internal weights to reduce errors."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "017",
+      "moduleTitle": "Why Deep Learning Needs Data and Compute",
+      "difficulty": "Beginner",
+      "summary": "Deep learning models can learn complex patterns, but they usually need large datasets and powerful hardware because they perform many matrix operations during training."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "018",
+      "moduleTitle": "Activation Functions",
+      "difficulty": "Beginner",
+      "summary": "Activation functions allow neural networks to learn non-linear relationships. Without them, even a deep network would behave like a simple linear model."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "019",
+      "moduleTitle": "Backpropagation and Gradient Descent",
+      "difficulty": "Beginner",
+      "summary": "Training uses loss to measure error. Backpropagation calculates how each weight contributed to the error, and gradient descent updates weights to reduce future error."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "020",
+      "moduleTitle": "CNNs, RNNs, and Transformers",
+      "difficulty": "Beginner",
+      "summary": "Different neural architectures are suited to different data. CNNs are strong for images, RNNs were common for sequences, and transformers became dominant for language and many multimodal tasks."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "021",
+      "moduleTitle": "What Generative AI Is",
+      "difficulty": "Beginner",
+      "summary": "Generative AI creates new content based on patterns learned from training data. It can produce text, code, images, audio, video, synthetic data, and design variations."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "022",
+      "moduleTitle": "Generative vs Traditional AI",
+      "difficulty": "Beginner",
+      "summary": "Traditional AI often predicts, classifies, recommends, or detects. Generative AI creates outputs that feel new, such as paragraphs, images, music, and code."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "023",
+      "moduleTitle": "Foundation Models",
+      "difficulty": "Beginner",
+      "summary": "A foundation model is a general-purpose model trained on large amounts of data and adaptable to many downstream tasks through prompting, fine-tuning, or retrieval."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "024",
+      "moduleTitle": "Modalities of Generative AI",
+      "difficulty": "Beginner",
+      "summary": "A modality is a type of data, such as text, image, audio, video, 3D, or structured data. Modern systems increasingly combine multiple modalities."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "025",
+      "moduleTitle": "Common Limitations of Generative AI",
+      "difficulty": "Beginner",
+      "summary": "Generative AI may hallucinate, repeat bias, misunderstand context, leak sensitive information if poorly designed, or produce unsafe content without guardrails."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "026",
+      "moduleTitle": "What an LLM Does",
+      "difficulty": "Beginner",
+      "summary": "A large language model processes tokens and predicts likely next tokens. By repeating this process, it can generate sentences, explanations, code, summaries, and conversations."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "027",
+      "moduleTitle": "Tokens and Context Windows",
+      "difficulty": "Beginner",
+      "summary": "Text is split into tokens before entering a model. The context window is the amount of tokens the model can consider at once."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "028",
+      "moduleTitle": "Embeddings and Vector Meaning",
+      "difficulty": "Beginner",
+      "summary": "Embeddings turn tokens, sentences, or documents into vectors. Similar meanings appear closer in vector space, enabling semantic search and retrieval."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "029",
+      "moduleTitle": "Attention Mechanism",
+      "difficulty": "Beginner",
+      "summary": "Attention helps a model decide which tokens matter for understanding another token. It allows the model to use context, such as knowing whether Apple means fruit or company."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "030",
+      "moduleTitle": "Autoregressive Generation",
+      "difficulty": "Beginner",
+      "summary": "Autoregressive models generate one token at a time. Each new token becomes part of the context for predicting the next token."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "031",
+      "moduleTitle": "Pre-training",
+      "difficulty": "Beginner",
+      "summary": "Pre-training teaches a model broad patterns from huge datasets. For language models, this often involves predicting hidden or next tokens from large text collections."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "032",
+      "moduleTitle": "Self-Supervised Learning",
+      "difficulty": "Beginner",
+      "summary": "Self-supervised learning creates training signals from the data itself. For example, a model can learn by predicting missing words or next words without humans labeling every example."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "033",
+      "moduleTitle": "Fine-tuning",
+      "difficulty": "Beginner",
+      "summary": "Fine-tuning adapts a pre-trained model to a specific style, domain, or task by continuing training on curated examples."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "034",
+      "moduleTitle": "Instruction Tuning and SFT",
+      "difficulty": "Beginner",
+      "summary": "Supervised fine-tuning uses example instructions and desired answers to teach a model how to behave like an assistant instead of merely continuing text."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "035",
+      "moduleTitle": "RLHF and Preference Learning",
+      "difficulty": "Beginner",
+      "summary": "Reinforcement learning from human feedback and preference optimization teach models to produce outputs that humans prefer, such as helpful, harmless, and concise answers."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "036",
+      "moduleTitle": "What Prompt Engineering Is",
+      "difficulty": "Beginner",
+      "summary": "Prompt engineering is the practice of writing clear instructions, context, examples, and constraints so an AI model produces a useful output."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "037",
+      "moduleTitle": "Prompt Anatomy",
+      "difficulty": "Beginner",
+      "summary": "A strong prompt can include role, task, context, input data, output format, constraints, tone, examples, and evaluation criteria."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "038",
+      "moduleTitle": "Zero-shot and Few-shot Prompting",
+      "difficulty": "Beginner",
+      "summary": "Zero-shot prompting asks the model to solve a task without examples. Few-shot prompting gives sample inputs and outputs so the model can imitate the pattern."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "039",
+      "moduleTitle": "Structured Output Prompts",
+      "difficulty": "Beginner",
+      "summary": "Structured prompts request output in a specific format, such as JSON, a table, bullet points, lesson plan, or checklist."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "040",
+      "moduleTitle": "Prompt Testing and Iteration",
+      "difficulty": "Beginner",
+      "summary": "Prompt engineering is experimental. You test prompts against real examples, compare outputs, revise wording, and document what works."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "041",
+      "moduleTitle": "What RAG Is",
+      "difficulty": "Intermediate",
+      "summary": "Retrieval-augmented generation connects an LLM to external knowledge. The system retrieves relevant information and adds it to the prompt before the model answers."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "042",
+      "moduleTitle": "Vector Databases",
+      "difficulty": "Intermediate",
+      "summary": "Vector databases store embeddings and allow similarity search. They help find documents that are semantically related to a user query."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "043",
+      "moduleTitle": "Chunking and Indexing",
+      "difficulty": "Intermediate",
+      "summary": "Chunking divides documents into meaningful pieces. Good chunks are large enough to preserve meaning but small enough to retrieve precisely."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "044",
+      "moduleTitle": "Context Engineering vs Prompt Engineering",
+      "difficulty": "Intermediate",
+      "summary": "Prompt engineering focuses on one instruction. Context engineering designs how memory, retrieved documents, user preferences, tools, and summaries are assembled for each request."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "045",
+      "moduleTitle": "Evaluating RAG Systems",
+      "difficulty": "Intermediate",
+      "summary": "RAG evaluation checks whether retrieval found the right evidence and whether the generated answer used it faithfully."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "046",
+      "moduleTitle": "What AI Agents Are",
+      "difficulty": "Intermediate",
+      "summary": "AI agents are software systems that use AI to pursue goals and complete tasks on behalf of users. They may reason, plan, use tools, remember state, and adapt."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "047",
+      "moduleTitle": "Tools and APIs",
+      "difficulty": "Intermediate",
+      "summary": "Agents become useful when connected to tools such as search, calculators, databases, email, calendars, code execution, or business systems."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "048",
+      "moduleTitle": "Planning and Task Decomposition",
+      "difficulty": "Intermediate",
+      "summary": "Agentic systems break a goal into smaller steps, execute them, observe results, and adjust the plan when needed."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "049",
+      "moduleTitle": "Memory in Agents",
+      "difficulty": "Intermediate",
+      "summary": "Agent memory can include short-term conversation state, long-term preferences, task state, and external records."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "050",
+      "moduleTitle": "Agentic AI Risks",
+      "difficulty": "Intermediate",
+      "summary": "More autonomy creates more risk. Agents can take wrong actions, use tools incorrectly, leak data, or overstep user intent."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "051",
+      "moduleTitle": "What Multimodal AI Means",
+      "difficulty": "Intermediate",
+      "summary": "Multimodal AI can understand or generate more than one data type, such as text, images, audio, video, tables, charts, and documents."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "052",
+      "moduleTitle": "Image Generation",
+      "difficulty": "Intermediate",
+      "summary": "Image generation models create visuals from text prompts or edit existing images. They are used in design, marketing, storyboarding, and creative exploration."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "053",
+      "moduleTitle": "Audio and Speech AI",
+      "difficulty": "Intermediate",
+      "summary": "Audio AI can transcribe speech, synthesize voices, remove noise, classify sounds, or generate music."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "054",
+      "moduleTitle": "Video and 3D Generation",
+      "difficulty": "Intermediate",
+      "summary": "Video and 3D generation are emerging areas where models produce motion, scenes, characters, or 3D assets from prompts or references."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "055",
+      "moduleTitle": "Multimodal RAG",
+      "difficulty": "Intermediate",
+      "summary": "Multimodal RAG retrieves text, tables, charts, diagrams, or images so an AI system can answer questions grounded in mixed-format information."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "056",
+      "moduleTitle": "Why Responsible AI Matters",
+      "difficulty": "Intermediate",
+      "summary": "Responsible AI is the practice of designing, building, and using AI systems in ways that are fair, reliable, safe, private, secure, transparent, and accountable."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "057",
+      "moduleTitle": "Bias and Fairness",
+      "difficulty": "Intermediate",
+      "summary": "Bias appears when data, design, or deployment causes unfair outcomes for groups or individuals. Fairness requires careful data review, testing, and monitoring."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "058",
+      "moduleTitle": "Privacy and Security",
+      "difficulty": "Intermediate",
+      "summary": "AI systems must protect sensitive data. Risks include data leakage, prompt injection, model inversion, unauthorized tool use, and unsafe retention."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "059",
+      "moduleTitle": "Hallucination and Grounding",
+      "difficulty": "Intermediate",
+      "summary": "Hallucination occurs when a model produces incorrect information confidently. Grounding uses evidence, retrieval, tools, and validation to reduce this risk."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "060",
+      "moduleTitle": "Governance and AI Risk Management",
+      "difficulty": "Intermediate",
+      "summary": "AI governance defines policies, roles, reviews, testing, documentation, monitoring, and escalation paths for AI systems."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "061",
+      "moduleTitle": "Problem Framing",
+      "difficulty": "Intermediate",
+      "summary": "Before building AI, define the user problem, success metric, available data, risks, constraints, and whether AI is actually needed."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "062",
+      "moduleTitle": "Data Collection and Preparation",
+      "difficulty": "Intermediate",
+      "summary": "Data preparation includes collecting, cleaning, labeling, formatting, splitting, and documenting data. It often takes more time than model selection."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "063",
+      "moduleTitle": "Choosing Build vs Buy",
+      "difficulty": "Intermediate",
+      "summary": "Teams can build custom models, fine-tune existing models, use APIs, or combine off-the-shelf tools with custom data."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "064",
+      "moduleTitle": "Evaluation Before Launch",
+      "difficulty": "Intermediate",
+      "summary": "AI applications should be tested for accuracy, latency, cost, safety, usability, and failure modes before reaching users."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "065",
+      "moduleTitle": "Deployment and Monitoring",
+      "difficulty": "Intermediate",
+      "summary": "Deployment means making the AI system available to users. Monitoring checks quality, costs, errors, drift, abuse, and user satisfaction over time."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "066",
+      "moduleTitle": "What MLOps Is",
+      "difficulty": "Intermediate",
+      "summary": "MLOps applies software engineering, DevOps, and data practices to machine learning so models can be built, deployed, monitored, and improved reliably."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "067",
+      "moduleTitle": "Experiment Tracking",
+      "difficulty": "Intermediate",
+      "summary": "Experiment tracking records datasets, code, parameters, metrics, and model versions so teams can reproduce results and compare approaches."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "068",
+      "moduleTitle": "Model Versioning",
+      "difficulty": "Intermediate",
+      "summary": "Model versioning helps teams know which model is in development, testing, production, or rollback."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "069",
+      "moduleTitle": "LLMOps Special Concerns",
+      "difficulty": "Intermediate",
+      "summary": "LLMOps extends MLOps with prompts, retrieval indexes, safety filters, evaluation sets, model providers, token costs, and response monitoring."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "070",
+      "moduleTitle": "Cost and Latency Optimization",
+      "difficulty": "Intermediate",
+      "summary": "AI systems must balance quality, speed, and cost. Smaller models, caching, batching, retrieval pruning, and prompt compression can help."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "071",
+      "moduleTitle": "Chatbots and AI Assistants",
+      "difficulty": "Intermediate",
+      "summary": "AI assistants help users draft, summarize, explain, brainstorm, code, translate, and analyze information through natural language interaction."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "072",
+      "moduleTitle": "Coding Assistants",
+      "difficulty": "Intermediate",
+      "summary": "Coding assistants generate code, explain errors, write tests, refactor functions, and help navigate unfamiliar codebases."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "073",
+      "moduleTitle": "Open-Source Models and Hugging Face",
+      "difficulty": "Intermediate",
+      "summary": "Open-source model ecosystems allow learners and teams to explore models, datasets, demos, and tooling without depending only on closed platforms."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "074",
+      "moduleTitle": "Cloud AI Platforms",
+      "difficulty": "Intermediate",
+      "summary": "Cloud AI platforms provide infrastructure, managed models, deployment tools, monitoring, security, and integrations for building AI applications at scale."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "075",
+      "moduleTitle": "No-Code and Low-Code AI Tools",
+      "difficulty": "Intermediate",
+      "summary": "No-code and low-code tools help non-developers create AI workflows, chatbots, dashboards, and automations with limited coding."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "076",
+      "moduleTitle": "AI in Customer Support",
+      "difficulty": "Intermediate",
+      "summary": "AI can route tickets, suggest responses, summarize conversations, detect sentiment, and power chatbots that answer common questions."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "077",
+      "moduleTitle": "AI in Marketing and Sales",
+      "difficulty": "Intermediate",
+      "summary": "AI helps create campaign drafts, segment audiences, personalize content, score leads, summarize calls, and analyze customer feedback."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "078",
+      "moduleTitle": "AI in Healthcare",
+      "difficulty": "Intermediate",
+      "summary": "AI supports imaging analysis, documentation, triage assistance, drug discovery, patient communication, and research workflows, but requires strict validation."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "079",
+      "moduleTitle": "AI in Finance",
+      "difficulty": "Intermediate",
+      "summary": "AI supports fraud detection, risk scoring, financial analysis, forecasting, compliance review, and report generation."
+    },
+    {
+      "teacherId": "simplilearn-specialist",
+      "page": "080",
+      "moduleTitle": "AI in Education",
+      "difficulty": "Intermediate",
+      "summary": "AI can personalize learning, generate practice questions, explain concepts, summarize materials, and support teachers with planning."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "081",
+      "moduleTitle": "Python for AI Learners",
+      "difficulty": "Intermediate",
+      "summary": "Python is widely used in AI because of its readable syntax and strong libraries for data, machine learning, deep learning, automation, and application development."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "082",
+      "moduleTitle": "Math Foundations",
+      "difficulty": "Intermediate",
+      "summary": "Useful AI math includes linear algebra, probability, statistics, calculus basics, and optimization. Beginners can learn these gradually through examples."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "083",
+      "moduleTitle": "Portfolio Projects",
+      "difficulty": "Intermediate",
+      "summary": "A portfolio shows that you can apply concepts. Good beginner projects are small, practical, documented, and easy for others to run."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "084",
+      "moduleTitle": "Interview Readiness",
+      "difficulty": "Intermediate",
+      "summary": "AI interviews often test fundamentals, project experience, trade-offs, evaluation, responsible AI, and practical problem-solving."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "085",
+      "moduleTitle": "Learning Roadmap",
+      "difficulty": "Intermediate",
+      "summary": "A strong learning path moves from AI basics to ML, deep learning, LLMs, prompt engineering, RAG, agents, MLOps, responsible AI, and projects."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "086",
+      "moduleTitle": "Build a Simple Classifier Plan",
+      "difficulty": "Intermediate",
+      "summary": "A beginner classifier project teaches data collection, labeling, preprocessing, model training, evaluation, and deployment thinking."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "087",
+      "moduleTitle": "Design a Prompt Library",
+      "difficulty": "Intermediate",
+      "summary": "A prompt library stores reusable prompts for summarization, tutoring, coding, data analysis, writing, and brainstorming."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "088",
+      "moduleTitle": "Create a RAG Knowledge Bot",
+      "difficulty": "Intermediate",
+      "summary": "A RAG bot lets users ask questions over documents. It requires chunking, embeddings, retrieval, prompting, citations, and answer evaluation."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "089",
+      "moduleTitle": "Prototype an AI Agent",
+      "difficulty": "Intermediate",
+      "summary": "A safe beginner agent can use tools such as calculator, search over local files, or task checklist generation without performing irreversible actions."
+    },
+    {
+      "teacherId": "andrew-brown",
+      "page": "090",
+      "moduleTitle": "Capstone Project Blueprint",
+      "difficulty": "Intermediate",
+      "summary": "A capstone combines problem framing, data, AI model or API, evaluation, user interface, documentation, and responsible AI checks."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "091",
+      "moduleTitle": "Temperature and Sampling",
+      "difficulty": "Intermediate",
+      "summary": "Temperature, top-p, and related sampling settings influence how predictable or creative model outputs are. Lower settings tend to be more focused, while higher settings may add variety but also more risk of errors."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "092",
+      "moduleTitle": "Context Windows and Long Documents",
+      "difficulty": "Intermediate",
+      "summary": "A context window limits how much information the model can consider at one time. Long documents may need chunking, summarization, retrieval, or selective context assembly."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "093",
+      "moduleTitle": "System Prompts and Developer Instructions",
+      "difficulty": "Intermediate",
+      "summary": "System and developer instructions define behavior, constraints, tone, and tool usage. They are usually more authoritative than ordinary user text in an application."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "094",
+      "moduleTitle": "Prompt Injection",
+      "difficulty": "Intermediate",
+      "summary": "Prompt injection happens when user-provided or retrieved text tries to override the application instructions or misuse tools."
+    },
+    {
+      "teacherId": "gaurav-sen",
+      "page": "095",
+      "moduleTitle": "Model Selection",
+      "difficulty": "Intermediate",
+      "summary": "Choosing a model involves trade-offs between quality, cost, latency, context length, modality support, privacy, and tool integration."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "096",
+      "moduleTitle": "Data Quality",
+      "difficulty": "Intermediate",
+      "summary": "AI systems are limited by the quality of their data. Clean, representative, well-labeled, and legally usable data improves model reliability."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "097",
+      "moduleTitle": "Overfitting and Underfitting",
+      "difficulty": "Intermediate",
+      "summary": "Overfitting happens when a model memorizes training data too closely. Underfitting happens when the model is too simple to learn the pattern."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "098",
+      "moduleTitle": "Confusion Matrix",
+      "difficulty": "Intermediate",
+      "summary": "A confusion matrix shows true positives, false positives, true negatives, and false negatives. It helps beginners understand classification errors."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "099",
+      "moduleTitle": "Human Evaluation",
+      "difficulty": "Intermediate",
+      "summary": "Human evaluation is useful for generative AI because outputs can be subjective, open-ended, or hard to judge with one automatic metric."
+    },
+    {
+      "teacherId": "stanford-cs229",
+      "page": "100",
+      "moduleTitle": "Benchmarking",
+      "difficulty": "Intermediate",
+      "summary": "Benchmarks are standardized tests, but real application quality depends on your own data, users, tasks, and constraints."
+    }
+  ],
+  "sources": [
+    "Detailed_Beginner_AI_Workbook.docx",
+    "AI_Generative_AI_100_Page_Beginner_Workbook.docx",
+    "Generative_AI_Workbook.docx"
+  ]
+}
