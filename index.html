@@ -131,6 +131,55 @@
         </div>
       </section>
 
+      <section class="panel reveal-card teacher-section">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Teacher Library</p>
+            <h2>Learn GenAI through five teaching styles</h2>
+          </div>
+          <span id="curriculum-status" class="chip">Workbook loading</span>
+        </div>
+        <p class="muted teacher-intro">
+          This section is driven by the repo workbook database and turns the collaboration brief plus transcript insights into a teacher-led learning map.
+        </p>
+        <div class="teacher-layout">
+          <article class="teacher-spotlight">
+            <div class="teacher-spotlight-head">
+              <p class="eyebrow">Current teacher</p>
+              <span id="teacher-module-count" class="chip chip-soft">0 lessons</span>
+            </div>
+            <h3 id="teacher-name">Loading teacher...</h3>
+            <p id="teacher-channel" class="teacher-meta"></p>
+            <p id="teacher-domain" class="teacher-domain"></p>
+            <p id="teacher-summary" class="muted"></p>
+            <div class="teacher-callout">
+              <span class="brief-label">Teacher voice</span>
+              <p id="teacher-voice"></p>
+            </div>
+            <div class="teacher-columns">
+              <div>
+                <span class="brief-label">Teaching style</span>
+                <p id="teacher-style"></p>
+              </div>
+              <div>
+                <span class="brief-label">Why it matters</span>
+                <p id="teacher-impact"></p>
+              </div>
+            </div>
+            <div class="teacher-callout">
+              <span class="brief-label">Signature topics</span>
+              <div id="teacher-skills" class="lesson-pills"></div>
+            </div>
+            <div class="teacher-callout">
+              <span class="brief-label">Curriculum playlist</span>
+              <ul id="teacher-lesson-list" class="plain-list compact-list"></ul>
+            </div>
+          </article>
+
+          <div id="teacher-grid" class="teacher-grid"></div>
+        </div>
+      </section>
+
       <section class="top-dashboard">
         <article class="panel dashboard-card pulse-card">
           <p class="eyebrow">Live coach</p>
